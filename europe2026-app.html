@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Europe 2026">
+<meta name="theme-color" content="#1D3461">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>Europe 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F4EF;
+    --card: #ffffff;
+    --ink: #1C1917;
+    --muted: #78716C;
+    --london: #1D3461;
+    --zurich: #2D6A4F;
+    --murren: #7B4F9E;
+    --travel: #B5451B;
+    --accent: #E8A838;
+    --shadow: 0 2px 16px rgba(28,25,23,0.09);
+    --shadow-lg: 0 6px 32px rgba(28,25,23,0.13);
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; overflow: hidden; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: white;
+    padding: calc(16px + var(--safe-top)) 20px 0;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-deco {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 50% 90% at 95% 0%, rgba(232,168,56,0.2) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 60% at -5% 110%, rgba(123,79,158,0.15) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .header-inner { position: relative; display: flex; align-items: center; gap: 14px; padding-bottom: 14px; }
+  .app-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .app-icon img { width: 100%; height: 100%; }
+  .header-text {}
+  .header-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+  header h1 {
+    font-family: 'Lora', serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: white;
+  }
+  header h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+
+  /* dest pills */
+  .dest-pills { display: flex; gap: 6px; flex-wrap: wrap; padding: 0 0 14px; position: relative; }
+  .pill {
+    font-size: 0.7rem; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px;
+    color: white; opacity: 0.88;
+  }
+  .pill-london { background: var(--london); }
+  .pill-zurich { background: var(--zurich); }
+  .pill-murren { background: var(--murren); }
+
+  /* ── TAB BAR ── */
+  .tab-bar {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    flex-shrink: 0;
+  }
+  .tab-btn {
+    flex: 1;
+    background: none; border: none;
+    color: rgba(255,255,255,0.45);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem; font-weight: 600;
+    padding: 10px 6px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  .tab-btn .ti { font-size: 1.15rem; }
+  .tab-btn.active { color: white; border-bottom-color: var(--accent); }
+
+  /* ── SCROLL AREA ── */
+  .scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding-bottom: calc(16px + var(--safe-bottom));
+  }
+
+  .tab-panel { display: none; padding: 20px 14px 0; }
+  .tab-panel.active { display: block; }
+
+  /* ── LOCATION DIVIDERS ── */
+  .loc-div {
+    display: flex; align-items: center; gap: 10px;
+    margin: 22px 0 10px;
+  }
+  .loc-div:first-child { margin-top: 0; }
+  .loc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .ld-london .loc-dot { background: var(--london); }
+  .ld-zurich .loc-dot { background: var(--zurich); }
+  .ld-murren .loc-dot { background: var(--murren); }
+  .loc-div h2 {
+    font-family: 'Lora', serif;
+    font-size: 0.9rem; font-weight: 600;
+    color: var(--muted); white-space: nowrap;
+  }
+  .loc-line { flex: 1; height: 1px; background: #E5E1DB; }
+
+  /* ── DAY CARDS ── */
+  .days-grid { display: flex; flex-direction: column; gap: 8px; }
+
+  .day-card {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .day-header {
+    display: flex; align-items: stretch;
+    cursor: pointer; user-select: none;
+  }
+  .day-badge {
+    width: 58px; min-width: 58px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 12px 6px; color: white;
+  }
+  .day-badge .num { font-size: 1.25rem; font-weight: 700; line-height: 1; }
+  .day-badge .dow { font-size: 0.55rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-top: 2px; }
+  .day-badge .ds { font-size: 0.52rem; opacity: 0.6; margin-top: 1px; }
+  .bg-london { background: var(--london); }
+  .bg-zurich { background: var(--zurich); }
+  .bg-murren { background: var(--murren); }
+  .bg-travel { background: var(--travel); }
+
+  .day-info { flex: 1; padding: 11px 12px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+  .day-where { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1px; }
+  .c-london { color: var(--london); } .c-zurich { color: var(--zurich); }
+  .c-murren { color: var(--murren); } .c-travel { color: var(--travel); }
+
+  .day-title {
+    font-family: 'Lora', serif;
+    font-size: 0.95rem; font-weight: 600;
+    color: var(--ink); line-height: 1.2;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .day-snip { font-size: 0.7rem; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .day-chev { display: flex; align-items: center; padding: 0 12px; color: #CCC; font-size: 0.7rem; transition: transform 0.25s; flex-shrink: 0; }
+  .day-card.open .day-chev { transform: rotate(180deg); }
+
+  .day-body { display: none; padding: 4px 14px 14px; border-top: 1px solid #F0EDE8; }
+  .day-card.open .day-body { display: block; }
+
+  .det-row { display: flex; gap: 9px; align-items: flex-start; margin-top: 12px; }
+  .det-icon { font-size: 1rem; min-width: 20px; text-align: center; flex-shrink: 0; padding-top: 1px; }
+  .det-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #BBB; margin-bottom: 1px; }
+  .det-val { font-size: 0.84rem; color: var(--ink); font-weight: 500; line-height: 1.35; }
+  .det-val.addr { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+
+  .act-head { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #BBB; margin: 13px 0 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chip { font-size: 0.74rem; font-weight: 500; padding: 4px 10px; border-radius: 20px; }
+  .chip-def { background: #FDF3E0; color: #92400E; }
+  .chip-travel { background: #FEF2F2; color: #991B1B; }
+  .chip-food { background: #F0FDF4; color: #166534; }
+  .chip-sight { background: #EFF6FF; color: #1E40AF; }
+
+  /* ── COSTS TAB ── */
+  .costs-summary {
+    background: var(--ink);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .costs-summary::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 90% -20%, rgba(232,168,56,0.2) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .costs-summary h2 {
+    font-family: 'Lora', serif;
+    font-size: 0.75rem; font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .costs-big {
+    font-family: 'Lora', serif;
+    font-size: 2.2rem; font-weight: 700;
+    color: white; line-height: 1;
+    position: relative;
+  }
+  .costs-big span { font-size: 1.1rem; opacity: 0.6; }
+  .costs-meta { display: flex; gap: 16px; margin-top: 14px; flex-wrap: wrap; position: relative; }
+  .costs-meta-item { }
+  .costs-meta-label { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); margin-bottom: 2px; }
+  .costs-meta-val { font-size: 1rem; font-weight: 700; color: white; }
+  .costs-meta-val.paid { color: #6EE7B7; }
+  .costs-meta-val.remaining { color: var(--accent); }
+
+  /* progress bar */
+  .pay-progress { margin-top: 16px; position: relative; }
+  .pay-progress-label { display: flex; justify-content: space-between; font-size: 0.65rem; color: rgba(255,255,255,0.45); margin-bottom: 6px; }
+  .pay-track { background: rgba(255,255,255,0.12); border-radius: 8px; height: 8px; overflow: hidden; }
+  .pay-fill { background: linear-gradient(90deg, #6EE7B7, #34D399); height: 100%; border-radius: 8px; transition: width 0.8s ease; }
+
+  /* cost breakdown cards */
+  .cost-cards { display: flex; flex-direction: column; gap: 10px; }
+
+  .cost-card {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .cost-card-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px;
+    cursor: pointer; user-select: none;
+    border-left: 4px solid transparent;
+  }
+  .cost-card.flights .cost-card-header { border-left-color: var(--london); }
+  .cost-card.lodging .cost-card-header { border-left-color: var(--zurich); }
+  .cost-card.activities .cost-card-header { border-left-color: var(--murren); }
+
+  .cost-card-header .ci { font-size: 1.2rem; }
+  .cost-card-title { flex: 1; }
+  .cost-card-title h3 { font-family: 'Lora', serif; font-size: 0.95rem; font-weight: 600; }
+  .cost-card-title p { font-size: 0.72rem; color: var(--muted); margin-top: 1px; }
+  .cost-card-total { text-align: right; }
+  .cost-card-total .amt { font-size: 1.05rem; font-weight: 700; color: var(--ink); }
+  .cost-card-total .chev { font-size: 0.65rem; color: #CCC; margin-top: 2px; transition: transform 0.2s; display: block; }
+  .cost-card.open .cost-card-total .chev { transform: rotate(180deg); }
+
+  .cost-card-body { display: none; padding: 2px 16px 14px; border-top: 1px solid #F0EDE8; }
+  .cost-card.open .cost-card-body { display: block; }
+
+  .cost-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin-top: 8px; }
+  .cost-table th { text-align: left; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: #C0BAB4; padding: 4px 6px; border-bottom: 1px solid #F0EDE8; }
+  .cost-table th:not(:first-child) { text-align: right; }
+  .cost-table td { padding: 8px 6px; border-bottom: 1px solid #F8F6F3; vertical-align: middle; }
+  .cost-table tr:last-child td { border-bottom: none; }
+  .cost-table td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+  .cost-table td.item-name { font-weight: 600; color: #57534E; }
+  .badge-paid { background: #D1FAE5; color: #065F46; font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; display: inline-block; }
+  .badge-owed { background: #FEF3C7; color: #92400E; font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; display: inline-block; }
+
+  /* P&L split section */
+  .pl-section {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 16px;
+    margin-top: 10px;
+  }
+  .pl-section h3 { font-family: 'Lora', serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .pl-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid #F0EDE8; font-size: 0.83rem; }
+  .pl-row:last-child { border-bottom: none; }
+  .pl-row .pl-label { color: var(--muted); }
+  .pl-row .pl-amt { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .pl-row .pl-amt.remaining { color: var(--accent); }
+
+  .payments-list { margin-top: 10px; }
+  .payment-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #F0EDE8; font-size: 0.82rem; }
+  .payment-item:last-child { border-bottom: none; }
+  .payment-date { color: var(--muted); font-size: 0.74rem; }
+  .payment-amt { font-weight: 700; color: #065F46; font-variant-numeric: tabular-nums; }
+
+  /* ── REFERENCE TAB ── */
+  .ref-note {
+    background: #FFFBEB; border: 1px solid #FDE68A;
+    border-radius: 10px; padding: 10px 14px;
+    font-size: 0.78rem; color: #92400E;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ref-sections { display: flex; flex-direction: column; gap: 10px; }
+  .ref-card { background: var(--card); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .ref-card-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 13px 16px; cursor: pointer; user-select: none;
+    border-left: 4px solid transparent;
+  }
+  .ref-card.flights .ref-card-header { border-left-color: var(--london); }
+  .ref-card.hotels .ref-card-header { border-left-color: var(--zurich); }
+  .ref-card.tickets .ref-card-header { border-left-color: var(--murren); }
+  .ref-card.transport .ref-card-header { border-left-color: var(--travel); }
+  .ref-card.misc .ref-card-header { border-left-color: var(--accent); }
+  .ref-card-header .ri { font-size: 1.15rem; }
+  .ref-card-header h3 { font-family: 'Lora', serif; font-size: 0.92rem; font-weight: 600; flex: 1; }
+  .ref-toggle { color: #CCC; font-size: 0.65rem; transition: transform 0.2s; }
+  .ref-card.open .ref-toggle { transform: rotate(180deg); }
+  .ref-card-body { display: none; padding: 2px 16px 14px; border-top: 1px solid #F0EDE8; }
+  .ref-card.open .ref-card-body { display: block; }
+
+  table.rt { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin-top: 8px; }
+  table.rt th { text-align: left; font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: #C0BAB4; padding: 4px 6px; border-bottom: 1px solid #F0EDE8; }
+  table.rt td { padding: 8px 6px; border-bottom: 1px solid #F8F6F3; vertical-align: top; color: var(--ink); }
+  table.rt tr:last-child td { border-bottom: none; }
+  table.rt td.label { font-weight: 600; color: #57534E; }
+  .conf { font-family: 'Courier New', monospace; font-size: 0.78rem; background: #F3EEFF; color: #5B21B6; padding: 2px 7px; border-radius: 5px; display: inline-block; }
+  .placeholder { color: #C0BAB4; font-style: italic; }
+  [contenteditable] { outline: none; border-radius: 3px; }
+  [contenteditable]:focus { background: #FFFBEB; outline: 2px dashed var(--accent); }
+  .add-row-btn { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; padding: 5px 12px; background: none; border: 1.5px dashed #DDD; border-radius: 20px; font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: #BBB; cursor: pointer; transition: all 0.2s; }
+  .add-row-btn:hover { border-color: var(--murren); color: var(--murren); }
+
+  /* ── PACKING LIST ── */
+  .pack-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .pack-progress-wrap { flex: 1; margin-right: 14px; }
+  .pack-progress-label {
+    font-size: 0.68rem; font-weight: 600; color: var(--muted);
+    margin-bottom: 5px; display: flex; justify-content: space-between;
+  }
+  .pack-track { background: #E5E1DB; border-radius: 8px; height: 7px; overflow: hidden; }
+  .pack-fill {
+    background: linear-gradient(90deg, var(--zurich), #52B788);
+    height: 100%; border-radius: 8px;
+    transition: width 0.4s ease;
+  }
+  .pack-reset-btn {
+    background: none; border: 1.5px solid #E5E1DB;
+    border-radius: 20px; padding: 5px 12px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.72rem;
+    color: var(--muted); cursor: pointer; white-space: nowrap;
+    transition: all 0.2s; flex-shrink: 0;
+  }
+  .pack-reset-btn:hover { border-color: var(--travel); color: var(--travel); }
+
+  .pack-sections { display: flex; flex-direction: column; gap: 10px; }
+
+  .pack-section {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .pack-section-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 13px 16px; cursor: pointer; user-select: none;
+  }
+  .pack-section-header .psi { font-size: 1.15rem; }
+  .pack-section-header h3 {
+    font-family: 'Lora', serif; font-size: 0.92rem; font-weight: 600; flex: 1;
+  }
+  .pack-section-count {
+    font-size: 0.7rem; font-weight: 600;
+    color: var(--muted); margin-right: 6px;
+  }
+  .pack-section-count.done { color: var(--zurich); }
+  .pack-chev { color: #CCC; font-size: 0.65rem; transition: transform 0.2s; }
+  .pack-section.open .pack-chev { transform: rotate(180deg); }
+
+  .pack-section-body { display: none; padding: 2px 14px 12px; border-top: 1px solid #F0EDE8; }
+  .pack-section.open .pack-section-body { display: block; }
+
+  .pack-items { list-style: none; }
+  .pack-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 4px; border-bottom: 1px solid #F8F6F3;
+    cursor: pointer; user-select: none;
+  }
+  .pack-item:last-child { border-bottom: none; }
+  .pack-item:active { background: #F8F6F3; border-radius: 8px; }
+
+  .pack-check {
+    width: 22px; height: 22px; border-radius: 6px;
+    border: 2px solid #D6D3CF; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; background: white;
+  }
+  .pack-item.checked .pack-check {
+    background: var(--zurich); border-color: var(--zurich);
+  }
+  .pack-check-mark {
+    color: white; font-size: 0.75rem; opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .pack-item.checked .pack-check-mark { opacity: 1; }
+
+  .pack-item-text {
+    flex: 1; font-size: 0.86rem; font-weight: 500;
+    transition: color 0.2s;
+    line-height: 1.3;
+  }
+  .pack-item.checked .pack-item-text {
+    color: #C0BAB4; text-decoration: line-through;
+  }
+
+  .pack-item-who {
+    font-size: 0.62rem; font-weight: 700;
+    padding: 2px 7px; border-radius: 10px;
+    flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .who-t { background: #EFF6FF; color: #1E40AF; }
+  .who-c { background: #FDF4FF; color: #7B4F9E; }
+  .who-all { background: #F0FDF4; color: #166534; }
+  .who-buy { background: #FEF9EE; color: #92400E; }
+  .who-skip { background: #F8F6F3; color: #A8A29E; }
+
+  .pack-note {
+    font-size: 0.72rem; color: var(--muted); font-style: italic;
+    padding: 6px 4px 2px; display: flex; align-items: center; gap: 5px;
+  }
+
+  /* add item row */
+  .pack-add-row {
+    display: flex; gap: 8px; align-items: center;
+    padding: 10px 4px 2px; margin-top: 4px;
+    border-top: 1px dashed #E5E1DB;
+  }
+  .pack-add-input {
+    flex: 1; border: none; background: #F8F6F3;
+    border-radius: 8px; padding: 8px 12px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.84rem;
+    color: var(--ink); outline: none;
+  }
+  .pack-add-input:focus { background: #FFF8E8; outline: 2px solid var(--accent); }
+  .pack-add-input::placeholder { color: #C0BAB4; }
+  .pack-add-submit {
+    background: var(--ink); color: white;
+    border: none; border-radius: 8px;
+    padding: 8px 14px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.84rem; font-weight: 600; cursor: pointer;
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .pack-add-submit:hover { background: var(--zurich); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-deco"></div>
+  <div class="header-inner">
+    <div class="app-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width:100%;height:100%;display:block;">
+  <defs>
+    <linearGradient id="ibg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1D3461"/><stop offset="100%" stop-color="#2D6A4F"/>
+    </linearGradient>
+    <linearGradient id="isun" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5C842"/><stop offset="100%" stop-color="#E8A838"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="url(#ibg)"/>
+  <circle cx="370" cy="145" r="58" fill="url(#isun)" opacity="0.92"/>
+  <polygon points="60,370 180,180 300,370" fill="#7B4F9E" opacity="0.85"/>
+  <polygon points="180,370 290,210 400,370" fill="#ffffff" opacity="0.18"/>
+  <polygon points="220,370 320,230 420,370" fill="#2D6A4F" opacity="0.7"/>
+  <polygon points="180,180 160,230 200,230" fill="white" opacity="0.9"/>
+  <polygon points="320,230 305,268 335,268" fill="white" opacity="0.75"/>
+  <g transform="translate(80,108) rotate(-20)">
+    <ellipse cx="0" cy="0" rx="38" ry="11" fill="white" opacity="0.95"/>
+    <polygon points="-10,-11 10,-11 2,-24" fill="white" opacity="0.95"/>
+    <polygon points="20,-4 38,-4 32,-14" fill="white" opacity="0.7"/>
+    <polygon points="-26,4 -38,10 -38,2" fill="white" opacity="0.7"/>
+  </g>
+  <rect x="60" y="368" width="392" height="8" rx="4" fill="white" opacity="0.15"/>
+  <text x="256" y="448" font-family="Georgia,serif" font-size="62" font-weight="700" fill="white" opacity="0.9" text-anchor="middle" letter-spacing="4">EUROPE</text>
+</svg>
+    </div>
+    <div class="header-text">
+      <div class="header-eyebrow">Summer 2026 · 15 Days</div>
+      <h1>Europe <em>2026</em></h1>
+    </div>
+  </div>
+  <div class="dest-pills">
+    <div class="pill pill-london">🇬🇧 London</div>
+    <div class="pill pill-zurich">🇨🇭 Zurich</div>
+    <div class="pill pill-murren">🏔️ Mürren</div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('itinerary',this)">
+    <span class="ti">🗺️</span>Itinerary
+  </button>
+  <button class="tab-btn" onclick="switchTab('costs',this)">
+    <span class="ti">💰</span>Costs
+  </button>
+  <button class="tab-btn" onclick="switchTab('reference',this)">
+    <span class="ti">🔐</span>Reference
+  </button>
+  <button class="tab-btn" onclick="switchTab('packing',this)">
+    <span class="ti">🧳</span>Packing
+  </button>
+</div>
+
+<div class="scroll-area">
+
+  <!-- ══════════ ITINERARY ══════════ -->
+  <div class="tab-panel active" id="tab-itinerary">
+    <div class="days-grid">
+
+      <div class="loc-div ld-london"><div class="loc-dot"></div><h2>London, England</h2><div class="loc-line"></div></div>
+
+      <!-- D1 -->
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-travel"><span class="num">1</span><span class="dow">Thu</span><span class="ds">Jun 11</span></div>
+          <div class="day-info">
+            <div class="day-where c-travel">Travel Day</div>
+            <div class="day-title">EWR → LHR (UA 934)</div>
+            <div class="day-snip">Flight · Black cab · Check in</div>
+          </div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">✈️</div><div><div class="det-label">Flight</div><div class="det-val">United UA 934 · EWR → LHR</div></div></div>
+          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Accommodation</div><div class="det-val">Marlin Apartments – Empire Square, London Bridge</div><div class="det-val addr">34 Long Ln, London SE1 4NA</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips">
+            <span class="chip chip-travel">✈️ Heathrow arrival</span>
+            <span class="chip chip-travel">🚕 Black cab to Airbnb</span>
+            <span class="chip chip-def">🛌 Check in & settle</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- D2 -->
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-london"><span class="num">2</span><span class="dow">Fri</span><span class="ds">Jun 12</span></div>
+          <div class="day-info">
+            <div class="day-where c-london">London</div>
+            <div class="day-title">Marlin Apartments</div>
+            <div class="day-snip">Borough Market · Bangers & Mash</div>
+          </div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Marlin Apartments, London Bridge</div><div class="det-val addr">34 Long Ln, London SE1 4NA</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips">
+            <span class="chip chip-sight">🛒 Borough Market</span>
+            <span class="chip chip-def">🛍️ Shop & explore</span>
+            <span class="chip chip-food">🛵 Uber Groceries</span>
+            <span class="chip chip-food">🍽️ Dinner: Bangers & Mash</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- D3 -->
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-london"><span class="num">3</span><span class="dow">Sat</span><span class="ds">Jun 13</span></div>
+          <div class="day-info">
+            <div class="day-where c-london">London</div>
+            <div class="day-title">Marlin Apartments</div>
+            <div class="day-snip">E Pellicci breakfast · Harry Potter</div>
+          </div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Marlin Apartments, London Bridge</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips">
+            <span class="chip chip-food">🍳 E Pellicci English Breakfast</span>
+            <span class="chip chip-sight">⚡ Harry Potter</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- D4 -->
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-london"><span class="num">4</span><span class="dow">Sun</span><span class="ds">Jun 14</span></div>
+          <div class="day-info">
+            <div class="day-where c-london">London</div>
+            <div class="day-title">Marlin Apartments</div>
+            <div class="day-snip">Black Cab 9am–3pm · Fish & Chips</div>
+          </div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Marlin Apartments, London Bridge</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips">
+            <span class="chip chip-sight">🚕 Black Cab city tour · 9am–3pm</span>
+            <span class="chip chip-food">🐟 Late lunch: Fish & Chips</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- D5 -->
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-london"><span class="num">5</span><span class="dow">Mon</span><span class="ds">Jun 15</span></div>
+          <div class="day-info">
+            <div class="day-where c-london">London</div>
+            <div class="day-title">Marlin Apartments</div>
+            <div class="day-snip">Uber Boat · Churchill War Rooms</div>
+          </div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Marlin Apartments, London Bridge</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips">
+            <span class="chip chip-sight">🛥️ Uber Boat on the Thames</span>
+            <span class="chip chip-sight">🪖 Churchill War Rooms</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="loc-div ld-zurich"><div class="loc-dot"></div><h2>Zurich, Switzerland</h2><div class="loc-line"></div></div>
+
+      <!-- D6 -->
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-travel"><span class="num">6</span><span class="dow">Tue</span><span class="ds">Jun 16</span></div>
+          <div class="day-info">
+            <div class="day-where c-travel">Travel Day</div>
+            <div class="day-title">LHR → ZRH (LX 319)</div>
+            <div class="day-snip">8am Tube · Fly 12–2pm · Hotel Adler</div>
+          </div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🚇</div><div><div class="det-label">Morning</div><div class="det-val">8am Tube to Heathrow</div></div></div>
+          <div class="det-row"><div class="det-icon">✈️</div><div><div class="det-label">Flight</div><div class="det-val">Swiss Air LX 319 · LHR → ZRH · 12:00–14:00</div></div></div>
+          <div class="det-row"><div class="det-icon">🏨</div><div><div class="det-label">Accommodation</div><div class="det-val">Hotel Adler Zürich · 2 double + 2 single</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips">
+            <span class="chip chip-travel">🚶 Walk to Hotel Adler</span>
+            <span class="chip chip-food">🍽️ Dinner out</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- D7 -->
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-zurich"><span class="num">7</span><span class="dow">Wed</span><span class="ds">Jun 17</span></div>
+          <div class="day-info">
+            <div class="day-where c-zurich">Zurich</div>
+            <div class="day-title">Hotel Adler Zürich</div>
+            <div class="day-snip">City · Fries & Sausage · Ducks on the lake!</div>
+          </div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🏨</div><div><div class="det-label">Stay</div><div class="det-val">Hotel Adler Zürich</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips">
+            <span class="chip chip-sight">🏙️ Explore Zurich</span>
+            <span class="chip chip-def">🛍️ Shop</span>
+            <span class="chip chip-food">🍟 Lunch: Fries & Sausage</span>
+            <span class="chip chip-sight">🦆 Feed ducks & swans on Lake Zurich</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="loc-div ld-murren"><div class="loc-dot"></div><h2>Mürren, Swiss Alps</h2><div class="loc-line"></div></div>
+
+      <!-- D8 -->
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-travel"><span class="num">8</span><span class="dow">Thu</span><span class="ds">Jun 18</span></div>
+          <div class="day-info">
+            <div class="day-where c-travel">Travel Day</div>
+            <div class="day-title">Zurich → Mürren</div>
+            <div class="day-snip">Trains 12–3:30pm · Possible Lucerne stop</div>
+          </div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🚆</div><div><div class="det-label">Journey</div><div class="det-val">Train · Zurich → Mürren · 12:00–15:30</div><div class="det-val addr">Consider a stop in Lucerne!</div></div></div>
+          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Accommodation</div><div class="det-val">Chalet Apartment "Schnell"</div><div class="det-val addr">Hehmatten 1068E, Mürren</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips">
+            <span class="chip chip-travel">🚆 Train through the Alps</span>
+            <span class="chip chip-def">🥨 Snacks en route</span>
+            <span class="chip chip-food">🛒 Groceries on arrival</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- D9–D14 Mürren -->
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-murren"><span class="num">9</span><span class="dow">Fri</span><span class="ds">Jun 19</span></div>
+          <div class="day-info"><div class="day-where c-murren">Mürren</div><div class="day-title">Chalet "Schnell"</div><div class="day-snip">Free day — add your plans!</div></div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Chalet "Schnell" · Hehmatten 1068E, Mürren</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips"><span class="chip chip-def" contenteditable>✏️ Add activity</span></div>
+        </div>
+      </div>
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-murren"><span class="num">10</span><span class="dow">Sat</span><span class="ds">Jun 20</span></div>
+          <div class="day-info"><div class="day-where c-murren">Mürren</div><div class="day-title">Chalet "Schnell"</div><div class="day-snip">Free day in the Alps</div></div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Chalet "Schnell" · Hehmatten 1068E, Mürren</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips"><span class="chip chip-def" contenteditable>✏️ Add activity</span></div>
+        </div>
+      </div>
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-murren"><span class="num">11</span><span class="dow">Sun</span><span class="ds">Jun 21</span></div>
+          <div class="day-info"><div class="day-where c-murren">Mürren</div><div class="day-title">Chalet "Schnell"</div><div class="day-snip">🚁 Helicopter ride for P&L!</div></div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Chalet "Schnell" · Hehmatten 1068E, Mürren</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips"><span class="chip chip-sight">🚁 Helicopter ride for P&L</span></div>
+        </div>
+      </div>
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-murren"><span class="num">12</span><span class="dow">Mon</span><span class="ds">Jun 22</span></div>
+          <div class="day-info"><div class="day-where c-murren">Mürren</div><div class="day-title">Chalet "Schnell"</div><div class="day-snip">Free day in the Alps</div></div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Chalet "Schnell" · Hehmatten 1068E, Mürren</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips"><span class="chip chip-def" contenteditable>✏️ Add activity</span></div>
+        </div>
+      </div>
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-murren"><span class="num">13</span><span class="dow">Tue</span><span class="ds">Jun 23</span></div>
+          <div class="day-info"><div class="day-where c-murren">Mürren</div><div class="day-title">Chalet "Schnell"</div><div class="day-snip">Free day in the Alps</div></div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Chalet "Schnell" · Hehmatten 1068E, Mürren</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips"><span class="chip chip-def" contenteditable>✏️ Add activity</span></div>
+        </div>
+      </div>
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-murren"><span class="num">14</span><span class="dow">Wed</span><span class="ds">Jun 24</span></div>
+          <div class="day-info"><div class="day-where c-murren">Mürren</div><div class="day-title">Chalet "Schnell"</div><div class="day-snip">Last night in the Alps 🌄</div></div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Chalet "Schnell" · Hehmatten 1068E, Mürren</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips">
+            <span class="chip chip-def">🌄 Last Alpine sunset</span>
+            <span class="chip chip-def">🧳 Pack for tomorrow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- D15 -->
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div class="day-badge bg-travel"><span class="num">15</span><span class="dow">Thu</span><span class="ds">Jun 25</span></div>
+          <div class="day-info">
+            <div class="day-where c-travel">Travel Day</div>
+            <div class="day-title">Mürren → ZRH → EWR</div>
+            <div class="day-snip">UA 9748 · Homeward bound 🏡</div>
+          </div>
+          <div class="day-chev">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="det-row"><div class="det-icon">🚆</div><div><div class="det-label">To Airport</div><div class="det-val">Train · Mürren → Zurich ZRH</div></div></div>
+          <div class="det-row"><div class="det-icon">✈️</div><div><div class="det-label">Flight Home</div><div class="det-val">United UA 9748 · ZRH → EWR</div></div></div>
+          <div class="act-head">Plan</div>
+          <div class="chips">
+            <span class="chip chip-food">☕ Final Swiss breakfast</span>
+            <span class="chip chip-travel">🚆 Train to Zurich airport</span>
+            <span class="chip chip-travel">✈️ Fly home</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /itinerary -->
+
+  <!-- ══════════ COSTS ══════════ -->
+  <div class="tab-panel" id="tab-costs">
+
+    <!-- Summary card -->
+    <div class="costs-summary">
+      <h2>Total Trip Cost</h2>
+      <div class="costs-big">$<span id="totalCost">21,014</span></div>
+      <div class="costs-meta">
+        <div class="costs-meta-item">
+          <div class="costs-meta-label">Paid so far</div>
+          <div class="costs-meta-val paid">$4,519.50</div>
+        </div>
+        <div class="costs-meta-item">
+          <div class="costs-meta-label">Remaining</div>
+          <div class="costs-meta-val remaining">$16,494.85</div>
+        </div>
+        <div class="costs-meta-item">
+          <div class="costs-meta-label">T&amp;C share</div>
+          <div class="costs-meta-val">$8,801.08</div>
+        </div>
+        <div class="costs-meta-item">
+          <div class="costs-meta-label">P&amp;L share</div>
+          <div class="costs-meta-val">$4,882.26</div>
+        </div>
+      </div>
+      <div class="pay-progress">
+        <div class="pay-progress-label"><span>Payment progress</span><span>$4,519.50 of $21,014</span></div>
+        <div class="pay-track"><div class="pay-fill" style="width: 21.5%"></div></div>
+      </div>
+    </div>
+
+    <div class="cost-cards">
+
+      <!-- FLIGHTS -->
+      <div class="cost-card flights open">
+        <div class="cost-card-header" onclick="toggleCost(this.parentElement)">
+          <span class="ci">✈️</span>
+          <div class="cost-card-title">
+            <h3>Flights</h3>
+            <p>EWR↔LHR · LHR↔ZRH · ZRH↔EWR</p>
+          </div>
+          <div class="cost-card-total">
+            <div class="amt">$6,925.52</div>
+            <span class="chev">▼</span>
+          </div>
+        </div>
+        <div class="cost-card-body">
+          <table class="cost-table">
+            <thead><tr><th>Item</th><th>Total</th><th>Paid</th><th>T&amp;C</th><th>P&amp;L</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="item-name">All Flights</td>
+                <td>$6,925.52</td>
+                <td><span class="badge-paid">$3,330.66</span></td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- LODGING -->
+      <div class="cost-card lodging">
+        <div class="cost-card-header" onclick="toggleCost(this.parentElement)">
+          <span class="ci">🏨</span>
+          <div class="cost-card-title">
+            <h3>Lodging</h3>
+            <p>London · Hotel Adler · Chalet Schnell</p>
+          </div>
+          <div class="cost-card-total">
+            <div class="amt">$12,770.83</div>
+            <span class="chev">▼</span>
+          </div>
+        </div>
+        <div class="cost-card-body">
+          <table class="cost-table">
+            <thead><tr><th>Property</th><th>Total</th><th>Paid</th><th>T&amp;C</th><th>P&amp;L</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="item-name">London Hotel (Marlin)</td>
+                <td>$7,000</td>
+                <td><span class="badge-owed">$0</span></td>
+                <td>$4,400</td>
+                <td>$2,600</td>
+              </tr>
+              <tr>
+                <td class="item-name">Airbnb Switz (Schnell)</td>
+                <td>$2,097.95</td>
+                <td><span class="badge-paid">$1,188.84</span></td>
+                <td>$1,384.65</td>
+                <td>$692.32</td>
+              </tr>
+              <tr>
+                <td class="item-name">Hotel Adler Zürich</td>
+                <td>$3,672.88</td>
+                <td><span class="badge-owed">$0</span></td>
+                <td>$2,435</td>
+                <td>$1,155</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ACTIVITIES -->
+      <div class="cost-card activities">
+        <div class="cost-card-header" onclick="toggleCost(this.parentElement)">
+          <span class="ci">🎟️</span>
+          <div class="cost-card-title">
+            <h3>Activities</h3>
+            <p>Black Cab · Harry Potter</p>
+          </div>
+          <div class="cost-card-total">
+            <div class="amt">$1,318</div>
+            <span class="chev">▼</span>
+          </div>
+        </div>
+        <div class="cost-card-body">
+          <table class="cost-table">
+            <thead><tr><th>Activity</th><th>Total</th><th>Paid</th><th>T&amp;C</th><th>P&amp;L</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="item-name">Black Cab Tour</td>
+                <td>$850</td>
+                <td><span class="badge-owed">$0</span></td>
+                <td>$561</td>
+                <td>$280.50</td>
+              </tr>
+              <tr>
+                <td class="item-name">Harry Potter</td>
+                <td>$468</td>
+                <td><span class="badge-owed">$0</span></td>
+                <td>$308.88</td>
+                <td>$154.44</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- P&L Split -->
+    <div class="pl-section" style="margin-top:14px;">
+      <h3>🧾 P&amp;L Breakdown</h3>
+      <div class="pl-row"><span class="pl-label">Total flights</span><span class="pl-amt">$3,330.66</span></div>
+      <div class="pl-row"><span class="pl-label">Total lodging</span><span class="pl-amt">$4,447.32</span></div>
+      <div class="pl-row"><span class="pl-label">Total activities</span><span class="pl-amt">$434.94</span></div>
+      <div class="pl-row" style="border-top: 2px solid #E5E1DB; margin-top:4px; padding-top:10px;">
+        <span class="pl-label" style="font-weight:700; color:var(--ink);">Total costs</span>
+        <span class="pl-amt" style="font-size:1.05rem;">$8,212.92</span>
+      </div>
+      <div class="pl-row"><span class="pl-label">Total payments made</span><span class="pl-amt" style="color:#065F46;">$4,000.00</span></div>
+      <div class="pl-row"><span class="pl-label" style="font-weight:700; color:var(--ink);">Remaining balance</span><span class="pl-amt remaining" style="font-size:1.05rem;">$4,212.92</span></div>
+    </div>
+
+    <!-- Payments -->
+    <div class="pl-section" style="margin-top:10px;">
+      <h3>💳 Payments Made</h3>
+      <div class="payments-list">
+        <div class="payment-item">
+          <div><div style="font-weight:600;">Payment 1</div><div class="payment-date">Nov 13, 2025</div></div>
+          <div class="payment-amt">$4,000.00</div>
+        </div>
+        <div class="payment-item" style="color:#C0BAB4; font-style:italic;">
+          <div>Add next payment...</div>
+          <div contenteditable style="min-width:80px; text-align:right; color:#C0BAB4;">$0.00</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /costs -->
+
+  <!-- ══════════ REFERENCE ══════════ -->
+  <div class="tab-panel" id="tab-reference">
+    <div class="ref-note">🔐 <span>Private — just for you & your husband. Tap any field to edit.</span></div>
+    <div class="ref-sections">
+
+      <div class="ref-card flights open">
+        <div class="ref-card-header" onclick="toggleRef(this.parentElement)">
+          <span class="ri">✈️</span><h3>Flights</h3><span class="ref-toggle">▼</span>
+        </div>
+        <div class="ref-card-body">
+          <table class="rt">
+            <thead><tr><th>Route</th><th>Date</th><th>Flight</th><th>Conf #</th></tr></thead>
+            <tbody id="tFlights">
+              <tr><td class="label">EWR → LHR</td><td contenteditable>Jun 11</td><td contenteditable>UA 934</td><td><span class="conf placeholder" contenteditable>Add conf #</span></td></tr>
+              <tr><td class="label">LHR → ZRH</td><td contenteditable>Jun 16</td><td contenteditable>LX 319</td><td><span class="conf placeholder" contenteditable>Add conf #</span></td></tr>
+              <tr><td class="label">ZRH → EWR</td><td contenteditable>Jun 25</td><td contenteditable>UA 9748</td><td><span class="conf placeholder" contenteditable>Add conf #</span></td></tr>
+            </tbody>
+          </table>
+          <button class="add-row-btn" onclick="addRow('tFlights',['Route','Date','Flight #','Conf #'])">＋ Add flight</button>
+        </div>
+      </div>
+
+      <div class="ref-card hotels">
+        <div class="ref-card-header" onclick="toggleRef(this.parentElement)">
+          <span class="ri">🏨</span><h3>Accommodations</h3><span class="ref-toggle">▼</span>
+        </div>
+        <div class="ref-card-body">
+          <table class="rt">
+            <thead><tr><th>Property</th><th>Dates</th><th>Conf #</th></tr></thead>
+            <tbody id="tHotels">
+              <tr><td class="label">Marlin Apts, London</td><td contenteditable>Jun 11–16</td><td><span class="conf placeholder" contenteditable>Add conf #</span></td></tr>
+              <tr><td class="label">Hotel Adler Zürich</td><td contenteditable>Jun 16–18</td><td><span class="conf placeholder" contenteditable>Add conf #</span></td></tr>
+              <tr><td class="label">Chalet "Schnell"</td><td contenteditable>Jun 18–25</td><td><span class="conf placeholder" contenteditable>Add conf #</span></td></tr>
+            </tbody>
+          </table>
+          <button class="add-row-btn" onclick="addRow('tHotels',['Property','Dates','Conf #'])">＋ Add property</button>
+        </div>
+      </div>
+
+      <div class="ref-card tickets">
+        <div class="ref-card-header" onclick="toggleRef(this.parentElement)">
+          <span class="ri">🎟️</span><h3>Tickets & Tours</h3><span class="ref-toggle">▼</span>
+        </div>
+        <div class="ref-card-body">
+          <table class="rt">
+            <thead><tr><th>Experience</th><th>Date</th><th>Ref #</th><th>Notes</th></tr></thead>
+            <tbody id="tTickets">
+              <tr><td class="label" contenteditable>Harry Potter</td><td contenteditable>Jun 13</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable>Confirm venue</td></tr>
+              <tr><td class="label" contenteditable>Black Cab Tour</td><td contenteditable>Jun 14 · 9am</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable></td></tr>
+              <tr><td class="label" contenteditable>Churchill War Rooms</td><td contenteditable>Jun 15</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable></td></tr>
+              <tr><td class="label" contenteditable>🚁 Helicopter Ride</td><td contenteditable>Jun 21</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable>For P&L</td></tr>
+            </tbody>
+          </table>
+          <button class="add-row-btn" onclick="addRow('tTickets',['Experience','Date','Ref #','Notes'])">＋ Add booking</button>
+        </div>
+      </div>
+
+      <div class="ref-card transport">
+        <div class="ref-card-header" onclick="toggleRef(this.parentElement)">
+          <span class="ri">🚆</span><h3>Ground Transport</h3><span class="ref-toggle">▼</span>
+        </div>
+        <div class="ref-card-body">
+          <table class="rt">
+            <thead><tr><th>Type</th><th>Date</th><th>Ref #</th><th>Notes</th></tr></thead>
+            <tbody id="tTransport">
+              <tr><td class="label">Black Cab (LHR arrival)</td><td contenteditable>Jun 11</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable>To Marlin Apts</td></tr>
+              <tr><td class="label">Train: ZRH → Mürren</td><td contenteditable>Jun 18 · 12pm</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable>Possible Lucerne stop</td></tr>
+              <tr><td class="label">Train: Mürren → ZRH</td><td contenteditable>Jun 25</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable>Allow airport time</td></tr>
+            </tbody>
+          </table>
+          <button class="add-row-btn" onclick="addRow('tTransport',['Type','Date','Ref #','Notes'])">＋ Add transport</button>
+        </div>
+      </div>
+
+      <div class="ref-card misc">
+        <div class="ref-card-header" onclick="toggleRef(this.parentElement)">
+          <span class="ri">📋</span><h3>Misc & Emergency</h3><span class="ref-toggle">▼</span>
+        </div>
+        <div class="ref-card-body">
+          <table class="rt">
+            <thead><tr><th>Item</th><th>Details</th><th>Notes</th></tr></thead>
+            <tbody id="tMisc">
+              <tr><td class="label" contenteditable>Travel Insurance</td><td><span class="conf placeholder" contenteditable>Policy #</span></td><td contenteditable>24/7 helpline #</td></tr>
+              <tr><td class="label" contenteditable>Emergency Contact</td><td contenteditable>Name & number</td><td contenteditable>Has our full itinerary</td></tr>
+              <tr><td class="label" contenteditable>Credit Cards</td><td contenteditable>Which cards + notified</td><td contenteditable>Foreign fees?</td></tr>
+              <tr><td class="label" contenteditable>EWR Parking</td><td><span class="conf placeholder" contenteditable>Parking conf #</span></td><td contenteditable>Lot, level, row</td></tr>
+            </tbody>
+          </table>
+          <button class="add-row-btn" onclick="addRow('tMisc',['Item','Details','Notes'])">＋ Add item</button>
+        </div>
+      </div>
+
+    </div>
+    <!-- ══════════ PACKING ══════════ -->
+  <div class="tab-panel" id="tab-packing">
+
+    <div class="pack-header">
+      <div class="pack-progress-wrap">
+        <div class="pack-progress-label">
+          <span>Packed</span>
+          <span id="packCount">0 of 0 items</span>
+        </div>
+        <div class="pack-track"><div class="pack-fill" id="packFill" style="width:0%"></div></div>
+      </div>
+      <button class="pack-reset-btn" onclick="resetPacking()">Reset all</button>
+    </div>
+
+    <div class="pack-sections" id="packSections">
+
+      <!-- CLOTHES -->
+      <div class="pack-section open" data-section="clothes">
+        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
+          <span class="psi">👕</span>
+          <h3>Clothes</h3>
+          <span class="pack-section-count" id="count-clothes">0/0</span>
+          <span class="pack-chev">▼</span>
+        </div>
+        <div class="pack-section-body">
+          <ul class="pack-items" id="list-clothes">
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">5 pairs of socks</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">5 underwear</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">3 shirts</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">1 pants</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">1 shorts</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Pajamas</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Raincoat / windbreaker with hood</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Layerable quarter-zip / long sleeve</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Sweatshirt</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Sunglasses</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Crossbody / purse (fits water bottle & phone)</span></li>
+          </ul>
+          <div class="pack-add-row">
+            <input class="pack-add-input" type="text" placeholder="Add clothing item…" onkeydown="addPackItem(event,'list-clothes')">
+            <button class="pack-add-submit" onclick="addPackItemBtn('list-clothes')">＋</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TECH & GEAR -->
+      <div class="pack-section" data-section="tech">
+        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
+          <span class="psi">🔌</span>
+          <h3>Tech & Gear</h3>
+          <span class="pack-section-count" id="count-tech">0/0</span>
+          <span class="pack-chev">▼</span>
+        </div>
+        <div class="pack-section-body">
+          <ul class="pack-items" id="list-tech">
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Power adapter (European)</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Backup battery — small</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Phone chargers with long cord</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Headphones</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Backpack loop / carabiner</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Packing cubes</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Tom's mini USB fan <span class="pack-item-who who-t">Tom</span></span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Christie's USB fan <span class="pack-item-who who-c">Christie</span></span></li>
+          </ul>
+          <div class="pack-add-row">
+            <input class="pack-add-input" type="text" placeholder="Add tech item…" onkeydown="addPackItem(event,'list-tech')">
+            <button class="pack-add-submit" onclick="addPackItemBtn('list-tech')">＋</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOILETRIES -->
+      <div class="pack-section" data-section="toiletries">
+        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
+          <span class="psi">🪥</span>
+          <h3>Toiletries</h3>
+          <span class="pack-section-count" id="count-toiletries">0/0</span>
+          <span class="pack-chev">▼</span>
+        </div>
+        <div class="pack-section-body">
+          <ul class="pack-items" id="list-toiletries">
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Toothbrush + mini toothpaste</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Deodorant</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Mini pack hand wipes</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Hand sanitizer</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Laundry detergent sheets</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Tom's foot powder <span class="pack-item-who who-t">Tom</span></span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Tom's nail clippers <span class="pack-item-who who-t">Tom</span></span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Tom's saline / contacts <span class="pack-item-who who-t">Tom</span></span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Christie's laundry detergent sheets <span class="pack-item-who who-c">Christie</span></span></li>
+          </ul>
+          <div class="pack-add-row">
+            <input class="pack-add-input" type="text" placeholder="Add toiletry…" onkeydown="addPackItem(event,'list-toiletries')">
+            <button class="pack-add-submit" onclick="addPackItemBtn('list-toiletries')">＋</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- HEALTH & MEDS -->
+      <div class="pack-section" data-section="health">
+        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
+          <span class="psi">💊</span>
+          <h3>Health & Meds</h3>
+          <span class="pack-section-count" id="count-health">0/0</span>
+          <span class="pack-chev">▼</span>
+        </div>
+        <div class="pack-section-body">
+          <ul class="pack-items" id="list-health">
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Prescription medications</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">OTC medications (ibuprofen, antacids, etc.)</span></li>
+          </ul>
+          <div class="pack-add-row">
+            <input class="pack-add-input" type="text" placeholder="Add med / health item…" onkeydown="addPackItem(event,'list-health')">
+            <button class="pack-add-submit" onclick="addPackItemBtn('list-health')">＋</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOCUMENTS -->
+      <div class="pack-section" data-section="docs">
+        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
+          <span class="psi">📄</span>
+          <h3>Documents</h3>
+          <span class="pack-section-count" id="count-docs">0/0</span>
+          <span class="pack-chev">▼</span>
+        </div>
+        <div class="pack-section-body">
+          <ul class="pack-items" id="list-docs">
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Passport + copy (each person)</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Credit card per person — call to notify bank</span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">T&C credit card + backup card</span></li>
+          </ul>
+          <div class="pack-add-row">
+            <input class="pack-add-input" type="text" placeholder="Add document…" onkeydown="addPackItem(event,'list-docs')">
+            <button class="pack-add-submit" onclick="addPackItemBtn('list-docs')">＋</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUY IN EUROPE -->
+      <div class="pack-section" data-section="buy">
+        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
+          <span class="psi">🛒</span>
+          <h3>Buy in Europe</h3>
+          <span class="pack-section-count" id="count-buy">0/0</span>
+          <span class="pack-chev">▼</span>
+        </div>
+        <div class="pack-section-body">
+          <div class="pack-note">💡 Don't pack these — grab them over there</div>
+          <ul class="pack-items" id="list-buy">
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Laundry detergent <span class="pack-item-who who-buy">Buy there</span></span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Cards / games or something fun <span class="pack-item-who who-buy">Buy there</span></span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Reusable tote bag <span class="pack-item-who who-buy">Buy there</span></span></li>
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Extra suitcase for souvenirs (possibly) <span class="pack-item-who who-buy">Maybe</span></span></li>
+          </ul>
+          <div class="pack-add-row">
+            <input class="pack-add-input" type="text" placeholder="Add something to buy there…" onkeydown="addPackItem(event,'list-buy')">
+            <button class="pack-add-submit" onclick="addPackItemBtn('list-buy')">＋</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DON'T BOTHER -->
+      <div class="pack-section" data-section="skip">
+        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
+          <span class="psi">🚫</span>
+          <h3>Don't Bother Packing</h3>
+          <span class="pack-section-count" id="count-skip">—</span>
+          <span class="pack-chev">▼</span>
+        </div>
+        <div class="pack-section-body">
+          <div class="pack-note">🙅 Leave these at home</div>
+          <ul class="pack-items" id="list-skip">
+            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Sunscreen <span class="pack-item-who who-skip">Skip</span></span></li>
+          </ul>
+          <div class="pack-add-row">
+            <input class="pack-add-input" type="text" placeholder="Add something to leave behind…" onkeydown="addPackItem(event,'list-skip')">
+            <button class="pack-add-submit" onclick="addPackItemBtn('list-skip')">＋</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /packing -->
+
+</div><!-- /scroll-area -->
+
+<script>
+  // PWA: Add to Home Screen still works via meta tags without a separate SW file
+
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+    document.querySelector('.scroll-area').scrollTop = 0;
+  }
+
+  function toggleDay(card) {
+    // stop propagation from contenteditable clicks
+    card.classList.toggle('open');
+  }
+
+  function toggleRef(card) { card.classList.toggle('open'); }
+  function toggleCost(card) { card.classList.toggle('open'); }
+  function togglePackSection(section) { section.classList.toggle('open'); }
+
+  // sections that should NOT count toward progress bar
+  const NO_COUNT_SECTIONS = ['skip', 'buy'];
+
+  function toggleItem(item) {
+    item.classList.toggle('checked');
+    updatePackProgress();
+    savePackState();
+  }
+
+  function updatePackProgress() {
+    const sections = document.querySelectorAll('.pack-section');
+    let total = 0, checked = 0;
+    sections.forEach(section => {
+      const id = section.dataset.section;
+      const items = section.querySelectorAll('.pack-item');
+      const checkedItems = section.querySelectorAll('.pack-item.checked');
+      const countEl = section.querySelector('.pack-section-count');
+      if (NO_COUNT_SECTIONS.includes(id)) {
+        if (countEl) { countEl.textContent = '—'; countEl.classList.remove('done'); }
+        return;
+      }
+      if (countEl) {
+        countEl.textContent = `${checkedItems.length}/${items.length}`;
+        countEl.classList.toggle('done', checkedItems.length === items.length && items.length > 0);
+      }
+      total += items.length;
+      checked += checkedItems.length;
+    });
+    const pct = total ? Math.round((checked / total) * 100) : 0;
+    document.getElementById('packFill').style.width = pct + '%';
+    document.getElementById('packCount').textContent = `${checked} of ${total} items`;
+  }
+
+  function savePackState() {
+    const state = {};
+    document.querySelectorAll('.pack-section').forEach(section => {
+      const id = section.dataset.section;
+      const origCount = parseInt(section.dataset.origCount || 0);
+      const items = Array.from(section.querySelectorAll('.pack-item'));
+      state[id] = {
+        checked: items.map(item => item.classList.contains('checked')),
+        added: items.slice(origCount).map(item => item.querySelector('.pack-item-text').innerHTML)
+      };
+    });
+    try { localStorage.setItem('packState2', JSON.stringify(state)); } catch(e) {}
+  }
+
+  function loadPackState() {
+    // Stamp original counts from HTML
+    document.querySelectorAll('.pack-section').forEach(section => {
+      section.dataset.origCount = section.querySelectorAll('.pack-item').length;
+    });
+
+    let state;
+    try { state = JSON.parse(localStorage.getItem('packState2')); } catch(e) {}
+
+    if (state) {
+      document.querySelectorAll('.pack-section').forEach(section => {
+        const id = section.dataset.section;
+        if (!state[id]) return;
+        const list = section.querySelector('.pack-items');
+        const items = Array.from(list.querySelectorAll('.pack-item'));
+        // Restore checked state on existing HTML items
+        (state[id].checked || []).forEach((isChecked, i) => {
+          if (items[i]) items[i].classList.toggle('checked', isChecked);
+        });
+        // Append any user-added items
+        (state[id].added || []).forEach(html => {
+          list.appendChild(makePackItem(html, false));
+        });
+      });
+    }
+
+    updatePackProgress();
+  }
+
+  function makePackItem(innerHTML, checked = false) {
+    const li = document.createElement('li');
+    li.className = 'pack-item' + (checked ? ' checked' : '');
+    li.onclick = () => toggleItem(li);
+    li.innerHTML = `<div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">${innerHTML}</span>`;
+    return li;
+  }
+
+  function addPackItem(event, listId) {
+    if (event.key === 'Enter') addPackItemBtn(listId);
+  }
+
+  function addPackItemBtn(listId) {
+    const input = document.querySelector(`#${listId}`).closest('.pack-section-body').querySelector('.pack-add-input');
+    const text = input.value.trim();
+    if (!text) return;
+    const list = document.getElementById(listId);
+    list.appendChild(makePackItem(text));
+    input.value = '';
+    updatePackProgress();
+    savePackState();
+  }
+
+  function resetPacking() {
+    if (!confirm('Reset all checkboxes?')) return;
+    document.querySelectorAll('.pack-item').forEach(item => item.classList.remove('checked'));
+    updatePackProgress();
+    savePackState();
+  }
+
+  // Init
+  loadPackState();
+
+  function addRow(tableId, cols) {
+    const tbody = document.getElementById(tableId);
+    const tr = document.createElement('tr');
+    cols.forEach((col, i) => {
+      const td = document.createElement('td');
+      if (i === 0) td.className = 'label';
+      if (i === 2) {
+        const span = document.createElement('span');
+        span.className = 'conf placeholder';
+        span.contentEditable = true;
+        span.textContent = col;
+        td.appendChild(span);
+      } else {
+        td.contentEditable = true;
+        td.textContent = col;
+      }
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+    tr.querySelector('[contenteditable]').focus();
+  }
+
+  // Prevent day card toggle when tapping contenteditable chips
+  document.querySelectorAll('[contenteditable]').forEach(el => {
+    el.addEventListener('click', e => e.stopPropagation());
+  });
+</script>
+</body>
+</html>

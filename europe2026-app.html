@@ -6,1433 +6,999 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Europe 2026">
-<meta name="theme-color" content="#1D3461">
-<link rel="apple-touch-icon" href="icon.svg">
+<meta name="theme-color" content="#0B1F3A">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>Europe 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
+
   :root {
-    --bg: #F7F4EF;
-    --card: #ffffff;
-    --ink: #1C1917;
-    --muted: #78716C;
-    --london: #1D3461;
-    --zurich: #2D6A4F;
-    --murren: #7B4F9E;
-    --travel: #B5451B;
-    --accent: #E8A838;
-    --shadow: 0 2px 16px rgba(28,25,23,0.09);
-    --shadow-lg: 0 6px 32px rgba(28,25,23,0.13);
-    --safe-top: env(safe-area-inset-top, 0px);
-    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --cream: #F5F0E8;
+    --cream-dk: #EDE7D9;
+    --parchment: #E8E0CE;
+    --black: #0D0D0D;
+    --ink: #1A1A1A;
+    --ink2: #3A3A3A;
+    --muted: #8A8478;
+    --rule: #D5CEC0;
+    --gold: #A8893A;
+    --gold-lt: #E8D98A;
+    --red: #8B2020;
+    --blue: #1A3A6E;
+    --purple: #3D2E6E;
+    --brown: #4A2E14;
+    --shadow: 0 1px 3px rgba(13,13,13,0.06), 0 4px 16px rgba(13,13,13,0.04);
+    --st: env(safe-area-inset-top,0px);
+    --sb: env(safe-area-inset-bottom,0px);
   }
+
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   html, body { height: 100%; overflow: hidden; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    color: var(--ink);
-    background: var(--bg);
-    display: flex;
-    flex-direction: column;
-  }
+  body { font-family: 'Jost', sans-serif; color: var(--ink); background: var(--cream); display: flex; flex-direction: column; }
 
   /* ── HEADER ── */
   header {
-    background: var(--ink);
-    color: white;
-    padding: calc(16px + var(--safe-top)) 20px 0;
+    background: var(--black);
+    padding: calc(18px + var(--st)) 22px 0;
     flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
   }
-  .header-deco {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 50% 90% at 95% 0%, rgba(232,168,56,0.2) 0%, transparent 65%),
-      radial-gradient(ellipse 40% 60% at -5% 110%, rgba(123,79,158,0.15) 0%, transparent 65%);
-    pointer-events: none;
+  .hd { display: none; }
+  .hi { display: flex; align-items: center; gap: 14px; padding-bottom: 16px; }
+  .aicon {
+    width: 44px; height: 44px; border-radius: 10px;
+    overflow: hidden; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.15);
   }
-  .header-inner { position: relative; display: flex; align-items: center; gap: 14px; padding-bottom: 14px; }
-  .app-icon {
-    width: 48px; height: 48px;
-    border-radius: 12px;
-    flex-shrink: 0;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  }
-  .app-icon img { width: 100%; height: 100%; }
-  .header-text {}
-  .header-eyebrow {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 2px;
-  }
-  header h1 {
-    font-family: 'Lora', serif;
-    font-size: 1.45rem;
-    font-weight: 700;
-    line-height: 1.1;
-    color: white;
-  }
-  header h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
 
-  /* dest pills */
-  .dest-pills { display: flex; gap: 6px; flex-wrap: wrap; padding: 0 0 14px; position: relative; }
-  .pill {
-    font-size: 0.7rem; font-weight: 600;
-    padding: 3px 10px; border-radius: 20px;
-    color: white; opacity: 0.88;
+  .eye {
+    font-size: 0.58rem; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold-lt); margin-bottom: 5px; display: block;
   }
-  .pill-london { background: var(--london); }
-  .pill-zurich { background: var(--zurich); }
-  .pill-murren { background: var(--murren); }
+  h1 {
+    font-family: 'Jost', sans-serif;
+    font-size: 1.6rem; font-weight: 300;
+    color: white; line-height: 1;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  h1 em {
+    font-style: normal; font-weight: 600;
+    color: white; letter-spacing: 0.06em;
+  }
+
+  .pills { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 0 16px; }
+  .pill {
+    font-size: 0.58rem; font-weight: 400;
+    padding: 3px 0;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    border: none;
+    color: rgba(255,255,255,0.45);
+    background: none;
+  }
+  .pill + .pill::before {
+    content: '·';
+    margin-right: 10px;
+    color: rgba(255,255,255,0.2);
+  }
+  .plon { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); }
+  .pzur { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); }
+  .pmur { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); }
 
   /* ── TAB BAR ── */
-  .tab-bar {
-    background: var(--ink);
+  .tbar {
+    background: var(--black);
     border-top: 1px solid rgba(255,255,255,0.08);
-    display: flex;
-    flex-shrink: 0;
+    display: flex; flex-shrink: 0;
   }
-  .tab-btn {
-    flex: 1;
-    background: none; border: none;
-    color: rgba(255,255,255,0.45);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem; font-weight: 600;
-    padding: 10px 6px;
+  .tbtn {
+    flex: 1; background: none; border: none;
+    color: rgba(255,255,255,0.3);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem; font-weight: 500;
+    padding: 11px 4px 12px;
     cursor: pointer;
-    border-bottom: 3px solid transparent;
-    transition: all 0.2s;
-    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    border-bottom: 1.5px solid transparent;
+    transition: all 0.25s;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    letter-spacing: 0.1em; text-transform: uppercase;
   }
-  .tab-btn .ti { font-size: 1.15rem; }
-  .tab-btn.active { color: white; border-bottom-color: var(--accent); }
+  .tbtn .ti { font-size: 1rem; }
+  .tbtn.active { color: var(--gold-lt); border-bottom-color: var(--gold); }
+  .tbtn:hover:not(.active) { color: rgba(255,255,255,0.6); }
 
-  /* ── SCROLL AREA ── */
-  .scroll-area {
-    flex: 1;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
-    padding-bottom: calc(16px + var(--safe-bottom));
-  }
-
-  .tab-panel { display: none; padding: 20px 14px 0; }
-  .tab-panel.active { display: block; }
+  /* ── SCROLL ── */
+  .sa { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding-bottom: calc(24px + var(--sb)); }
+  .tp { display: none; padding: 24px 16px 0; }
+  .tp.active { display: block; }
 
   /* ── LOCATION DIVIDERS ── */
-  .loc-div {
-    display: flex; align-items: center; gap: 10px;
-    margin: 22px 0 10px;
-  }
-  .loc-div:first-child { margin-top: 0; }
-  .loc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .ld-london .loc-dot { background: var(--london); }
-  .ld-zurich .loc-dot { background: var(--zurich); }
-  .ld-murren .loc-dot { background: var(--murren); }
-  .loc-div h2 {
-    font-family: 'Lora', serif;
-    font-size: 0.9rem; font-weight: 600;
+  .ldiv { display: flex; align-items: center; gap: 12px; margin: 28px 0 12px; }
+  .ldiv:first-child { margin-top: 0; }
+  .ldot { display: none; }
+  .ldiv h2 {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.58rem; font-weight: 600;
     color: var(--muted); white-space: nowrap;
+    letter-spacing: 0.22em; text-transform: uppercase;
   }
-  .loc-line { flex: 1; height: 1px; background: #E5E1DB; }
+  .lline { flex: 1; height: 1px; background: var(--rule); }
 
   /* ── DAY CARDS ── */
-  .days-grid { display: flex; flex-direction: column; gap: 8px; }
+  .dgrid { display: flex; flex-direction: column; gap: 1px; }
 
-  .day-card {
-    background: var(--card);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
+  /* Cards in a list share borders for a magazine-style grid */
+  .dgrid .dc:first-of-type { border-radius: 4px 4px 0 0; }
+  .dgrid .dc:last-of-type { border-radius: 0 0 4px 4px; margin-bottom: 0; }
+  .dgrid .dc:only-of-type { border-radius: 4px; }
+
+  .dc {
+    background: white;
     overflow: hidden;
+    border-left: none;
+    transition: background 0.15s;
   }
-  .day-header {
-    display: flex; align-items: stretch;
-    cursor: pointer; user-select: none;
-  }
-  .day-badge {
-    width: 58px; min-width: 58px;
+  .dc:active { background: var(--cream); }
+
+  .dh { display: flex; align-items: stretch; cursor: pointer; user-select: none; min-height: 64px; }
+
+  .db2 {
+    width: 64px; min-width: 64px;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    padding: 12px 6px; color: white;
+    padding: 14px 6px;
+    background: var(--cream-dk);
+    border-right: 1px solid var(--rule);
+    position: relative;
   }
-  .day-badge .num { font-size: 1.25rem; font-weight: 700; line-height: 1; }
-  .day-badge .dow { font-size: 0.55rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-top: 2px; }
-  .day-badge .ds { font-size: 0.52rem; opacity: 0.6; margin-top: 1px; }
-  .bg-london { background: var(--london); }
-  .bg-zurich { background: var(--zurich); }
-  .bg-murren { background: var(--murren); }
-  .bg-travel { background: var(--travel); }
+  .db2 .n { font-size: 1.5rem; font-weight: 300; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .db2 .dw { font-size: 0.52rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-top: 3px; }
+  .db2 .dd { font-size: 0.5rem; color: var(--muted); margin-top: 1px; opacity: 0.7; }
 
-  .day-info { flex: 1; padding: 11px 12px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
-  .day-where { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1px; }
-  .c-london { color: var(--london); } .c-zurich { color: var(--zurich); }
-  .c-murren { color: var(--murren); } .c-travel { color: var(--travel); }
+  /* Colored left accent bar instead of full background */
+  .db2::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+  .blon .db2::before { background: var(--red); }
+  .bzur .db2::before { background: var(--blue); }
+  .bmur .db2::before { background: var(--purple); }
+  .btrv .db2::before { background: var(--gold); }
 
-  .day-title {
-    font-family: 'Lora', serif;
-    font-size: 0.95rem; font-weight: 600;
-    color: var(--ink); line-height: 1.2;
+  /* Apply color classes to .dc not .db2 */
+  .blon, .bzur, .bmur, .btrv { }
+
+  .di { flex: 1; padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+  .dw2 { font-size: 0.55rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 3px; }
+  .clon { color: var(--red); }
+  .czur { color: var(--blue); }
+  .cmur { color: var(--purple); }
+  .ctrv { color: var(--gold); }
+
+  .dt {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem; font-weight: 500;
+    color: var(--ink); line-height: 1.25;
+    letter-spacing: 0.01em;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-  .day-snip { font-size: 0.7rem; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .day-chev { display: flex; align-items: center; padding: 0 12px; color: #CCC; font-size: 0.7rem; transition: transform 0.25s; flex-shrink: 0; }
-  .day-card.open .day-chev { transform: rotate(180deg); }
+  .ds { font-size: 0.7rem; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 400; letter-spacing: 0.01em; }
+  .dch { display: flex; align-items: center; padding: 0 16px; color: var(--rule); font-size: 0.55rem; transition: transform 0.25s, color 0.2s; flex-shrink: 0; }
+  .dc.open .dch { transform: rotate(180deg); color: var(--ink); }
 
-  .day-body { display: none; padding: 4px 14px 14px; border-top: 1px solid #F0EDE8; }
-  .day-card.open .day-body { display: block; }
+  .dbody { display: none; padding: 16px 20px 20px; border-top: 1px solid var(--cream-dk); background: white; }
+  .dc.open .dbody { display: block; }
 
-  .det-row { display: flex; gap: 9px; align-items: flex-start; margin-top: 12px; }
-  .det-icon { font-size: 1rem; min-width: 20px; text-align: center; flex-shrink: 0; padding-top: 1px; }
-  .det-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #BBB; margin-bottom: 1px; }
-  .det-val { font-size: 0.84rem; color: var(--ink); font-weight: 500; line-height: 1.35; }
-  .det-val.addr { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+  .dr { display: flex; gap: 12px; align-items: flex-start; margin-top: 14px; }
+  .dri { font-size: 0.85rem; min-width: 18px; text-align: center; flex-shrink: 0; padding-top: 3px; opacity: 0.7; }
+  .dlbl { font-size: 0.52rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); margin-bottom: 3px; }
+  .dv { font-size: 0.84rem; color: var(--ink2); font-weight: 400; line-height: 1.5; }
+  .dv.addr { font-size: 0.75rem; color: var(--muted); margin-top: 1px; }
 
-  .act-head { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #BBB; margin: 13px 0 6px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 5px; }
-  .chip { font-size: 0.74rem; font-weight: 500; padding: 4px 10px; border-radius: 20px; }
-  .chip-def { background: #FDF3E0; color: #92400E; }
-  .chip-travel { background: #FEF2F2; color: #991B1B; }
-  .chip-food { background: #F0FDF4; color: #166534; }
-  .chip-sight { background: #EFF6FF; color: #1E40AF; }
+  .ah { font-size: 0.52rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); margin: 16px 0 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: 0.7rem; font-weight: 400; padding: 5px 12px; border-radius: 2px; letter-spacing: 0.04em; }
+  .cdef    { background: var(--cream-dk); color: var(--ink2); }
+  .ctravel { background: #F9EEEE; color: var(--red); }
+  .cfood   { background: #EEF4EE; color: #1A4A1A; }
+  .csight  { background: #EEF0F9; color: var(--blue); }
 
-  /* ── COSTS TAB ── */
-  .costs-summary {
-    background: var(--ink);
-    border-radius: 16px;
-    padding: 20px;
+  .hbadge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--cream); border: 1px solid var(--rule);
+    color: var(--ink2); font-size: 0.68rem; font-weight: 400;
+    padding: 5px 12px; border-radius: 2px; margin-top: 8px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── COSTS ── */
+  .csum {
+    background: var(--black);
+    border-radius: 4px;
+    padding: 24px;
     margin-bottom: 16px;
-    position: relative;
-    overflow: hidden;
   }
-  .costs-summary::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 90% -20%, rgba(232,168,56,0.2) 0%, transparent 65%);
-    pointer-events: none;
+  .csum h2 {
+    font-size: 0.56rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.22em; color: rgba(255,255,255,0.4);
+    margin-bottom: 8px;
   }
-  .costs-summary h2 {
-    font-family: 'Lora', serif;
-    font-size: 0.75rem; font-weight: 600;
-    color: rgba(255,255,255,0.5);
-    text-transform: uppercase; letter-spacing: 0.1em;
-    margin-bottom: 4px;
-    position: relative;
-  }
-  .costs-big {
-    font-family: 'Lora', serif;
-    font-size: 2.2rem; font-weight: 700;
+  .cbig {
+    font-family: 'Jost', sans-serif;
+    font-size: 2.6rem; font-weight: 300;
     color: white; line-height: 1;
-    position: relative;
+    letter-spacing: -0.02em;
   }
-  .costs-big span { font-size: 1.1rem; opacity: 0.6; }
-  .costs-meta { display: flex; gap: 16px; margin-top: 14px; flex-wrap: wrap; position: relative; }
-  .costs-meta-item { }
-  .costs-meta-label { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); margin-bottom: 2px; }
-  .costs-meta-val { font-size: 1rem; font-weight: 700; color: white; }
-  .costs-meta-val.paid { color: #6EE7B7; }
-  .costs-meta-val.remaining { color: var(--accent); }
+  .cmeta { display: flex; gap: 20px; margin-top: 18px; flex-wrap: wrap; }
+  .cml { font-size: 0.52rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+  .cmv { font-size: 1.05rem; font-weight: 400; color: white; letter-spacing: 0.02em; }
+  .cmv.paid { color: #7DDBB0; }
+  .cmv.rem { color: var(--gold-lt); }
+  .pprog { margin-top: 20px; }
+  .pplbl { display: flex; justify-content: space-between; font-size: 0.58rem; color: rgba(255,255,255,0.3); margin-bottom: 6px; letter-spacing: 0.08em; }
+  .pptrack { background: rgba(255,255,255,0.08); border-radius: 1px; height: 2px; }
+  .ppfill { background: var(--gold-lt); height: 100%; }
 
-  /* progress bar */
-  .pay-progress { margin-top: 16px; position: relative; }
-  .pay-progress-label { display: flex; justify-content: space-between; font-size: 0.65rem; color: rgba(255,255,255,0.45); margin-bottom: 6px; }
-  .pay-track { background: rgba(255,255,255,0.12); border-radius: 8px; height: 8px; overflow: hidden; }
-  .pay-fill { background: linear-gradient(90deg, #6EE7B7, #34D399); height: 100%; border-radius: 8px; transition: width 0.8s ease; }
+  .ccards { display: flex; flex-direction: column; gap: 1px; }
+  .ccard { background: white; overflow: hidden; }
+  .ccards .ccard:first-child { border-radius: 4px 4px 0 0; }
+  .ccards .ccard:last-child { border-radius: 0 0 4px 4px; }
+  .cch { display: flex; align-items: center; gap: 12px; padding: 16px 18px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--cream-dk); }
+  .ccard.open .cch { border-bottom-color: var(--rule); }
+  .cch .ci { font-size: 1.1rem; opacity: 0.7; }
+  .cct { flex: 1; }
+  .cct h3 { font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em; }
+  .cct p { font-size: 0.68rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.02em; }
+  .cctot { text-align: right; }
+  .cctot .amt { font-size: 0.95rem; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+  .cctot .chv { font-size: 0.55rem; color: var(--muted); margin-top: 3px; transition: transform 0.2s; display: block; }
+  .ccard.open .cctot .chv { transform: rotate(180deg); }
+  .ccb { display: none; padding: 14px 18px 18px; }
+  .ccard.open .ccb { display: block; }
+  .ctbl { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin-top: 8px; }
+  .ctbl th { text-align: left; font-size: 0.52rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); padding: 5px 6px; border-bottom: 1px solid var(--rule); }
+  .ctbl th:not(:first-child) { text-align: right; }
+  .ctbl td { padding: 9px 6px; border-bottom: 1px solid var(--cream-dk); vertical-align: middle; }
+  .ctbl tr:last-child td { border-bottom: none; }
+  .ctbl td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+  .ctbl td.in { font-weight: 500; color: var(--ink2); }
+  .bp { background: #D8F0E4; color: #1A5C38; font-size: 0.6rem; font-weight: 600; padding: 3px 8px; border-radius: 2px; display: inline-block; letter-spacing: 0.06em; }
+  .bo { background: #F5EDDA; color: #6B4A10; font-size: 0.6rem; font-weight: 600; padding: 3px 8px; border-radius: 2px; display: inline-block; letter-spacing: 0.06em; }
 
-  /* cost breakdown cards */
-  .cost-cards { display: flex; flex-direction: column; gap: 10px; }
+  .plsec { background: white; border-radius: 4px; padding: 20px; margin-top: 8px; }
+  .plsec h3 { font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 500; margin-bottom: 14px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .plr { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--cream-dk); font-size: 0.82rem; }
+  .plr:last-child { border-bottom: none; }
+  .plr .pll { color: var(--muted); font-weight: 400; }
+  .plr .pla { font-weight: 500; font-variant-numeric: tabular-nums; }
+  .plr .pla.rem { color: var(--gold); }
+  .pitem { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--cream-dk); font-size: 0.81rem; }
+  .pitem:last-child { border-bottom: none; }
+  .pdate { color: var(--muted); font-size: 0.7rem; margin-top: 2px; }
+  .pamt { font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
 
-  .cost-card {
-    background: var(--card);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-  }
-  .cost-card-header {
-    display: flex; align-items: center; gap: 12px;
-    padding: 14px 16px;
-    cursor: pointer; user-select: none;
-    border-left: 4px solid transparent;
-  }
-  .cost-card.flights .cost-card-header { border-left-color: var(--london); }
-  .cost-card.lodging .cost-card-header { border-left-color: var(--zurich); }
-  .cost-card.activities .cost-card-header { border-left-color: var(--murren); }
+  /* ── REFERENCE ── */
+  .rnote { background: #FBF7EE; border: 1px solid #E8D99A; border-radius: 3px; padding: 10px 14px; font-size: 0.74rem; color: #7A5A10; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; letter-spacing: 0.02em; }
+  .rsecs { display: flex; flex-direction: column; gap: 1px; }
+  .rc { background: white; overflow: hidden; }
+  .rsecs .rc:first-child { border-radius: 4px 4px 0 0; }
+  .rsecs .rc:last-child { border-radius: 0 0 4px 4px; }
+  .rch { display: flex; align-items: center; gap: 10px; padding: 14px 18px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--cream-dk); }
+  .rc.open .rch { border-bottom-color: var(--rule); }
+  .rch .ri { font-size: 1rem; opacity: 0.7; }
+  .rch h3 { font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 500; flex: 1; letter-spacing: 0.04em; }
+  .rtog { color: var(--muted); font-size: 0.55rem; transition: transform 0.2s; }
+  .rc.open .rtog { transform: rotate(180deg); }
+  .rcb { display: none; padding: 12px 18px 18px; }
+  .rc.open .rcb { display: block; }
 
-  .cost-card-header .ci { font-size: 1.2rem; }
-  .cost-card-title { flex: 1; }
-  .cost-card-title h3 { font-family: 'Lora', serif; font-size: 0.95rem; font-weight: 600; }
-  .cost-card-title p { font-size: 0.72rem; color: var(--muted); margin-top: 1px; }
-  .cost-card-total { text-align: right; }
-  .cost-card-total .amt { font-size: 1.05rem; font-weight: 700; color: var(--ink); }
-  .cost-card-total .chev { font-size: 0.65rem; color: #CCC; margin-top: 2px; transition: transform 0.2s; display: block; }
-  .cost-card.open .cost-card-total .chev { transform: rotate(180deg); }
-
-  .cost-card-body { display: none; padding: 2px 16px 14px; border-top: 1px solid #F0EDE8; }
-  .cost-card.open .cost-card-body { display: block; }
-
-  .cost-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin-top: 8px; }
-  .cost-table th { text-align: left; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: #C0BAB4; padding: 4px 6px; border-bottom: 1px solid #F0EDE8; }
-  .cost-table th:not(:first-child) { text-align: right; }
-  .cost-table td { padding: 8px 6px; border-bottom: 1px solid #F8F6F3; vertical-align: middle; }
-  .cost-table tr:last-child td { border-bottom: none; }
-  .cost-table td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
-  .cost-table td.item-name { font-weight: 600; color: #57534E; }
-  .badge-paid { background: #D1FAE5; color: #065F46; font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; display: inline-block; }
-  .badge-owed { background: #FEF3C7; color: #92400E; font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; display: inline-block; }
-
-  /* P&L split section */
-  .pl-section {
-    background: var(--card);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    padding: 16px;
-    margin-top: 10px;
-  }
-  .pl-section h3 { font-family: 'Lora', serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-  .pl-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid #F0EDE8; font-size: 0.83rem; }
-  .pl-row:last-child { border-bottom: none; }
-  .pl-row .pl-label { color: var(--muted); }
-  .pl-row .pl-amt { font-weight: 700; font-variant-numeric: tabular-nums; }
-  .pl-row .pl-amt.remaining { color: var(--accent); }
-
-  .payments-list { margin-top: 10px; }
-  .payment-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #F0EDE8; font-size: 0.82rem; }
-  .payment-item:last-child { border-bottom: none; }
-  .payment-date { color: var(--muted); font-size: 0.74rem; }
-  .payment-amt { font-weight: 700; color: #065F46; font-variant-numeric: tabular-nums; }
-
-  /* ── REFERENCE TAB ── */
-  .ref-note {
-    background: #FFFBEB; border: 1px solid #FDE68A;
-    border-radius: 10px; padding: 10px 14px;
-    font-size: 0.78rem; color: #92400E;
-    margin-bottom: 16px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .ref-sections { display: flex; flex-direction: column; gap: 10px; }
-  .ref-card { background: var(--card); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
-  .ref-card-header {
-    display: flex; align-items: center; gap: 10px;
-    padding: 13px 16px; cursor: pointer; user-select: none;
-    border-left: 4px solid transparent;
-  }
-  .ref-card.flights .ref-card-header { border-left-color: var(--london); }
-  .ref-card.hotels .ref-card-header { border-left-color: var(--zurich); }
-  .ref-card.tickets .ref-card-header { border-left-color: var(--murren); }
-  .ref-card.transport .ref-card-header { border-left-color: var(--travel); }
-  .ref-card.misc .ref-card-header { border-left-color: var(--accent); }
-  .ref-card-header .ri { font-size: 1.15rem; }
-  .ref-card-header h3 { font-family: 'Lora', serif; font-size: 0.92rem; font-weight: 600; flex: 1; }
-  .ref-toggle { color: #CCC; font-size: 0.65rem; transition: transform 0.2s; }
-  .ref-card.open .ref-toggle { transform: rotate(180deg); }
-  .ref-card-body { display: none; padding: 2px 16px 14px; border-top: 1px solid #F0EDE8; }
-  .ref-card.open .ref-card-body { display: block; }
-
-  table.rt { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin-top: 8px; }
-  table.rt th { text-align: left; font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: #C0BAB4; padding: 4px 6px; border-bottom: 1px solid #F0EDE8; }
-  table.rt td { padding: 8px 6px; border-bottom: 1px solid #F8F6F3; vertical-align: top; color: var(--ink); }
+  table.rt { width: 100%; border-collapse: collapse; font-size: 0.76rem; margin-top: 8px; }
+  table.rt th { text-align: left; font-size: 0.52rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); padding: 5px 6px; border-bottom: 1px solid var(--rule); }
+  table.rt td { padding: 8px 6px; border-bottom: 1px solid var(--cream-dk); vertical-align: top; color: var(--ink2); }
   table.rt tr:last-child td { border-bottom: none; }
-  table.rt td.label { font-weight: 600; color: #57534E; }
-  .conf { font-family: 'Courier New', monospace; font-size: 0.78rem; background: #F3EEFF; color: #5B21B6; padding: 2px 7px; border-radius: 5px; display: inline-block; }
-  .placeholder { color: #C0BAB4; font-style: italic; }
-  [contenteditable] { outline: none; border-radius: 3px; }
-  [contenteditable]:focus { background: #FFFBEB; outline: 2px dashed var(--accent); }
-  .add-row-btn { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; padding: 5px 12px; background: none; border: 1.5px dashed #DDD; border-radius: 20px; font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: #BBB; cursor: pointer; transition: all 0.2s; }
-  .add-row-btn:hover { border-color: var(--murren); color: var(--murren); }
+  table.rt td.lbl { font-weight: 500; color: var(--ink); white-space: nowrap; }
+  .conf { font-family: 'Jost', monospace; font-size: 0.73rem; background: var(--cream-dk); color: var(--ink); padding: 3px 8px; border-radius: 2px; display: inline-block; font-weight: 500; letter-spacing: 0.06em; }
+  .ph { color: var(--muted); font-style: italic; font-weight: 300; }
+  [contenteditable] { outline: none; }
+  [contenteditable]:focus { background: var(--cream); outline: none; box-shadow: inset 0 -2px 0 var(--gold); }
+  .arb { display: inline-flex; align-items: center; gap: 5px; margin-top: 12px; padding: 6px 14px; background: none; border: 1px solid var(--rule); border-radius: 2px; font-family: 'Jost', sans-serif; font-size: 0.7rem; color: var(--muted); cursor: pointer; transition: all 0.2s; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+  .arb:hover { border-color: var(--ink); color: var(--ink); }
 
-  /* ── PACKING LIST ── */
-  .pack-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 14px;
-  }
-  .pack-progress-wrap { flex: 1; margin-right: 14px; }
-  .pack-progress-label {
-    font-size: 0.68rem; font-weight: 600; color: var(--muted);
-    margin-bottom: 5px; display: flex; justify-content: space-between;
-  }
-  .pack-track { background: #E5E1DB; border-radius: 8px; height: 7px; overflow: hidden; }
-  .pack-fill {
-    background: linear-gradient(90deg, var(--zurich), #52B788);
-    height: 100%; border-radius: 8px;
-    transition: width 0.4s ease;
-  }
-  .pack-reset-btn {
-    background: none; border: 1.5px solid #E5E1DB;
-    border-radius: 20px; padding: 5px 12px;
-    font-family: 'DM Sans', sans-serif; font-size: 0.72rem;
-    color: var(--muted); cursor: pointer; white-space: nowrap;
-    transition: all 0.2s; flex-shrink: 0;
-  }
-  .pack-reset-btn:hover { border-color: var(--travel); color: var(--travel); }
+  /* ── PACKING ── */
+  .ptop { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .ppw { flex: 1; }
+  .pplabel { font-size: 0.56rem; font-weight: 600; color: var(--muted); margin-bottom: 7px; display: flex; justify-content: space-between; text-transform: uppercase; letter-spacing: 0.16em; }
+  .ptrack { background: var(--rule); border-radius: 1px; height: 2px; }
+  .pfill { background: var(--ink); height: 100%; transition: width 0.4s ease; }
+  .preset { background: none; border: 1px solid var(--rule); border-radius: 2px; padding: 6px 14px; font-family: 'Jost', sans-serif; font-size: 0.62rem; color: var(--muted); cursor: pointer; white-space: nowrap; transition: all 0.2s; flex-shrink: 0; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+  .preset:hover { border-color: var(--ink); color: var(--ink); }
 
-  .pack-sections { display: flex; flex-direction: column; gap: 10px; }
+  .ptabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .ptab { background: white; border: 1px solid var(--rule); border-radius: 2px; padding: 6px 14px; font-family: 'Jost', sans-serif; font-size: 0.62rem; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; letter-spacing: 0.1em; text-transform: uppercase; }
+  .ptab:hover { border-color: var(--ink); color: var(--ink); }
+  .ptab.active { background: var(--ink); color: white; border-color: var(--ink); }
+  .ptab[data-p="paul"].active   { background: var(--red); border-color: var(--red); }
+  .ptab[data-p="lorraine"].active { background: #B03030; border-color: #B03030; }
+  .ptab[data-p="tom"].active    { background: var(--blue); border-color: var(--blue); }
+  .ptab[data-p="christie"].active { background: var(--purple); border-color: var(--purple); }
+  .ptab[data-p="megan"].active  { background: #2A5A2A; border-color: #2A5A2A; }
+  .ptab[data-p="michael"].active { background: #8B5A1A; border-color: #8B5A1A; }
 
-  .pack-section {
-    background: var(--card);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-  }
-  .pack-section-header {
-    display: flex; align-items: center; gap: 10px;
-    padding: 13px 16px; cursor: pointer; user-select: none;
-  }
-  .pack-section-header .psi { font-size: 1.15rem; }
-  .pack-section-header h3 {
-    font-family: 'Lora', serif; font-size: 0.92rem; font-weight: 600; flex: 1;
-  }
-  .pack-section-count {
-    font-size: 0.7rem; font-weight: 600;
-    color: var(--muted); margin-right: 6px;
-  }
-  .pack-section-count.done { color: var(--zurich); }
-  .pack-chev { color: #CCC; font-size: 0.65rem; transition: transform 0.2s; }
-  .pack-section.open .pack-chev { transform: rotate(180deg); }
+  .psecs { display: flex; flex-direction: column; gap: 1px; }
+  .psec { background: white; overflow: hidden; }
+  .psecs .psec:first-child { border-radius: 4px 4px 0 0; }
+  .psecs .psec:last-child { border-radius: 0 0 4px 4px; }
+  .psech { display: flex; align-items: center; gap: 10px; padding: 14px 18px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--cream-dk); }
+  .psec.open .psech { border-bottom-color: var(--rule); }
+  .psech .psi { font-size: 1rem; opacity: 0.6; }
+  .psech h3 { font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 500; flex: 1; letter-spacing: 0.04em; }
+  .pscnt { font-size: 0.62rem; font-weight: 500; color: var(--muted); margin-right: 5px; font-variant-numeric: tabular-nums; letter-spacing: 0.06em; }
+  .pscnt.done { color: var(--ink); }
+  .pchv { color: var(--muted); font-size: 0.55rem; transition: transform 0.2s; }
+  .psec.open .pchv { transform: rotate(180deg); color: var(--ink); }
+  .psecb { display: none; padding: 4px 18px 16px; }
+  .psec.open .psecb { display: block; }
 
-  .pack-section-body { display: none; padding: 2px 14px 12px; border-top: 1px solid #F0EDE8; }
-  .pack-section.open .pack-section-body { display: block; }
+  .pitems { list-style: none; }
+  .pitem2 { display: flex; align-items: center; gap: 12px; padding: 11px 2px; border-bottom: 1px solid var(--cream-dk); cursor: pointer; user-select: none; transition: background 0.1s; }
+  .pitem2:last-child { border-bottom: none; }
+  .pitem2:active { background: var(--cream); }
+  .pitem2.hidden { display: none; }
 
-  .pack-items { list-style: none; }
-  .pack-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 9px 4px; border-bottom: 1px solid #F8F6F3;
-    cursor: pointer; user-select: none;
-  }
-  .pack-item:last-child { border-bottom: none; }
-  .pack-item:active { background: #F8F6F3; border-radius: 8px; }
+  .pchk { width: 20px; height: 20px; border-radius: 2px; border: 1.5px solid var(--rule); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s; background: white; }
+  .pitem2.checked .pchk { background: var(--ink); border-color: var(--ink); }
+  .pchkm { color: white; font-size: 0.65rem; opacity: 0; transition: opacity 0.15s; }
+  .pitem2.checked .pchkm { opacity: 1; }
+  .pitxt { flex: 1; font-size: 0.84rem; font-weight: 400; line-height: 1.4; color: var(--ink2); letter-spacing: 0.01em; }
+  .pitem2.checked .pitxt { color: var(--muted); text-decoration: line-through; }
 
-  .pack-check {
-    width: 22px; height: 22px; border-radius: 6px;
-    border: 2px solid #D6D3CF; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s; background: white;
+  .pwho { font-size: 0.55rem; font-weight: 600; padding: 3px 8px; border-radius: 2px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+  .wpaul    { background: #F5EBEB; color: var(--red); }
+  .wlorraine{ background: #F5EBEB; color: #B03030; }
+  .wtom     { background: #EAF0F8; color: var(--blue); }
+  .wchristie{ background: #F0EEF8; color: var(--purple); }
+  .wmegan   { background: #EBF2EB; color: #2A5A2A; }
+  .wmichael { background: #F5F0E8; color: #8B5A1A; }
+  .wall     { background: var(--cream-dk); color: var(--muted); }
+  .wbuy     { background: #F5F0E0; color: var(--gold); }
+  .wskip    { background: var(--cream-dk); color: var(--muted); }
+
+  .pnote { font-size: 0.7rem; color: var(--muted); padding: 10px 2px 4px; letter-spacing: 0.02em; font-style: italic; }
+  .padd { display: flex; gap: 8px; align-items: center; padding: 12px 2px 2px; margin-top: 4px; border-top: 1px solid var(--cream-dk); }
+  .paddinp { flex: 1; border: 1px solid var(--rule); background: var(--cream); border-radius: 2px; padding: 8px 12px; font-family: 'Jost', sans-serif; font-size: 0.82rem; color: var(--ink); outline: none; transition: border-color 0.2s; letter-spacing: 0.02em; }
+  .paddinp:focus { border-color: var(--ink); background: white; }
+  .paddinp::placeholder { color: var(--muted); }
+  .paddbtn { background: var(--ink); color: white; border: none; border-radius: 2px; padding: 8px 18px; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s; flex-shrink: 0; letter-spacing: 0.08em; text-transform: uppercase; }
+  .paddbtn:hover { background: var(--ink2); }
+
+  /* ── VENUE CARDS ── */
+  .vcard {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
-  .pack-item.checked .pack-check {
-    background: var(--zurich); border-color: var(--zurich);
+  .vhours {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.76rem;
+    color: var(--ink2);
+    line-height: 1.4;
   }
-  .pack-check-mark {
-    color: white; font-size: 0.75rem; opacity: 0;
+  .vhours-icon { flex-shrink: 0; opacity: 0.5; margin-top: 1px; }
+  .vhours-text { flex: 1; }
+  .vdur { color: var(--muted); }
+  .vlinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .vlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    border-radius: 2px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
     transition: opacity 0.15s;
+    cursor: pointer;
   }
-  .pack-item.checked .pack-check-mark { opacity: 1; }
+  .vlink:active { opacity: 0.7; }
+  .vlink-ticket { background: var(--ink); color: white; }
+  .vlink-map    { background: var(--cream-dk); color: var(--ink2); border: 1px solid var(--rule); }
+  .vlink-web    { background: var(--cream-dk); color: var(--ink2); border: 1px solid var(--rule); }
+  .vlink-menu   { background: var(--cream-dk); color: var(--ink2); border: 1px solid var(--rule); }
 
-  .pack-item-text {
-    flex: 1; font-size: 0.86rem; font-weight: 500;
-    transition: color 0.2s;
-    line-height: 1.3;
-  }
-  .pack-item.checked .pack-item-text {
-    color: #C0BAB4; text-decoration: line-through;
-  }
-
-  .pack-item-who {
-    font-size: 0.62rem; font-weight: 700;
-    padding: 2px 7px; border-radius: 10px;
-    flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.05em;
-  }
-  .who-t { background: #EFF6FF; color: #1E40AF; }
-  .who-c { background: #FDF4FF; color: #7B4F9E; }
-  .who-all { background: #F0FDF4; color: #166534; }
-  .who-buy { background: #FEF9EE; color: #92400E; }
-  .who-skip { background: #F8F6F3; color: #A8A29E; }
-
-  .pack-note {
-    font-size: 0.72rem; color: var(--muted); font-style: italic;
-    padding: 6px 4px 2px; display: flex; align-items: center; gap: 5px;
-  }
-
-  /* add item row */
-  .pack-add-row {
-    display: flex; gap: 8px; align-items: center;
-    padding: 10px 4px 2px; margin-top: 4px;
-    border-top: 1px dashed #E5E1DB;
-  }
-  .pack-add-input {
-    flex: 1; border: none; background: #F8F6F3;
-    border-radius: 8px; padding: 8px 12px;
-    font-family: 'DM Sans', sans-serif; font-size: 0.84rem;
-    color: var(--ink); outline: none;
-  }
-  .pack-add-input:focus { background: #FFF8E8; outline: 2px solid var(--accent); }
-  .pack-add-input::placeholder { color: #C0BAB4; }
-  .pack-add-submit {
-    background: var(--ink); color: white;
-    border: none; border-radius: 8px;
-    padding: 8px 14px; font-family: 'DM Sans', sans-serif;
-    font-size: 0.84rem; font-weight: 600; cursor: pointer;
-    transition: background 0.2s; flex-shrink: 0;
-  }
-  .pack-add-submit:hover { background: var(--zurich); }
 </style>
 </head>
 <body>
-
 <header>
-  <div class="header-deco"></div>
-  <div class="header-inner">
-    <div class="app-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width:100%;height:100%;display:block;">
-  <defs>
-    <linearGradient id="ibg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1D3461"/><stop offset="100%" stop-color="#2D6A4F"/>
-    </linearGradient>
-    <linearGradient id="isun" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F5C842"/><stop offset="100%" stop-color="#E8A838"/>
-    </linearGradient>
-  </defs>
-  <rect width="512" height="512" rx="110" fill="url(#ibg)"/>
-  <circle cx="370" cy="145" r="58" fill="url(#isun)" opacity="0.92"/>
-  <polygon points="60,370 180,180 300,370" fill="#7B4F9E" opacity="0.85"/>
-  <polygon points="180,370 290,210 400,370" fill="#ffffff" opacity="0.18"/>
-  <polygon points="220,370 320,230 420,370" fill="#2D6A4F" opacity="0.7"/>
-  <polygon points="180,180 160,230 200,230" fill="white" opacity="0.9"/>
-  <polygon points="320,230 305,268 335,268" fill="white" opacity="0.75"/>
-  <g transform="translate(80,108) rotate(-20)">
-    <ellipse cx="0" cy="0" rx="38" ry="11" fill="white" opacity="0.95"/>
-    <polygon points="-10,-11 10,-11 2,-24" fill="white" opacity="0.95"/>
-    <polygon points="20,-4 38,-4 32,-14" fill="white" opacity="0.7"/>
-    <polygon points="-26,4 -38,10 -38,2" fill="white" opacity="0.7"/>
-  </g>
-  <rect x="60" y="368" width="392" height="8" rx="4" fill="white" opacity="0.15"/>
-  <text x="256" y="448" font-family="Georgia,serif" font-size="62" font-weight="700" fill="white" opacity="0.9" text-anchor="middle" letter-spacing="4">EUROPE</text>
+  <div class="hd"></div>
+  <div class="hi">
+    <div class="aicon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width:100%;height:100%;display:block">
+  <!-- Clean dark background -->
+  <rect width="512" height="512" rx="110" fill="#0D0D0D"/>
+  <!-- Subtle texture rings -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="rgba(168,137,58,0.12)" stroke-width="1"/>
+  <circle cx="256" cy="256" r="160" fill="none" stroke="rgba(168,137,58,0.08)" stroke-width="1"/>
+  <!-- Alps silhouette background -->
+  <polygon points="0,380 100,240 200,340 300,200 400,310 512,220 512,512 0,512" fill="rgba(255,255,255,0.04)"/>
+  <polygon points="0,380 100,240 200,340 300,200 400,310 512,220 512,400 380,360 300,390 200,370 100,395 0,400" fill="rgba(255,255,255,0.03)"/>
+  <!-- Big Ben minimal silhouette -->
+  <!-- Main tower -->
+  <rect x="212" y="155" width="88" height="270" rx="2" fill="rgba(168,137,58,0.9)"/>
+  <!-- Clock section -->
+  <rect x="200" y="155" width="112" height="95" rx="3" fill="#A8893A"/>
+  <!-- Clock face -->
+  <circle cx="256" cy="200" r="35" fill="#F5F0E8" opacity="0.95"/>
+  <circle cx="256" cy="200" r="29" fill="none" stroke="#A8893A" stroke-width="2"/>
+  <!-- Clock hands -->
+  <line x1="256" y1="200" x2="256" y2="178" stroke="#0D0D0D" stroke-width="4" stroke-linecap="round"/>
+  <line x1="256" y1="200" x2="273" y2="208" stroke="#0D0D0D" stroke-width="3" stroke-linecap="round"/>
+  <!-- Belfry ledge -->
+  <rect x="196" y="138" width="120" height="20" rx="2" fill="#C9A84C"/>
+  <!-- Spire -->
+  <polygon points="256,45 232,142 280,142" fill="#C9A84C"/>
+  <polygon points="256,45 244,95 268,95" fill="#E8D060"/>
+  <!-- Decorative tower details -->
+  <rect x="217" y="175" width="78" height="2" fill="rgba(0,0,0,0.2)"/>
+  <rect x="217" y="210" width="78" height="2" fill="rgba(0,0,0,0.2)"/>
+  <rect x="217" y="270" width="78" height="2" fill="rgba(0,0,0,0.15)"/>
+  <rect x="217" y="310" width="78" height="2" fill="rgba(0,0,0,0.15)"/>
+  <!-- Tower base -->
+  <rect x="200" y="422" width="112" height="18" rx="2" fill="#8B6E24"/>
+  <!-- Thames water hint -->
+  <rect x="0" y="440" width="512" height="72" rx="0" fill="rgba(26,58,110,0.35)"/>
+  <!-- Bridge arches -->
+  <ellipse cx="140" cy="452" rx="55" ry="16" fill="rgba(0,0,0,0.25)"/>
+  <ellipse cx="256" cy="452" rx="55" ry="16" fill="rgba(0,0,0,0.25)"/>
+  <ellipse cx="372" cy="452" rx="55" ry="16" fill="rgba(0,0,0,0.25)"/>
+  <!-- Gold "E26" monogram bottom -->
+  <text x="256" y="490" font-family="Georgia,serif" font-size="36" font-weight="700" fill="rgba(168,137,58,0.7)" text-anchor="middle" letter-spacing="8">E 2 6</text>
 </svg>
     </div>
-    <div class="header-text">
-      <div class="header-eyebrow">Summer 2026 · 15 Days</div>
+    <div>
+      <div class="eye">Summer 2026 · 15 Days · 6 Travellers</div>
       <h1>Europe <em>2026</em></h1>
     </div>
   </div>
-  <div class="dest-pills">
-    <div class="pill pill-london">🇬🇧 London</div>
-    <div class="pill pill-zurich">🇨🇭 Zurich</div>
-    <div class="pill pill-murren">🏔️ Mürren</div>
+  <div class="pills">
+    <div class="pill plon">🇬🇧 London</div>
+    <div class="pill pzur">🇨🇭 Zurich</div>
+    <div class="pill pmur">🏔️ Mürren</div>
   </div>
 </header>
 
-<div class="tab-bar">
-  <button class="tab-btn active" onclick="switchTab('itinerary',this)">
-    <span class="ti">🗺️</span>Itinerary
-  </button>
-  <button class="tab-btn" onclick="switchTab('costs',this)">
-    <span class="ti">💰</span>Costs
-  </button>
-  <button class="tab-btn" onclick="switchTab('reference',this)">
-    <span class="ti">🔐</span>Reference
-  </button>
-  <button class="tab-btn" onclick="switchTab('packing',this)">
-    <span class="ti">🧳</span>Packing
-  </button>
+<div class="tbar">
+  <button class="tbtn active" onclick="sw('itinerary',this)"><span class="ti">🗺️</span>Itinerary</button>
+  <button class="tbtn" onclick="sw('costs',this)"><span class="ti">💰</span>Costs</button>
+  <button class="tbtn" onclick="sw('reference',this)"><span class="ti">🔐</span>Reference</button>
+  <button class="tbtn" onclick="sw('packing',this)"><span class="ti">🧳</span>Packing</button>
 </div>
 
-<div class="scroll-area">
+<div class="sa">
 
-  <!-- ══════════ ITINERARY ══════════ -->
-  <div class="tab-panel active" id="tab-itinerary">
-    <div class="days-grid">
+<!-- ITINERARY -->
+<div class="tp active" id="tab-itinerary">
+<div class="dgrid">
+  <div class="ldiv ll-lon"><div class="ldot"></div><h2>London, England</h2><div class="lline"></div></div>
 
-      <div class="loc-div ld-london"><div class="loc-dot"></div><h2>London, England</h2><div class="loc-line"></div></div>
-
-      <!-- D1 -->
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-travel"><span class="num">1</span><span class="dow">Thu</span><span class="ds">Jun 11</span></div>
-          <div class="day-info">
-            <div class="day-where c-travel">Travel Day</div>
-            <div class="day-title">EWR → LHR (UA 934)</div>
-            <div class="day-snip">Flight · Black cab · Check in</div>
-          </div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">✈️</div><div><div class="det-label">Flight</div><div class="det-val">United UA 934 · EWR → LHR</div></div></div>
-          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Accommodation</div><div class="det-val">Marlin Apartments – Empire Square, London Bridge</div><div class="det-val addr">34 Long Ln, London SE1 4NA</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips">
-            <span class="chip chip-travel">✈️ Heathrow arrival</span>
-            <span class="chip chip-travel">🚕 Black cab to Airbnb</span>
-            <span class="chip chip-def">🛌 Check in & settle</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- D2 -->
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-london"><span class="num">2</span><span class="dow">Fri</span><span class="ds">Jun 12</span></div>
-          <div class="day-info">
-            <div class="day-where c-london">London</div>
-            <div class="day-title">Marlin Apartments</div>
-            <div class="day-snip">Borough Market · Bangers & Mash</div>
-          </div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Marlin Apartments, London Bridge</div><div class="det-val addr">34 Long Ln, London SE1 4NA</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips">
-            <span class="chip chip-sight">🛒 Borough Market</span>
-            <span class="chip chip-def">🛍️ Shop & explore</span>
-            <span class="chip chip-food">🛵 Uber Groceries</span>
-            <span class="chip chip-food">🍽️ Dinner: Bangers & Mash</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- D3 -->
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-london"><span class="num">3</span><span class="dow">Sat</span><span class="ds">Jun 13</span></div>
-          <div class="day-info">
-            <div class="day-where c-london">London</div>
-            <div class="day-title">Marlin Apartments</div>
-            <div class="day-snip">E Pellicci breakfast · Harry Potter</div>
-          </div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Marlin Apartments, London Bridge</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips">
-            <span class="chip chip-food">🍳 E Pellicci English Breakfast</span>
-            <span class="chip chip-sight">⚡ Harry Potter</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- D4 -->
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-london"><span class="num">4</span><span class="dow">Sun</span><span class="ds">Jun 14</span></div>
-          <div class="day-info">
-            <div class="day-where c-london">London</div>
-            <div class="day-title">Marlin Apartments</div>
-            <div class="day-snip">Black Cab 9am–3pm · Fish & Chips</div>
-          </div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Marlin Apartments, London Bridge</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips">
-            <span class="chip chip-sight">🚕 Black Cab city tour · 9am–3pm</span>
-            <span class="chip chip-food">🐟 Late lunch: Fish & Chips</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- D5 -->
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-london"><span class="num">5</span><span class="dow">Mon</span><span class="ds">Jun 15</span></div>
-          <div class="day-info">
-            <div class="day-where c-london">London</div>
-            <div class="day-title">Marlin Apartments</div>
-            <div class="day-snip">Uber Boat · Churchill War Rooms</div>
-          </div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Marlin Apartments, London Bridge</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips">
-            <span class="chip chip-sight">🛥️ Uber Boat on the Thames</span>
-            <span class="chip chip-sight">🪖 Churchill War Rooms</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="loc-div ld-zurich"><div class="loc-dot"></div><h2>Zurich, Switzerland</h2><div class="loc-line"></div></div>
-
-      <!-- D6 -->
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-travel"><span class="num">6</span><span class="dow">Tue</span><span class="ds">Jun 16</span></div>
-          <div class="day-info">
-            <div class="day-where c-travel">Travel Day</div>
-            <div class="day-title">LHR → ZRH (LX 319)</div>
-            <div class="day-snip">8am Tube · Fly 12–2pm · Hotel Adler</div>
-          </div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🚇</div><div><div class="det-label">Morning</div><div class="det-val">8am Tube to Heathrow</div></div></div>
-          <div class="det-row"><div class="det-icon">✈️</div><div><div class="det-label">Flight</div><div class="det-val">Swiss Air LX 319 · LHR → ZRH · 12:00–14:00</div></div></div>
-          <div class="det-row"><div class="det-icon">🏨</div><div><div class="det-label">Accommodation</div><div class="det-val">Hotel Adler Zürich · 2 double + 2 single</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips">
-            <span class="chip chip-travel">🚶 Walk to Hotel Adler</span>
-            <span class="chip chip-food">🍽️ Dinner out</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- D7 -->
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-zurich"><span class="num">7</span><span class="dow">Wed</span><span class="ds">Jun 17</span></div>
-          <div class="day-info">
-            <div class="day-where c-zurich">Zurich</div>
-            <div class="day-title">Hotel Adler Zürich</div>
-            <div class="day-snip">City · Fries & Sausage · Ducks on the lake!</div>
-          </div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🏨</div><div><div class="det-label">Stay</div><div class="det-val">Hotel Adler Zürich</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips">
-            <span class="chip chip-sight">🏙️ Explore Zurich</span>
-            <span class="chip chip-def">🛍️ Shop</span>
-            <span class="chip chip-food">🍟 Lunch: Fries & Sausage</span>
-            <span class="chip chip-sight">🦆 Feed ducks & swans on Lake Zurich</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="loc-div ld-murren"><div class="loc-dot"></div><h2>Mürren, Swiss Alps</h2><div class="loc-line"></div></div>
-
-      <!-- D8 -->
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-travel"><span class="num">8</span><span class="dow">Thu</span><span class="ds">Jun 18</span></div>
-          <div class="day-info">
-            <div class="day-where c-travel">Travel Day</div>
-            <div class="day-title">Zurich → Mürren</div>
-            <div class="day-snip">Trains 12–3:30pm · Possible Lucerne stop</div>
-          </div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🚆</div><div><div class="det-label">Journey</div><div class="det-val">Train · Zurich → Mürren · 12:00–15:30</div><div class="det-val addr">Consider a stop in Lucerne!</div></div></div>
-          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Accommodation</div><div class="det-val">Chalet Apartment "Schnell"</div><div class="det-val addr">Hehmatten 1068E, Mürren</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips">
-            <span class="chip chip-travel">🚆 Train through the Alps</span>
-            <span class="chip chip-def">🥨 Snacks en route</span>
-            <span class="chip chip-food">🛒 Groceries on arrival</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- D9–D14 Mürren -->
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-murren"><span class="num">9</span><span class="dow">Fri</span><span class="ds">Jun 19</span></div>
-          <div class="day-info"><div class="day-where c-murren">Mürren</div><div class="day-title">Chalet "Schnell"</div><div class="day-snip">Free day — add your plans!</div></div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Chalet "Schnell" · Hehmatten 1068E, Mürren</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips"><span class="chip chip-def" contenteditable>✏️ Add activity</span></div>
-        </div>
-      </div>
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-murren"><span class="num">10</span><span class="dow">Sat</span><span class="ds">Jun 20</span></div>
-          <div class="day-info"><div class="day-where c-murren">Mürren</div><div class="day-title">Chalet "Schnell"</div><div class="day-snip">Free day in the Alps</div></div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Chalet "Schnell" · Hehmatten 1068E, Mürren</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips"><span class="chip chip-def" contenteditable>✏️ Add activity</span></div>
-        </div>
-      </div>
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-murren"><span class="num">11</span><span class="dow">Sun</span><span class="ds">Jun 21</span></div>
-          <div class="day-info"><div class="day-where c-murren">Mürren</div><div class="day-title">Chalet "Schnell"</div><div class="day-snip">🚁 Helicopter ride for P&L!</div></div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Chalet "Schnell" · Hehmatten 1068E, Mürren</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips"><span class="chip chip-sight">🚁 Helicopter ride for P&L</span></div>
-        </div>
-      </div>
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-murren"><span class="num">12</span><span class="dow">Mon</span><span class="ds">Jun 22</span></div>
-          <div class="day-info"><div class="day-where c-murren">Mürren</div><div class="day-title">Chalet "Schnell"</div><div class="day-snip">Free day in the Alps</div></div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Chalet "Schnell" · Hehmatten 1068E, Mürren</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips"><span class="chip chip-def" contenteditable>✏️ Add activity</span></div>
-        </div>
-      </div>
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-murren"><span class="num">13</span><span class="dow">Tue</span><span class="ds">Jun 23</span></div>
-          <div class="day-info"><div class="day-where c-murren">Mürren</div><div class="day-title">Chalet "Schnell"</div><div class="day-snip">Free day in the Alps</div></div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Chalet "Schnell" · Hehmatten 1068E, Mürren</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips"><span class="chip chip-def" contenteditable>✏️ Add activity</span></div>
-        </div>
-      </div>
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-murren"><span class="num">14</span><span class="dow">Wed</span><span class="ds">Jun 24</span></div>
-          <div class="day-info"><div class="day-where c-murren">Mürren</div><div class="day-title">Chalet "Schnell"</div><div class="day-snip">Last night in the Alps 🌄</div></div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🏠</div><div><div class="det-label">Stay</div><div class="det-val">Chalet "Schnell" · Hehmatten 1068E, Mürren</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips">
-            <span class="chip chip-def">🌄 Last Alpine sunset</span>
-            <span class="chip chip-def">🧳 Pack for tomorrow</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- D15 -->
-      <div class="day-card" onclick="toggleDay(this)">
-        <div class="day-header">
-          <div class="day-badge bg-travel"><span class="num">15</span><span class="dow">Thu</span><span class="ds">Jun 25</span></div>
-          <div class="day-info">
-            <div class="day-where c-travel">Travel Day</div>
-            <div class="day-title">Mürren → ZRH → EWR</div>
-            <div class="day-snip">UA 9748 · Homeward bound 🏡</div>
-          </div>
-          <div class="day-chev">▼</div>
-        </div>
-        <div class="day-body">
-          <div class="det-row"><div class="det-icon">🚆</div><div><div class="det-label">To Airport</div><div class="det-val">Train · Mürren → Zurich ZRH</div></div></div>
-          <div class="det-row"><div class="det-icon">✈️</div><div><div class="det-label">Flight Home</div><div class="det-val">United UA 9748 · ZRH → EWR</div></div></div>
-          <div class="act-head">Plan</div>
-          <div class="chips">
-            <span class="chip chip-food">☕ Final Swiss breakfast</span>
-            <span class="chip chip-travel">🚆 Train to Zurich airport</span>
-            <span class="chip chip-travel">✈️ Fly home</span>
-          </div>
-        </div>
-      </div>
-
+  <div class="dc" onclick="td2(this)">
+    <div class="dh"><div class="db2 btrv"><span class="n">1</span><span class="dw">Thu</span><span class="dd">Jun 11</span></div>
+    <div class="di"><div class="dw2 ctrv">Travel Day</div><div class="dt">EWR → LHR (UA 934)</div><div class="ds">Depart 8:30am · Arrive 8:40pm</div></div><div class="dch">▼</div></div>
+    <div class="dbody">
+      <div class="dr"><div class="dri">✈️</div><div><div class="dlbl">Flight</div><div class="dv">United UA 934 · EWR→LHR · 8:30am–8:40pm</div></div></div>
+      <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Marlin Apartments – Empire Square, London Bridge</div><div class="dv addr">34 Long Ln, London SE1 4NA</div></div></div>
+      <div class="ah">Plan</div>
+      <div class="chips"><span class="chip ctravel">✈️ Heathrow arrival</span><span class="chip ctravel">🚕 Black cab to Airbnb</span><span class="chip cdef">🛌 Check in</span></div>
     </div>
-  </div><!-- /itinerary -->
+  </div>
 
-  <!-- ══════════ COSTS ══════════ -->
-  <div class="tab-panel" id="tab-costs">
+  <div class="dc" onclick="td2(this)">
+    <div class="dh"><div class="db2 blon"><span class="n">2</span><span class="dw">Fri</span><span class="dd">Jun 12</span></div>
+    <div class="di"><div class="dw2 clon">London</div><div class="dt">Marlin Apartments</div><div class="ds">Borough Market · Bangers & Mash</div></div><div class="dch">▼</div></div>
+    <div class="dbody">
+      <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Marlin Apartments, London Bridge</div></div></div>
+      <div class="ah">Plan</div>
+      <div class="chips"><span class="chip csight">🛒 Borough Market</span><span class="chip cdef">🛍️ Shop & explore</span><span class="chip cfood">🍽️ Dinner: Bangers & Mash</span></div>
+      <div class="hbadge">🕐 Borough Market: M–F 10–5, Sat 9–5, Sun closed</div>
+    </div>
+  </div>
 
-    <!-- Summary card -->
-    <div class="costs-summary">
-      <h2>Total Trip Cost</h2>
-      <div class="costs-big">$<span id="totalCost">21,014</span></div>
-      <div class="costs-meta">
-        <div class="costs-meta-item">
-          <div class="costs-meta-label">Paid so far</div>
-          <div class="costs-meta-val paid">$4,519.50</div>
-        </div>
-        <div class="costs-meta-item">
-          <div class="costs-meta-label">Remaining</div>
-          <div class="costs-meta-val remaining">$16,494.85</div>
-        </div>
-        <div class="costs-meta-item">
-          <div class="costs-meta-label">T&amp;C share</div>
-          <div class="costs-meta-val">$8,801.08</div>
-        </div>
-        <div class="costs-meta-item">
-          <div class="costs-meta-label">P&amp;L share</div>
-          <div class="costs-meta-val">$4,882.26</div>
-        </div>
-      </div>
-      <div class="pay-progress">
-        <div class="pay-progress-label"><span>Payment progress</span><span>$4,519.50 of $21,014</span></div>
-        <div class="pay-track"><div class="pay-fill" style="width: 21.5%"></div></div>
-      </div>
+  <div class="dc" onclick="td2(this)">
+    <div class="dh"><div class="db2 blon"><span class="n">3</span><span class="dw">Sat</span><span class="dd">Jun 13</span></div>
+    <div class="di"><div class="dw2 clon">London</div><div class="dt">Marlin Apartments</div><div class="ds">E Pellicci · Fortnum & Mason · Harry Potter 4pm</div></div><div class="dch">▼</div></div>
+    <div class="dbody">
+      <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Marlin Apartments, London Bridge</div></div></div>
+      <div class="ah">Plan</div>
+      <div class="chips"><span class="chip cfood">🍳 E Pellicci English Breakfast</span><span class="chip csight">🏪 Fortnum & Mason</span><span class="chip csight">⚡ Harry Potter Studio Tour @ 4PM</span></div>
+<div class="vcard"><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Mon–Sat 8am–3pm · Sun closed</span></div><div class="vlinks"><a href="https://epellicci.co.uk/menu/" target="_blank" class="vlink vlink-menu">🍽 Menu</a> <a href="https://maps.app.goo.gl/pUtZ6TQyEwLZEEwP9" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
+      <div class="vcard"><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">9am–10pm <span class="vdur">· 3–3.5 hrs</span></span></div><div class="vlinks"><a href="https://drive.google.com/file/d/1kSRyXRlFXeFmJDjg_nfx9JX9OkUzdt56/view?usp=sharing" target="_blank" class="vlink vlink-ticket">🎟 Ticket</a> <a href="https://www.wbstudiotour.co.uk" target="_blank" class="vlink vlink-web">↗ Website</a> <a href="https://maps.app.goo.gl/htQWtQcd8kf6XBRE7" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
+    </div>
+  </div>
+
+  <div class="dc" onclick="td2(this)">
+    <div class="dh"><div class="db2 blon"><span class="n">4</span><span class="dw">Sun</span><span class="dd">Jun 14</span></div>
+    <div class="di"><div class="dw2 clon">London</div><div class="dt">Marlin Apartments</div><div class="ds">Black Cab 9am–3pm · Fish & Chips</div></div><div class="dch">▼</div></div>
+    <div class="dbody">
+      <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Marlin Apartments, London Bridge</div></div></div>
+      <div class="ah">Plan</div>
+      <div class="chips"><span class="chip csight">🚕 Black Cab city tour · 9am–3pm</span><span class="chip cfood">🐟 Late lunch: Fish & Chips</span><span class="chip cfood">🫖 Swan Afternoon Tea</span></div>
+      <div class="hbadge">🍵 Swan Afternoon Tea: daily 12–5pm</div>
+    </div>
+  </div>
+
+  <div class="dc" onclick="td2(this)">
+    <div class="dh"><div class="db2 blon"><span class="n">5</span><span class="dw">Mon</span><span class="dd">Jun 15</span></div>
+    <div class="di"><div class="dw2 clon">London</div><div class="dt">Marlin Apartments</div><div class="ds">Uber Boat · Churchill War Rooms · Westminster</div></div><div class="dch">▼</div></div>
+    <div class="dbody">
+      <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Marlin Apartments, London Bridge</div></div></div>
+      <div class="ah">Plan</div>
+      <div class="chips"><span class="chip csight">🛥️ Uber Boat on Thames</span><span class="chip csight">🪖 Churchill War Rooms</span><span class="chip csight">⛪ Westminster Abbey</span></div>
+<div class="vcard"><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Daily 6am–midnight (varies by route)</span></div><div class="vlinks"><a href="https://www.uber.com/gb/en/ride/uber-boat/" target="_blank" class="vlink vlink-web">↗ Website</a></div></div>
+      <div class="vcard"><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Daily 9am–6pm (last entry 5pm) <span class="vdur">· 2.5–3 hrs</span></span></div><div class="vlinks"><a href="https://www.iwm.org.uk/visits/churchill-war-rooms" target="_blank" class="vlink vlink-web">↗ Website</a> <a href="https://maps.app.goo.gl/Fj2mPqCacEayGp577" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
+      <div class="vcard"><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Mon–Sat 9:30am–1pm last entry <span class="vdur">· 1.5–2 hrs</span></span></div><div class="vlinks"><a href="https://www.westminster-abbey.org" target="_blank" class="vlink vlink-web">↗ Website</a> <a href="https://maps.app.goo.gl/WgepaoxGMuY5arAUA" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
+    </div>
+  </div>
+
+  <div class="ldiv ll-zur"><div class="ldot"></div><h2>Zurich, Switzerland</h2><div class="lline"></div></div>
+
+  <div class="dc" onclick="td2(this)">
+    <div class="dh"><div class="db2 btrv"><span class="n">6</span><span class="dw">Tue</span><span class="dd">Jun 16</span></div>
+    <div class="di"><div class="dw2 ctrv">Travel Day</div><div class="dt">LHR → ZRH (LX 319)</div><div class="ds">8am Tube · Fly 12:10–2:50pm · Hotel Adler</div></div><div class="dch">▼</div></div>
+    <div class="dbody">
+      <div class="dr"><div class="dri">🚇</div><div><div class="dlbl">Morning</div><div class="dv">8am Tube to Heathrow</div></div></div>
+      <div class="dr"><div class="dri">✈️</div><div><div class="dlbl">Flight</div><div class="dv">Swiss Air LX 319 · LHR→ZRH · 12:10pm–2:50pm</div></div></div>
+      <div class="dr"><div class="dri">🏨</div><div><div class="dlbl">Stay</div><div class="dv">Hotel Adler Zürich · 2 double + 2 single</div></div></div>
+      <div class="ah">Plan</div>
+      <div class="chips"><span class="chip ctravel">🚶 Walk to Hotel Adler</span><span class="chip cfood">🍽️ Dinner out</span></div>
+    </div>
+  </div>
+
+  <div class="dc" onclick="td2(this)">
+    <div class="dh"><div class="db2 bzur"><span class="n">7</span><span class="dw">Wed</span><span class="dd">Jun 17</span></div>
+    <div class="di"><div class="dw2 czur">Zurich</div><div class="dt">Hotel Adler Zürich</div><div class="ds">City · Fries & Sausage · Ducks on the lake!</div></div><div class="dch">▼</div></div>
+    <div class="dbody">
+      <div class="dr"><div class="dri">🏨</div><div><div class="dlbl">Stay</div><div class="dv">Hotel Adler Zürich</div></div></div>
+      <div class="ah">Plan</div>
+      <div class="chips"><span class="chip csight">🏙️ Explore Zurich</span><span class="chip cdef">🛍️ Shop</span><span class="chip cfood">🍟 Fries & Sausage</span><span class="chip csight">🦆 Feed ducks · Lake Zurich</span></div>
+    </div>
+  </div>
+
+  <div class="ldiv ll-mur"><div class="ldot"></div><h2>Mürren, Swiss Alps</h2><div class="lline"></div></div>
+
+  <div class="dc" onclick="td2(this)">
+    <div class="dh"><div class="db2 btrv"><span class="n">8</span><span class="dw">Thu</span><span class="dd">Jun 18</span></div>
+    <div class="di"><div class="dw2 ctrv">Travel Day</div><div class="dt">Zurich → Mürren</div><div class="ds">Trains 12–3:30pm · Possible Lucerne stop</div></div><div class="dch">▼</div></div>
+    <div class="dbody">
+      <div class="dr"><div class="dri">🚆</div><div><div class="dlbl">Journey</div><div class="dv">Train · Zurich→Mürren · 12:00–15:30</div><div class="dv addr">Consider a stop in Lucerne!</div></div></div>
+      <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet Apartment "Schnell"</div><div class="dv addr">Hehmatten 1068E, Mürren</div></div></div>
+      <div class="ah">Plan</div>
+      <div class="chips"><span class="chip ctravel">🚆 Train through the Alps</span><span class="chip cdef">🥨 Snacks en route</span><span class="chip cfood">🛒 Groceries on arrival</span></div>
+    </div>
+  </div>
+
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">9</span><span class="dw">Fri</span><span class="dd">Jun 19</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Free day — add your plans!</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef" contenteditable onclick="event.stopPropagation()">✏️ Add activity</span></div></div></div>
+
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">10</span><span class="dw">Sat</span><span class="dd">Jun 20</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Free day in the Alps</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef" contenteditable onclick="event.stopPropagation()">✏️ Add activity</span></div></div></div>
+
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">11</span><span class="dw">Sun</span><span class="dd">Jun 21</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Maybe a helicopter ride? 🚁</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip csight">🚁 Helicopter ride (if P&amp;L are up for it!)</span></div></div></div>
+
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">12</span><span class="dw">Mon</span><span class="dd">Jun 22</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Free day in the Alps</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef" contenteditable onclick="event.stopPropagation()">✏️ Add activity</span></div></div></div>
+
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">13</span><span class="dw">Tue</span><span class="dd">Jun 23</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Free day in the Alps</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef" contenteditable onclick="event.stopPropagation()">✏️ Add activity</span></div></div></div>
+
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">14</span><span class="dw">Wed</span><span class="dd">Jun 24</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Last night in the Alps 🌄</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef">🌄 Last Alpine sunset</span><span class="chip cdef">🧳 Pack for tomorrow</span></div></div></div>
+
+  <div class="dc" onclick="td2(this)">
+    <div class="dh"><div class="db2 btrv"><span class="n">15</span><span class="dw">Thu</span><span class="dd">Jun 25</span></div>
+    <div class="di"><div class="dw2 ctrv">Travel Day</div><div class="dt">Mürren → ZRH → EWR</div><div class="ds">UA 9748 · Depart 5:20pm · Home 8:10pm</div></div><div class="dch">▼</div></div>
+    <div class="dbody">
+      <div class="dr"><div class="dri">🚆</div><div><div class="dlbl">To Airport</div><div class="dv">Train · Mürren → Zurich ZRH</div></div></div>
+      <div class="dr"><div class="dri">✈️</div><div><div class="dlbl">Flight Home</div><div class="dv">United UA 9748 · ZRH→EWR · 5:20pm–8:10pm</div></div></div>
+      <div class="ah">Plan</div>
+      <div class="chips"><span class="chip cfood">☕ Final Swiss breakfast</span><span class="chip ctravel">🚆 Train to airport</span><span class="chip ctravel">✈️ Fly home</span></div>
+    </div>
+  </div>
+</div>
+</div><!-- /itinerary -->
+
+<!-- COSTS -->
+<div class="tp" id="tab-costs">
+  <div class="csum">
+    <h2>Total Trip Cost</h2>
+    <div class="cbig">$21,014</div>
+    <div class="cmeta">
+      <div><div class="cml">Paid so far</div><div class="cmv paid">$4,519.50</div></div>
+      <div><div class="cml">Remaining</div><div class="cmv rem">$16,494.85</div></div>
+      <div><div class="cml">T&amp;C share</div><div class="cmv">$8,801</div></div>
+      <div><div class="cml">P&amp;L share</div><div class="cmv">$4,882</div></div>
+    </div>
+    <div class="pprog">
+      <div class="pplbl"><span>Payment progress</span><span>21.5%</span></div>
+      <div class="pptrack"><div class="ppfill" style="width:21.5%"></div></div>
+    </div>
+  </div>
+  <div class="ccards">
+    <div class="ccard flights open">
+      <div class="cch" onclick="tc(this.parentElement)"><span class="ci">✈️</span><div class="cct"><h3>Flights</h3><p>EWR↔LHR · LHR↔ZRH · ZRH↔EWR</p></div><div class="cctot"><div class="amt">$6,925.52</div><span class="chv">▼</span></div></div>
+      <div class="ccb"><table class="ctbl"><thead><tr><th>Item</th><th>Total</th><th>Paid</th><th>T&amp;C</th><th>P&amp;L</th></tr></thead><tbody><tr><td class="in">All Flights</td><td>$6,925.52</td><td><span class="bp">$3,330.66</span></td><td>—</td><td>—</td></tr></tbody></table></div>
+    </div>
+    <div class="ccard lodging">
+      <div class="cch" onclick="tc(this.parentElement)"><span class="ci">🏨</span><div class="cct"><h3>Lodging</h3><p>Marlin · Hotel Adler · Chalet Schnell</p></div><div class="cctot"><div class="amt">$12,770.83</div><span class="chv">▼</span></div></div>
+      <div class="ccb"><table class="ctbl"><thead><tr><th>Property</th><th>Total</th><th>Paid</th><th>T&amp;C</th><th>P&amp;L</th></tr></thead><tbody>
+        <tr><td class="in">Marlin Apts, London</td><td>$7,000</td><td><span class="bo">$0</span></td><td>$4,400</td><td>$2,600</td></tr>
+        <tr><td class="in">Chalet Schnell</td><td>$2,097.95</td><td><span class="bp">$1,188.84</span></td><td>$1,384.65</td><td>$692.32</td></tr>
+        <tr><td class="in">Hotel Adler</td><td>$3,672.88</td><td><span class="bo">$0</span></td><td>$2,435</td><td>$1,155</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="ccard activities">
+      <div class="cch" onclick="tc(this.parentElement)"><span class="ci">🎟️</span><div class="cct"><h3>Activities</h3><p>Black Cab · Harry Potter</p></div><div class="cctot"><div class="amt">$1,318</div><span class="chv">▼</span></div></div>
+      <div class="ccb"><table class="ctbl"><thead><tr><th>Activity</th><th>Total</th><th>Paid</th><th>T&amp;C</th><th>P&amp;L</th></tr></thead><tbody>
+        <tr><td class="in">Black Cab Tour</td><td>$850</td><td><span class="bo">$0</span></td><td>$561</td><td>$280.50</td></tr>
+        <tr><td class="in">Harry Potter Studio</td><td>$468</td><td><span class="bo">$0</span></td><td>$308.88</td><td>$154.44</td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+  <div class="plsec" style="margin-top:12px">
+    <h3>🧾 P&amp;L Breakdown</h3>
+    <div class="plr"><span class="pll">Total flights</span><span class="pla">$3,330.66</span></div>
+    <div class="plr"><span class="pll">Total lodging</span><span class="pla">$4,447.32</span></div>
+    <div class="plr"><span class="pll">Total activities</span><span class="pla">$434.94</span></div>
+    <div class="plr" style="border-top:2px solid #E5E1DB;margin-top:4px;padding-top:9px"><span class="pll" style="font-weight:700;color:var(--ink)">Total costs</span><span class="pla" style="font-size:1rem">$8,212.92</span></div>
+    <div class="plr"><span class="pll">Total payments made</span><span class="pla" style="color:#065F46">$4,000.00</span></div>
+    <div class="plr"><span class="pll" style="font-weight:700;color:var(--ink)">Remaining balance</span><span class="pla rem" style="font-size:1rem">$4,212.92</span></div>
+  </div>
+  <div class="plsec" style="margin-top:9px">
+    <h3>💳 Payments Made</h3>
+    <div class="pitem"><div><div style="font-weight:600">Payment 1</div><div class="pdate">Nov 13, 2025</div></div><div class="pamt">$4,000.00</div></div>
+    <div class="pitem" style="color:#C0BAB4;font-style:italic"><div>Add next payment…</div><div contenteditable style="min-width:80px;text-align:right;color:#C0BAB4">$0.00</div></div>
+  </div>
+</div><!-- /costs -->
+
+<!-- REFERENCE -->
+<div class="tp" id="tab-reference">
+  <div class="rsecs">
+
+    <div class="rc flights open">
+      <div class="rch" onclick="tr2(this.parentElement)"><span class="ri">✈️</span><h3>Flights</h3><span class="rtog">▼</span></div>
+      <div class="rcb"><table class="rt"><thead><tr><th>Route</th><th>Date</th><th>Flight</th><th>Times</th><th>Conf #</th></tr></thead><tbody id="tF">
+        <tr><td class="lbl">EWR→LHR</td><td>Jun 11</td><td>UA 934</td><td>8:30am–8:40pm</td><td><span class="conf ph" contenteditable>Add conf #</span></td></tr>
+        <tr><td class="lbl">LHR→ZRH</td><td>Jun 16</td><td>LX 319</td><td>12:10–2:50pm</td><td><span class="conf ph" contenteditable>Add conf #</span></td></tr>
+        <tr><td class="lbl">ZRH→EWR</td><td>Jun 25</td><td>UA 9748</td><td>5:20–8:10pm</td><td><span class="conf ph" contenteditable>Add conf #</span></td></tr>
+      </tbody></table>
+      <button class="arb" onclick="addRow('tF',['Route','Date','Flight','Times','Conf #'])">＋ Add flight</button></div>
     </div>
 
-    <div class="cost-cards">
-
-      <!-- FLIGHTS -->
-      <div class="cost-card flights open">
-        <div class="cost-card-header" onclick="toggleCost(this.parentElement)">
-          <span class="ci">✈️</span>
-          <div class="cost-card-title">
-            <h3>Flights</h3>
-            <p>EWR↔LHR · LHR↔ZRH · ZRH↔EWR</p>
-          </div>
-          <div class="cost-card-total">
-            <div class="amt">$6,925.52</div>
-            <span class="chev">▼</span>
-          </div>
-        </div>
-        <div class="cost-card-body">
-          <table class="cost-table">
-            <thead><tr><th>Item</th><th>Total</th><th>Paid</th><th>T&amp;C</th><th>P&amp;L</th></tr></thead>
-            <tbody>
-              <tr>
-                <td class="item-name">All Flights</td>
-                <td>$6,925.52</td>
-                <td><span class="badge-paid">$3,330.66</span></td>
-                <td>—</td>
-                <td>—</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- LODGING -->
-      <div class="cost-card lodging">
-        <div class="cost-card-header" onclick="toggleCost(this.parentElement)">
-          <span class="ci">🏨</span>
-          <div class="cost-card-title">
-            <h3>Lodging</h3>
-            <p>London · Hotel Adler · Chalet Schnell</p>
-          </div>
-          <div class="cost-card-total">
-            <div class="amt">$12,770.83</div>
-            <span class="chev">▼</span>
-          </div>
-        </div>
-        <div class="cost-card-body">
-          <table class="cost-table">
-            <thead><tr><th>Property</th><th>Total</th><th>Paid</th><th>T&amp;C</th><th>P&amp;L</th></tr></thead>
-            <tbody>
-              <tr>
-                <td class="item-name">London Hotel (Marlin)</td>
-                <td>$7,000</td>
-                <td><span class="badge-owed">$0</span></td>
-                <td>$4,400</td>
-                <td>$2,600</td>
-              </tr>
-              <tr>
-                <td class="item-name">Airbnb Switz (Schnell)</td>
-                <td>$2,097.95</td>
-                <td><span class="badge-paid">$1,188.84</span></td>
-                <td>$1,384.65</td>
-                <td>$692.32</td>
-              </tr>
-              <tr>
-                <td class="item-name">Hotel Adler Zürich</td>
-                <td>$3,672.88</td>
-                <td><span class="badge-owed">$0</span></td>
-                <td>$2,435</td>
-                <td>$1,155</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ACTIVITIES -->
-      <div class="cost-card activities">
-        <div class="cost-card-header" onclick="toggleCost(this.parentElement)">
-          <span class="ci">🎟️</span>
-          <div class="cost-card-title">
-            <h3>Activities</h3>
-            <p>Black Cab · Harry Potter</p>
-          </div>
-          <div class="cost-card-total">
-            <div class="amt">$1,318</div>
-            <span class="chev">▼</span>
-          </div>
-        </div>
-        <div class="cost-card-body">
-          <table class="cost-table">
-            <thead><tr><th>Activity</th><th>Total</th><th>Paid</th><th>T&amp;C</th><th>P&amp;L</th></tr></thead>
-            <tbody>
-              <tr>
-                <td class="item-name">Black Cab Tour</td>
-                <td>$850</td>
-                <td><span class="badge-owed">$0</span></td>
-                <td>$561</td>
-                <td>$280.50</td>
-              </tr>
-              <tr>
-                <td class="item-name">Harry Potter</td>
-                <td>$468</td>
-                <td><span class="badge-owed">$0</span></td>
-                <td>$308.88</td>
-                <td>$154.44</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
+    <div class="rc mileage open">
+      <div class="rch" onclick="tr2(this.parentElement)"><span class="ri">🏅</span><h3>MileagePlus & TSA Precheck</h3><span class="rtog">▼</span></div>
+      <div class="rcb"><table class="rt"><thead><tr><th>Person</th><th>MileagePlus #</th><th>TSA KTN</th></tr></thead><tbody>
+        <tr><td class="lbl">Christie</td><td><span class="conf">CP712321</span></td><td><span class="conf">TT1313SXZ</span></td></tr>
+        <tr><td class="lbl">Tom</td><td><span class="conf">ND837316</span></td><td><span class="conf ph" contenteditable>Add KTN</span></td></tr>
+        <tr><td class="lbl">Megan</td><td><span class="conf">CHM93920</span></td><td><span class="conf ph" contenteditable>Add KTN</span></td></tr>
+        <tr><td class="lbl">Michael</td><td><span class="conf">WGN11733</span></td><td><span class="conf ph" contenteditable>Add KTN</span></td></tr>
+        <tr><td class="lbl">Paul</td><td><span class="conf ph" contenteditable>Add #</span></td><td><span class="conf">TT13Q1XQB</span></td></tr>
+        <tr><td class="lbl">Lorraine</td><td><span class="conf ph" contenteditable>Add #</span></td><td><span class="conf">TT13Q1Y6H</span></td></tr>
+      </tbody></table>
+      <p style="font-size:.7rem;color:var(--muted);margin-top:8px">⚠️ Tom: check if upgrade fees on refundable tickets are also refundable · Megan: link reservations</p></div>
     </div>
 
-    <!-- P&L Split -->
-    <div class="pl-section" style="margin-top:14px;">
-      <h3>🧾 P&amp;L Breakdown</h3>
-      <div class="pl-row"><span class="pl-label">Total flights</span><span class="pl-amt">$3,330.66</span></div>
-      <div class="pl-row"><span class="pl-label">Total lodging</span><span class="pl-amt">$4,447.32</span></div>
-      <div class="pl-row"><span class="pl-label">Total activities</span><span class="pl-amt">$434.94</span></div>
-      <div class="pl-row" style="border-top: 2px solid #E5E1DB; margin-top:4px; padding-top:10px;">
-        <span class="pl-label" style="font-weight:700; color:var(--ink);">Total costs</span>
-        <span class="pl-amt" style="font-size:1.05rem;">$8,212.92</span>
-      </div>
-      <div class="pl-row"><span class="pl-label">Total payments made</span><span class="pl-amt" style="color:#065F46;">$4,000.00</span></div>
-      <div class="pl-row"><span class="pl-label" style="font-weight:700; color:var(--ink);">Remaining balance</span><span class="pl-amt remaining" style="font-size:1.05rem;">$4,212.92</span></div>
+    <div class="rc hotels">
+      <div class="rch" onclick="tr2(this.parentElement)"><span class="ri">🏨</span><h3>Accommodations</h3><span class="rtog">▼</span></div>
+      <div class="rcb"><table class="rt"><thead><tr><th>Property</th><th>Dates</th><th>Conf #</th></tr></thead><tbody id="tH">
+        <tr><td class="lbl">Marlin Apts, London</td><td contenteditable>Jun 11–16</td><td><span class="conf ph" contenteditable>Add conf #</span></td></tr>
+        <tr><td class="lbl">Hotel Adler Zürich</td><td contenteditable>Jun 16–18</td><td><span class="conf ph" contenteditable>Add conf #</span></td></tr>
+        <tr><td class="lbl">Chalet "Schnell"</td><td contenteditable>Jun 18–25</td><td><span class="conf ph" contenteditable>Add conf #</span></td></tr>
+      </tbody></table>
+      <button class="arb" onclick="addRow('tH',['Property','Dates','Conf #'])">＋ Add property</button></div>
     </div>
 
-    <!-- Payments -->
-    <div class="pl-section" style="margin-top:10px;">
-      <h3>💳 Payments Made</h3>
-      <div class="payments-list">
-        <div class="payment-item">
-          <div><div style="font-weight:600;">Payment 1</div><div class="payment-date">Nov 13, 2025</div></div>
-          <div class="payment-amt">$4,000.00</div>
-        </div>
-        <div class="payment-item" style="color:#C0BAB4; font-style:italic;">
-          <div>Add next payment...</div>
-          <div contenteditable style="min-width:80px; text-align:right; color:#C0BAB4;">$0.00</div>
-        </div>
+    <div class="rc tickets open">
+      <div class="rch" onclick="tr2(this.parentElement)"><span class="ri">🎟️</span><h3>Tickets & Tours</h3><span class="rtog">▼</span></div>
+      <div class="rcb"><table class="rt"><thead><tr><th>Experience</th><th>Date & Time</th><th>Tickets</th><th>Notes</th></tr></thead><tbody id="tT">
+        <tr>
+          <td class="lbl">Black Cab Tour</td>
+          <td>Jun 14 · 9am</td>
+          <td><a href="https://drive.google.com/file/d/16cgC3llvKtXvM47iAsWHs46jK1I5CFTe/view?usp=drive_link" target="_blank" class="vlink vlink-ticket">🎟 Open Ticket</a></td>
+          <td contenteditable></td>
+        </tr>
+        <tr>
+          <td class="lbl">Harry Potter Studio</td>
+          <td>Jun 13 · 4pm</td>
+          <td><a href="https://drive.google.com/file/d/1kSRyXRlFXeFmJDjg_nfx9JX9OkUzdt56/view?usp=sharing" target="_blank" class="vlink vlink-ticket">🎟 Open Ticket</a></td>
+          <td><span class="conf">Confirmed ✓</span></td>
+        </tr>
+        <tr>
+          <td class="lbl">Marlin Apartments</td>
+          <td>Jun 11–16</td>
+          <td><a href="https://drive.google.com/file/d/1azwzXOgIUujmygPxDqWF0BKr3t9SFU-s/view?usp=sharing" target="_blank" class="vlink vlink-ticket">📄 Confirmation</a></td>
+          <td contenteditable></td>
+        </tr>
+        <tr>
+          <td class="lbl">Churchill War Rooms</td>
+          <td contenteditable>Jun 15</td>
+          <td><span class="conf ph" contenteditable>Add ref #</span></td>
+          <td contenteditable></td>
+        </tr>
+        <tr>
+          <td class="lbl">Westminster Abbey</td>
+          <td contenteditable>Jun 15</td>
+          <td><span class="conf ph" contenteditable>Add ref #</span></td>
+          <td contenteditable></td>
+        </tr>
+      </tbody></table>
+      <button class="arb" onclick="addRow('tT',['Experience','Date','Ref #','Notes'])">＋ Add booking</button></div>
+    </div>
+
+    <div class="rc transport">
+      <div class="rch" onclick="tr2(this.parentElement)"><span class="ri">🚆</span><h3>Ground Transport</h3><span class="rtog">▼</span></div>
+      <div class="rcb"><table class="rt"><thead><tr><th>Type</th><th>Date</th><th>Ref #</th><th>Notes</th></tr></thead><tbody id="tTr">
+        <tr><td class="lbl">Black Cab · LHR arrival</td><td contenteditable>Jun 11</td><td><span class="conf ph" contenteditable>Add ref #</span></td><td contenteditable>To Marlin Apts</td></tr>
+        <tr><td class="lbl">Train: ZRH→Mürren</td><td contenteditable>Jun 18 · 12pm</td><td><span class="conf ph" contenteditable>Add ref #</span></td><td contenteditable>Possible Lucerne stop</td></tr>
+        <tr><td class="lbl">Train: Mürren→ZRH</td><td contenteditable>Jun 25</td><td><span class="conf ph" contenteditable>Add ref #</span></td><td contenteditable>Allow airport time</td></tr>
+      </tbody></table>
+      <button class="arb" onclick="addRow('tTr',['Type','Date','Ref #','Notes'])">＋ Add transport</button></div>
+    </div>
+</div><!-- /reference -->
+
+<!-- PACKING -->
+<div class="tp" id="tab-packing">
+  <div class="ptop">
+    <div class="ppw">
+      <div class="pplabel"><span>Packed</span><span id="packCount">0 of 0 items</span></div>
+      <div class="ptrack"><div class="pfill" id="packFill" style="width:0%"></div></div>
+    </div>
+    <button class="preset" onclick="resetPack()">Reset</button>
+  </div>
+  <div class="ptabs">
+    <button class="ptab active" data-p="all" onclick="fp('all',this)">👥 All</button>
+    <button class="ptab" data-p="paul" onclick="fp('paul',this)">👴 Paul</button>
+    <button class="ptab" data-p="lorraine" onclick="fp('lorraine',this)">👵 Lorraine</button>
+    <button class="ptab" data-p="tom" onclick="fp('tom',this)">🧔 Tom</button>
+    <button class="ptab" data-p="christie" onclick="fp('christie',this)">👩 Christie</button>
+    <button class="ptab" data-p="megan" onclick="fp('megan',this)">🧑 Megan</button>
+    <button class="ptab" data-p="michael" onclick="fp('michael',this)">👦 Michael</button>
+  </div>
+  <div class="psecs" id="packSecs">
+
+    <div class="psec open" data-sec="clothes">
+      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">👕</span><h3>Clothes</h3><span class="pscnt" id="cnt-clothes"></span><span class="pchv">▼</span></div>
+      <div class="psecb"><ul class="pitems" id="pl-clothes">
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">5 pairs of socks</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">5 underwear</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">3 shirts</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">1 pants</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">1 shorts</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Pajamas</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Raincoat / windbreaker with hood</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Layerable quarter-zip / long sleeve</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Sweatshirt</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Sunglasses</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Crossbody / purse (water + phone)</span><span class="pwho wchristie">Christie</span></li>
+        <li class="pitem2" data-pack="item" data-who="megan"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Going-out outfit</span><span class="pwho wmegan">Megan</span></li>
+      </ul>
+      <div class="padd"><input class="paddinp" type="text" placeholder="Add clothing item…" onkeydown="api(event,'pl-clothes')"><button class="paddbtn" onclick="apib('pl-clothes')">＋</button></div></div>
+    </div>
+
+    <div class="psec" data-sec="tech">
+      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">🔌</span><h3>Tech & Gear</h3><span class="pscnt" id="cnt-tech"></span><span class="pchv">▼</span></div>
+      <div class="psecb"><ul class="pitems" id="pl-tech">
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Power adapter (European)</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Backup battery — small</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Phone charger with long cord</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Headphones</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Backpack loop / carabiner</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Packing cubes</span><span class="pwho wchristie">Christie</span></li>
+        <li class="pitem2" data-pack="item" data-who="tom"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Mini USB fan</span><span class="pwho wtom">Tom</span></li>
+        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">USB fan</span><span class="pwho wchristie">Christie</span></li>
+        <li class="pitem2" data-pack="item" data-who="michael"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Tablet / device + charger</span><span class="pwho wmichael">Michael</span></li>
+      </ul>
+      <div class="padd"><input class="paddinp" type="text" placeholder="Add tech item…" onkeydown="api(event,'pl-tech')"><button class="paddbtn" onclick="apib('pl-tech')">＋</button></div></div>
+    </div>
+
+    <div class="psec" data-sec="toiletries">
+      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">🪥</span><h3>Toiletries</h3><span class="pscnt" id="cnt-toiletries"></span><span class="pchv">▼</span></div>
+      <div class="psecb"><ul class="pitems" id="pl-toiletries">
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Toothbrush + mini toothpaste</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Deodorant</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Mini pack hand wipes</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Hand sanitizer</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Laundry detergent sheets</span><span class="pwho wchristie">Christie</span></li>
+        <li class="pitem2" data-pack="item" data-who="tom"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Foot powder</span><span class="pwho wtom">Tom</span></li>
+        <li class="pitem2" data-pack="item" data-who="tom"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Nail clippers</span><span class="pwho wtom">Tom</span></li>
+        <li class="pitem2" data-pack="item" data-who="tom"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Saline / contacts</span><span class="pwho wtom">Tom</span></li>
+        <li class="pitem2" data-pack="item" data-who="paul"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Toiletry bag essentials</span><span class="pwho wpaul">Paul</span></li>
+        <li class="pitem2" data-pack="item" data-who="lorraine"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Toiletry bag essentials</span><span class="pwho wlorraine">Lorraine</span></li>
+        <li class="pitem2" data-pack="item" data-who="megan"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Toiletry bag</span><span class="pwho wmegan">Megan</span></li>
+        <li class="pitem2" data-pack="item" data-who="michael"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Toiletry bag</span><span class="pwho wmichael">Michael</span></li>
+      </ul>
+      <div class="padd"><input class="paddinp" type="text" placeholder="Add toiletry…" onkeydown="api(event,'pl-toiletries')"><button class="paddbtn" onclick="apib('pl-toiletries')">＋</button></div></div>
+    </div>
+
+    <div class="psec" data-sec="health">
+      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">💊</span><h3>Health & Meds</h3><span class="pscnt" id="cnt-health"></span><span class="pchv">▼</span></div>
+      <div class="psecb"><ul class="pitems" id="pl-health">
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">OTC medications (ibuprofen, antacids, etc.)</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="paul"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Prescription medications</span><span class="pwho wpaul">Paul</span></li>
+        <li class="pitem2" data-pack="item" data-who="lorraine"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Prescription medications</span><span class="pwho wlorraine">Lorraine</span></li>
+        <li class="pitem2" data-pack="item" data-who="tom"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Prescription medications</span><span class="pwho wtom">Tom</span></li>
+        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Prescription medications</span><span class="pwho wchristie">Christie</span></li>
+      </ul>
+      <div class="padd"><input class="paddinp" type="text" placeholder="Add med / health item…" onkeydown="api(event,'pl-health')"><button class="paddbtn" onclick="apib('pl-health')">＋</button></div></div>
+    </div>
+
+    <div class="psec" data-sec="docs">
+      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">📄</span><h3>Documents</h3><span class="pscnt" id="cnt-docs"></span><span class="pchv">▼</span></div>
+      <div class="psecb"><ul class="pitems" id="pl-docs">
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Passport + copy</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Credit card — call bank to notify travel</span><span class="pwho wall">Everyone</span></li>
+        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">T&amp;C credit card + backup</span><span class="pwho wchristie">Christie</span></li>
+        <li class="pitem2" data-pack="item" data-who="paul"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">TSA Precheck KTN: TT13Q1XQB</span><span class="pwho wpaul">Paul</span></li>
+        <li class="pitem2" data-pack="item" data-who="lorraine"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">TSA Precheck KTN: TT13Q1Y6H</span><span class="pwho wlorraine">Lorraine</span></li>
+        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">TSA Precheck KTN: TT1313SXZ</span><span class="pwho wchristie">Christie</span></li>
+      </ul>
+      <div class="padd"><input class="paddinp" type="text" placeholder="Add document…" onkeydown="api(event,'pl-docs')"><button class="paddbtn" onclick="apib('pl-docs')">＋</button></div></div>
+    </div>
+
+    <div class="psec" data-sec="buy">
+      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">🛒</span><h3>Buy in Europe</h3><span class="pscnt" id="cnt-buy">—</span><span class="pchv">▼</span></div>
+      <div class="psecb">
+        <div class="pnote">💡 Don't pack these — grab them over there</div>
+        <ul class="pitems" id="pl-buy">
+          <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Laundry detergent</span><span class="pwho wbuy">Buy there</span></li>
+          <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Cards / games for the chalet</span><span class="pwho wbuy">Buy there</span></li>
+          <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Reusable tote bag</span><span class="pwho wbuy">Buy there</span></li>
+          <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Extra suitcase for souvenirs (maybe)</span><span class="pwho wbuy">Maybe</span></li>
+        </ul>
+        <div class="padd"><input class="paddinp" type="text" placeholder="Add something to buy there…" onkeydown="api(event,'pl-buy')"><button class="paddbtn" onclick="apib('pl-buy')">＋</button></div>
       </div>
     </div>
 
-  </div><!-- /costs -->
-
-  <!-- ══════════ REFERENCE ══════════ -->
-  <div class="tab-panel" id="tab-reference">
-    <div class="ref-note">🔐 <span>Private — just for you & your husband. Tap any field to edit.</span></div>
-    <div class="ref-sections">
-
-      <div class="ref-card flights open">
-        <div class="ref-card-header" onclick="toggleRef(this.parentElement)">
-          <span class="ri">✈️</span><h3>Flights</h3><span class="ref-toggle">▼</span>
-        </div>
-        <div class="ref-card-body">
-          <table class="rt">
-            <thead><tr><th>Route</th><th>Date</th><th>Flight</th><th>Conf #</th></tr></thead>
-            <tbody id="tFlights">
-              <tr><td class="label">EWR → LHR</td><td contenteditable>Jun 11</td><td contenteditable>UA 934</td><td><span class="conf placeholder" contenteditable>Add conf #</span></td></tr>
-              <tr><td class="label">LHR → ZRH</td><td contenteditable>Jun 16</td><td contenteditable>LX 319</td><td><span class="conf placeholder" contenteditable>Add conf #</span></td></tr>
-              <tr><td class="label">ZRH → EWR</td><td contenteditable>Jun 25</td><td contenteditable>UA 9748</td><td><span class="conf placeholder" contenteditable>Add conf #</span></td></tr>
-            </tbody>
-          </table>
-          <button class="add-row-btn" onclick="addRow('tFlights',['Route','Date','Flight #','Conf #'])">＋ Add flight</button>
-        </div>
+    <div class="psec" data-sec="skip">
+      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">🚫</span><h3>Don't Bother</h3><span class="pscnt" id="cnt-skip">—</span><span class="pchv">▼</span></div>
+      <div class="psecb">
+        <div class="pnote">🙅 Leave these at home</div>
+        <ul class="pitems" id="pl-skip">
+          <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Sunscreen</span><span class="pwho wskip">Skip</span></li>
+        </ul>
+        <div class="padd"><input class="paddinp" type="text" placeholder="Add something to leave behind…" onkeydown="api(event,'pl-skip')"><button class="paddbtn" onclick="apib('pl-skip')">＋</button></div>
       </div>
-
-      <div class="ref-card hotels">
-        <div class="ref-card-header" onclick="toggleRef(this.parentElement)">
-          <span class="ri">🏨</span><h3>Accommodations</h3><span class="ref-toggle">▼</span>
-        </div>
-        <div class="ref-card-body">
-          <table class="rt">
-            <thead><tr><th>Property</th><th>Dates</th><th>Conf #</th></tr></thead>
-            <tbody id="tHotels">
-              <tr><td class="label">Marlin Apts, London</td><td contenteditable>Jun 11–16</td><td><span class="conf placeholder" contenteditable>Add conf #</span></td></tr>
-              <tr><td class="label">Hotel Adler Zürich</td><td contenteditable>Jun 16–18</td><td><span class="conf placeholder" contenteditable>Add conf #</span></td></tr>
-              <tr><td class="label">Chalet "Schnell"</td><td contenteditable>Jun 18–25</td><td><span class="conf placeholder" contenteditable>Add conf #</span></td></tr>
-            </tbody>
-          </table>
-          <button class="add-row-btn" onclick="addRow('tHotels',['Property','Dates','Conf #'])">＋ Add property</button>
-        </div>
-      </div>
-
-      <div class="ref-card tickets">
-        <div class="ref-card-header" onclick="toggleRef(this.parentElement)">
-          <span class="ri">🎟️</span><h3>Tickets & Tours</h3><span class="ref-toggle">▼</span>
-        </div>
-        <div class="ref-card-body">
-          <table class="rt">
-            <thead><tr><th>Experience</th><th>Date</th><th>Ref #</th><th>Notes</th></tr></thead>
-            <tbody id="tTickets">
-              <tr><td class="label" contenteditable>Harry Potter</td><td contenteditable>Jun 13</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable>Confirm venue</td></tr>
-              <tr><td class="label" contenteditable>Black Cab Tour</td><td contenteditable>Jun 14 · 9am</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable></td></tr>
-              <tr><td class="label" contenteditable>Churchill War Rooms</td><td contenteditable>Jun 15</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable></td></tr>
-              <tr><td class="label" contenteditable>🚁 Helicopter Ride</td><td contenteditable>Jun 21</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable>For P&L</td></tr>
-            </tbody>
-          </table>
-          <button class="add-row-btn" onclick="addRow('tTickets',['Experience','Date','Ref #','Notes'])">＋ Add booking</button>
-        </div>
-      </div>
-
-      <div class="ref-card transport">
-        <div class="ref-card-header" onclick="toggleRef(this.parentElement)">
-          <span class="ri">🚆</span><h3>Ground Transport</h3><span class="ref-toggle">▼</span>
-        </div>
-        <div class="ref-card-body">
-          <table class="rt">
-            <thead><tr><th>Type</th><th>Date</th><th>Ref #</th><th>Notes</th></tr></thead>
-            <tbody id="tTransport">
-              <tr><td class="label">Black Cab (LHR arrival)</td><td contenteditable>Jun 11</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable>To Marlin Apts</td></tr>
-              <tr><td class="label">Train: ZRH → Mürren</td><td contenteditable>Jun 18 · 12pm</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable>Possible Lucerne stop</td></tr>
-              <tr><td class="label">Train: Mürren → ZRH</td><td contenteditable>Jun 25</td><td><span class="conf placeholder" contenteditable>Add ref #</span></td><td contenteditable>Allow airport time</td></tr>
-            </tbody>
-          </table>
-          <button class="add-row-btn" onclick="addRow('tTransport',['Type','Date','Ref #','Notes'])">＋ Add transport</button>
-        </div>
-      </div>
-
-      <div class="ref-card misc">
-        <div class="ref-card-header" onclick="toggleRef(this.parentElement)">
-          <span class="ri">📋</span><h3>Misc & Emergency</h3><span class="ref-toggle">▼</span>
-        </div>
-        <div class="ref-card-body">
-          <table class="rt">
-            <thead><tr><th>Item</th><th>Details</th><th>Notes</th></tr></thead>
-            <tbody id="tMisc">
-              <tr><td class="label" contenteditable>Travel Insurance</td><td><span class="conf placeholder" contenteditable>Policy #</span></td><td contenteditable>24/7 helpline #</td></tr>
-              <tr><td class="label" contenteditable>Emergency Contact</td><td contenteditable>Name & number</td><td contenteditable>Has our full itinerary</td></tr>
-              <tr><td class="label" contenteditable>Credit Cards</td><td contenteditable>Which cards + notified</td><td contenteditable>Foreign fees?</td></tr>
-              <tr><td class="label" contenteditable>EWR Parking</td><td><span class="conf placeholder" contenteditable>Parking conf #</span></td><td contenteditable>Lot, level, row</td></tr>
-            </tbody>
-          </table>
-          <button class="add-row-btn" onclick="addRow('tMisc',['Item','Details','Notes'])">＋ Add item</button>
-        </div>
-      </div>
-
-    </div>
-  </div><!-- /reference -->
-
-  <!-- ══════════ PACKING ══════════ -->
-  <div class="tab-panel" id="tab-packing">
-
-    <div class="pack-header">
-      <div class="pack-progress-wrap">
-        <div class="pack-progress-label">
-          <span>Packed</span>
-          <span id="packCount">0 of 0 items</span>
-        </div>
-        <div class="pack-track"><div class="pack-fill" id="packFill" style="width:0%"></div></div>
-      </div>
-      <button class="pack-reset-btn" onclick="resetPacking()">Reset all</button>
     </div>
 
-    <div class="pack-sections" id="packSections">
-
-      <!-- CLOTHES -->
-      <div class="pack-section open" data-section="clothes">
-        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
-          <span class="psi">👕</span>
-          <h3>Clothes</h3>
-          <span class="pack-section-count" id="count-clothes">0/0</span>
-          <span class="pack-chev">▼</span>
-        </div>
-        <div class="pack-section-body">
-          <ul class="pack-items" id="list-clothes">
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">5 pairs of socks</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">5 underwear</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">3 shirts</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">1 pants</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">1 shorts</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Pajamas</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Raincoat / windbreaker with hood</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Layerable quarter-zip / long sleeve</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Sweatshirt</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Sunglasses</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Crossbody / purse (fits water bottle & phone)</span></li>
-          </ul>
-          <div class="pack-add-row">
-            <input class="pack-add-input" type="text" placeholder="Add clothing item…" onkeydown="addPackItem(event,'list-clothes')">
-            <button class="pack-add-submit" onclick="addPackItemBtn('list-clothes')">＋</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- TECH & GEAR -->
-      <div class="pack-section" data-section="tech">
-        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
-          <span class="psi">🔌</span>
-          <h3>Tech & Gear</h3>
-          <span class="pack-section-count" id="count-tech">0/0</span>
-          <span class="pack-chev">▼</span>
-        </div>
-        <div class="pack-section-body">
-          <ul class="pack-items" id="list-tech">
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Power adapter (European)</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Backup battery — small</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Phone chargers with long cord</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Headphones</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Backpack loop / carabiner</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Packing cubes</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Tom's mini USB fan <span class="pack-item-who who-t">Tom</span></span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Christie's USB fan <span class="pack-item-who who-c">Christie</span></span></li>
-          </ul>
-          <div class="pack-add-row">
-            <input class="pack-add-input" type="text" placeholder="Add tech item…" onkeydown="addPackItem(event,'list-tech')">
-            <button class="pack-add-submit" onclick="addPackItemBtn('list-tech')">＋</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- TOILETRIES -->
-      <div class="pack-section" data-section="toiletries">
-        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
-          <span class="psi">🪥</span>
-          <h3>Toiletries</h3>
-          <span class="pack-section-count" id="count-toiletries">0/0</span>
-          <span class="pack-chev">▼</span>
-        </div>
-        <div class="pack-section-body">
-          <ul class="pack-items" id="list-toiletries">
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Toothbrush + mini toothpaste</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Deodorant</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Mini pack hand wipes</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Hand sanitizer</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Laundry detergent sheets</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Tom's foot powder <span class="pack-item-who who-t">Tom</span></span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Tom's nail clippers <span class="pack-item-who who-t">Tom</span></span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Tom's saline / contacts <span class="pack-item-who who-t">Tom</span></span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Christie's laundry detergent sheets <span class="pack-item-who who-c">Christie</span></span></li>
-          </ul>
-          <div class="pack-add-row">
-            <input class="pack-add-input" type="text" placeholder="Add toiletry…" onkeydown="addPackItem(event,'list-toiletries')">
-            <button class="pack-add-submit" onclick="addPackItemBtn('list-toiletries')">＋</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- HEALTH & MEDS -->
-      <div class="pack-section" data-section="health">
-        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
-          <span class="psi">💊</span>
-          <h3>Health & Meds</h3>
-          <span class="pack-section-count" id="count-health">0/0</span>
-          <span class="pack-chev">▼</span>
-        </div>
-        <div class="pack-section-body">
-          <ul class="pack-items" id="list-health">
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Prescription medications</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">OTC medications (ibuprofen, antacids, etc.)</span></li>
-          </ul>
-          <div class="pack-add-row">
-            <input class="pack-add-input" type="text" placeholder="Add med / health item…" onkeydown="addPackItem(event,'list-health')">
-            <button class="pack-add-submit" onclick="addPackItemBtn('list-health')">＋</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- DOCUMENTS -->
-      <div class="pack-section" data-section="docs">
-        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
-          <span class="psi">📄</span>
-          <h3>Documents</h3>
-          <span class="pack-section-count" id="count-docs">0/0</span>
-          <span class="pack-chev">▼</span>
-        </div>
-        <div class="pack-section-body">
-          <ul class="pack-items" id="list-docs">
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Passport + copy (each person)</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Credit card per person — call to notify bank</span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">T&C credit card + backup card</span></li>
-          </ul>
-          <div class="pack-add-row">
-            <input class="pack-add-input" type="text" placeholder="Add document…" onkeydown="addPackItem(event,'list-docs')">
-            <button class="pack-add-submit" onclick="addPackItemBtn('list-docs')">＋</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- BUY IN EUROPE -->
-      <div class="pack-section" data-section="buy">
-        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
-          <span class="psi">🛒</span>
-          <h3>Buy in Europe</h3>
-          <span class="pack-section-count" id="count-buy">0/0</span>
-          <span class="pack-chev">▼</span>
-        </div>
-        <div class="pack-section-body">
-          <div class="pack-note">💡 Don't pack these — grab them over there</div>
-          <ul class="pack-items" id="list-buy">
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Laundry detergent <span class="pack-item-who who-buy">Buy there</span></span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Cards / games or something fun <span class="pack-item-who who-buy">Buy there</span></span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Reusable tote bag <span class="pack-item-who who-buy">Buy there</span></span></li>
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Extra suitcase for souvenirs (possibly) <span class="pack-item-who who-buy">Maybe</span></span></li>
-          </ul>
-          <div class="pack-add-row">
-            <input class="pack-add-input" type="text" placeholder="Add something to buy there…" onkeydown="addPackItem(event,'list-buy')">
-            <button class="pack-add-submit" onclick="addPackItemBtn('list-buy')">＋</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- DON'T BOTHER -->
-      <div class="pack-section" data-section="skip">
-        <div class="pack-section-header" onclick="togglePackSection(this.parentElement)">
-          <span class="psi">🚫</span>
-          <h3>Don't Bother Packing</h3>
-          <span class="pack-section-count" id="count-skip">—</span>
-          <span class="pack-chev">▼</span>
-        </div>
-        <div class="pack-section-body">
-          <div class="pack-note">🙅 Leave these at home</div>
-          <ul class="pack-items" id="list-skip">
-            <li class="pack-item" onclick="toggleItem(this)"><div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">Sunscreen <span class="pack-item-who who-skip">Skip</span></span></li>
-          </ul>
-          <div class="pack-add-row">
-            <input class="pack-add-input" type="text" placeholder="Add something to leave behind…" onkeydown="addPackItem(event,'list-skip')">
-            <button class="pack-add-submit" onclick="addPackItemBtn('list-skip')">＋</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div><!-- /packing -->
+  </div>
+</div><!-- /packing -->
 
 </div><!-- /scroll-area -->
 
 <script>
-  // PWA: Add to Home Screen still works via meta tags without a separate SW file
+if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{})}
 
-  function switchTab(name, btn) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + name).classList.add('active');
-    btn.classList.add('active');
-    document.querySelector('.scroll-area').scrollTop = 0;
-  }
+function sw(name,btn){
+  document.querySelectorAll('.tp').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+  document.querySelector('.sa').scrollTop=0;
+}
+function td2(c){c.classList.toggle('open')}
+function tr2(c){c.classList.toggle('open')}
+function tc(c){c.classList.toggle('open')}
+function tps(s){s.classList.toggle('open')}
 
-  function toggleDay(card) {
-    // stop propagation from contenteditable clicks
-    card.classList.toggle('open');
-  }
-
-  function toggleRef(card) { card.classList.toggle('open'); }
-  function toggleCost(card) { card.classList.toggle('open'); }
-  function togglePackSection(section) { section.classList.toggle('open'); }
-
-  // sections that should NOT count toward progress bar
-  const NO_COUNT_SECTIONS = ['skip', 'buy'];
-
-  function toggleItem(item) {
-    item.classList.toggle('checked');
-    updatePackProgress();
-    savePackState();
-  }
-
-  function updatePackProgress() {
-    const sections = document.querySelectorAll('.pack-section');
-    let total = 0, checked = 0;
-    sections.forEach(section => {
-      const id = section.dataset.section;
-      const items = section.querySelectorAll('.pack-item');
-      const checkedItems = section.querySelectorAll('.pack-item.checked');
-      const countEl = section.querySelector('.pack-section-count');
-      if (NO_COUNT_SECTIONS.includes(id)) {
-        if (countEl) { countEl.textContent = '—'; countEl.classList.remove('done'); }
-        return;
-      }
-      if (countEl) {
-        countEl.textContent = `${checkedItems.length}/${items.length}`;
-        countEl.classList.toggle('done', checkedItems.length === items.length && items.length > 0);
-      }
-      total += items.length;
-      checked += checkedItems.length;
-    });
-    const pct = total ? Math.round((checked / total) * 100) : 0;
-    document.getElementById('packFill').style.width = pct + '%';
-    document.getElementById('packCount').textContent = `${checked} of ${total} items`;
-  }
-
-  function savePackState() {
-    const state = {};
-    document.querySelectorAll('.pack-section').forEach(section => {
-      const id = section.dataset.section;
-      const origCount = parseInt(section.dataset.origCount || 0);
-      const items = Array.from(section.querySelectorAll('.pack-item'));
-      state[id] = {
-        checked: items.map(item => item.classList.contains('checked')),
-        added: items.slice(origCount).map(item => item.querySelector('.pack-item-text').innerHTML)
-      };
-    });
-    try { localStorage.setItem('packState2', JSON.stringify(state)); } catch(e) {}
-  }
-
-  function loadPackState() {
-    // Stamp original counts from HTML
-    document.querySelectorAll('.pack-section').forEach(section => {
-      section.dataset.origCount = section.querySelectorAll('.pack-item').length;
-    });
-
-    let state;
-    try { state = JSON.parse(localStorage.getItem('packState2')); } catch(e) {}
-
-    if (state) {
-      document.querySelectorAll('.pack-section').forEach(section => {
-        const id = section.dataset.section;
-        if (!state[id]) return;
-        const list = section.querySelector('.pack-items');
-        const items = Array.from(list.querySelectorAll('.pack-item'));
-        // Restore checked state on existing HTML items
-        (state[id].checked || []).forEach((isChecked, i) => {
-          if (items[i]) items[i].classList.toggle('checked', isChecked);
-        });
-        // Append any user-added items
-        (state[id].added || []).forEach(html => {
-          list.appendChild(makePackItem(html, false));
-        });
-      });
-    }
-
-    updatePackProgress();
-  }
-
-  function makePackItem(innerHTML, checked = false) {
-    const li = document.createElement('li');
-    li.className = 'pack-item' + (checked ? ' checked' : '');
-    li.onclick = () => toggleItem(li);
-    li.innerHTML = `<div class="pack-check"><span class="pack-check-mark">✓</span></div><span class="pack-item-text">${innerHTML}</span>`;
-    return li;
-  }
-
-  function addPackItem(event, listId) {
-    if (event.key === 'Enter') addPackItemBtn(listId);
-  }
-
-  function addPackItemBtn(listId) {
-    const input = document.querySelector(`#${listId}`).closest('.pack-section-body').querySelector('.pack-add-input');
-    const text = input.value.trim();
-    if (!text) return;
-    const list = document.getElementById(listId);
-    list.appendChild(makePackItem(text));
-    input.value = '';
-    updatePackProgress();
-    savePackState();
-  }
-
-  function resetPacking() {
-    if (!confirm('Reset all checkboxes?')) return;
-    document.querySelectorAll('.pack-item').forEach(item => item.classList.remove('checked'));
-    updatePackProgress();
-    savePackState();
-  }
-
-  // Init
-  loadPackState();
-
-  function addRow(tableId, cols) {
-    const tbody = document.getElementById(tableId);
-    const tr = document.createElement('tr');
-    cols.forEach((col, i) => {
-      const td = document.createElement('td');
-      if (i === 0) td.className = 'label';
-      if (i === 2) {
-        const span = document.createElement('span');
-        span.className = 'conf placeholder';
-        span.contentEditable = true;
-        span.textContent = col;
-        td.appendChild(span);
-      } else {
-        td.contentEditable = true;
-        td.textContent = col;
-      }
-      tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-    tr.querySelector('[contenteditable]').focus();
-  }
-
-  // Prevent day card toggle when tapping contenteditable chips
-  document.querySelectorAll('[contenteditable]').forEach(el => {
-    el.addEventListener('click', e => e.stopPropagation());
+let curP='all';
+function fp(p,btn){
+  curP=p;
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.pitem2').forEach(item=>{
+    const w=item.dataset.who||'all';
+    item.classList.toggle('hidden', p!=='all' && w!==p && w!=='all');
   });
+  upp();
+}
+
+const NOCOUNT=['skip','buy'];
+function ti(item){item.classList.toggle('checked');upp();sps()}
+
+function upp(){
+  let tot=0,chk=0;
+  document.querySelectorAll('.psec').forEach(sec=>{
+    const id=sec.dataset.sec;
+    const vis=Array.from(sec.querySelectorAll('.pitem2')).filter(i=>!i.classList.contains('hidden'));
+    const cv=vis.filter(i=>i.classList.contains('checked'));
+    const cel=sec.querySelector('.pscnt');
+    if(NOCOUNT.includes(id)){if(cel)cel.textContent='—';return}
+    if(cel){cel.textContent=`${cv.length}/${vis.length}`;cel.classList.toggle('done',cv.length===vis.length&&vis.length>0)}
+    tot+=vis.length;chk+=cv.length;
+  });
+  const pct=tot?Math.round(chk/tot*100):0;
+  document.getElementById('packFill').style.width=pct+'%';
+  document.getElementById('packCount').textContent=`${chk} of ${tot} items`;
+}
+
+function sps(){
+  const st={};
+  document.querySelectorAll('.psec').forEach(sec=>{
+    const id=sec.dataset.sec;
+    const oc=parseInt(sec.dataset.oc||0);
+    const items=Array.from(sec.querySelectorAll('.pitem2'));
+    st[id]={checked:items.map(i=>i.classList.contains('checked')),added:items.slice(oc).map(i=>({html:i.querySelector('.pitxt').innerHTML,who:i.dataset.who||'all'}))};
+  });
+  try{localStorage.setItem('ps4',JSON.stringify(st))}catch(e){}
+}
+
+function lps(){
+  document.querySelectorAll('.psec').forEach(s=>{s.dataset.oc=s.querySelectorAll('.pitem2').length});
+  let st;try{st=JSON.parse(localStorage.getItem('ps4'))}catch(e){}
+  if(st){
+    document.querySelectorAll('.psec').forEach(sec=>{
+      const id=sec.dataset.sec;if(!st[id])return;
+      const list=sec.querySelector('.pitems');
+      const items=Array.from(list.querySelectorAll('.pitem2'));
+      (st[id].checked||[]).forEach((c,i)=>{if(items[i])items[i].classList.toggle('checked',c)});
+      (st[id].added||[]).forEach(a=>{list.appendChild(mpi(a.html,false,a.who))});
+    });
+  }
+  upp();
+}
+
+function mpi(html,checked=false,who='all'){
+  const li=document.createElement('li');
+  li.className='pitem2'+(checked?' checked':'');
+  li.dataset.who=who;
+  li.onclick=()=>ti(li);
+  li.innerHTML=`<div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">${html}</span>`;
+  return li;
+}
+
+function api(e,lid){if(e.key==='Enter')apib(lid)}
+function apib(lid){
+  const inp=document.querySelector('#'+lid).closest('.psecb').querySelector('.paddinp');
+  const txt=inp.value.trim();if(!txt)return;
+  document.getElementById(lid).appendChild(mpi(txt,false,curP==='all'?'all':curP));
+  inp.value='';upp();sps();
+}
+
+function resetPack(){
+  if(!confirm('Reset all checkboxes?'))return;
+  document.querySelectorAll('.pitem2').forEach(i=>i.classList.remove('checked'));
+  upp();sps();
+}
+
+function addRow(tid,cols){
+  const tbody=document.getElementById(tid);
+  const tr=document.createElement('tr');
+  cols.forEach((col,i)=>{
+    const td=document.createElement('td');
+    if(i===0)td.className='lbl';
+    if(i===2){const sp=document.createElement('span');sp.className='conf ph';sp.contentEditable=true;sp.textContent=col;td.appendChild(sp)}
+    else{td.contentEditable=true;td.textContent=col}
+    tr.appendChild(td);
+  });
+  tbody.appendChild(tr);
+  tr.querySelector('[contenteditable]').focus();
+}
+
+document.querySelectorAll('[contenteditable]').forEach(el=>el.addEventListener('click',e=>e.stopPropagation()));
+// Event delegation for packing items (sandbox-safe)
+  document.getElementById('tab-packing').addEventListener('click', function(e) {
+    const item = e.target.closest('[data-pack="item"]');
+    if (item) ti(item);
+  });
+  lps();
 </script>
 </body>
 </html>

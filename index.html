@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- VERSION 5 — built April 2026 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -9,7 +10,7 @@
 <meta name="theme-color" content="#0B1F3A">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>The Geras Go to Europe</title>
+<title>The Geras Go to Europe — v5</title>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
@@ -1053,72 +1054,6 @@ function tr2(c){c.classList.toggle('open')}
 function tc(c){c.classList.toggle('open')}
 function tps(s){s.classList.toggle('open')}
 
-// ── PERSON FILTER ──
-let curP='all';
-function fp(p,btn){
-  curP=p;
-  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.pitem2').forEach(item=>{
-    const w=item.dataset.who||'all';
-    item.classList.toggle('hidden', p!=='all' && w!==p && w!=='all');
-  });
-  upp();
-}
-
-// ── PACKING PROGRESS ──
-const NOCOUNT=['skip','buy'];
-
-function ti(item){
-  item.classList.toggle('checked');
-  upp();
-}
-
-function upp(){
-  let tot=0,chk=0;
-  document.querySelectorAll('.psec').forEach(sec=>{
-    const id=sec.dataset.sec;
-    const vis=Array.from(sec.querySelectorAll('.pitem2')).filter(i=>!i.classList.contains('hidden'));
-    const cv=vis.filter(i=>i.classList.contains('checked'));
-    const cel=sec.querySelector('.pscnt');
-    if(NOCOUNT.includes(id)){if(cel)cel.textContent='—';return}
-    if(cel){
-      cel.textContent=vis.length>0?cv.length+'/'+vis.length:'';
-      cel.classList.toggle('done',cv.length===vis.length&&vis.length>0);
-    }
-    tot+=vis.length;chk+=cv.length;
-  });
-  const pct=tot?Math.round(chk/tot*100):0;
-  document.getElementById('packFill').style.width=pct+'%';
-  document.getElementById('packCount').textContent=chk+' of '+tot+' items';
-}
-
-function resetPack(){
-  if(!confirm('Reset all checkboxes?'))return;
-  document.querySelectorAll('.pitem2').forEach(i=>i.classList.remove('checked'));
-  upp();
-}
-
-// ── ADD PACK ITEM ──
-function mpi(text,who){
-  const li=document.createElement('li');
-  li.className='pitem2';
-  li.dataset.who=who||'all';
-  li.innerHTML='<div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">'+text+'</span>';
-  li.addEventListener('click',function(){ti(li)});
-  return li;
-}
-
-function api(e,lid){if(e.key==='Enter')apib(lid);}
-function apib(lid){
-  const inp=document.querySelector('#'+lid).closest('.psecb').querySelector('.paddinp');
-  const txt=inp.value.trim();if(!txt)return;
-  const item=mpi(txt,curP==='all'?'all':curP);
-  document.getElementById(lid).appendChild(item);
-  inp.value='';
-  upp();
-}
-
 // ── ADD REFERENCE ROW ──
 function addRow(tid,cols){
   const tbody=document.getElementById(tid);
@@ -1140,18 +1075,11 @@ function addRow(tid,cols){
 }
 
 // ── INIT ──
-// Wire up all existing packing items via event delegation (sandbox-safe)
 document.addEventListener('DOMContentLoaded', function(){
-  // Wire pack items
-  document.querySelectorAll('.pitem2').forEach(function(item){
-    item.addEventListener('click', function(){ ti(item); });
-  });
   // Stop contenteditable from bubbling
   document.querySelectorAll('[contenteditable]').forEach(function(el){
     el.addEventListener('click', function(e){ e.stopPropagation(); });
   });
-  // Initial progress count
-  upp();
 });
 </script>
 </body>

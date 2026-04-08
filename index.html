@@ -328,7 +328,7 @@
   .ptab[data-p="michael"].active { background: #8B5A1A; border-color: #8B5A1A; }
 
   .psecs { display: flex; flex-direction: column; gap: 1px; }
-  .psec { background: white; overflow: hidden; }
+  .psec { background: white; display: block; }
   .psecs .psec:first-child { border-radius: 4px 4px 0 0; }
   .psecs .psec:last-child { border-radius: 0 0 4px 4px; }
   .psech { display: flex; align-items: center; gap: 10px; padding: 14px 18px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--cream-dk); }
@@ -339,8 +339,8 @@
   .pscnt.done { color: var(--ink); }
   .pchv { color: var(--muted); font-size: 0.55rem; transition: transform 0.2s; }
   .psec.open .pchv { transform: rotate(180deg); color: var(--ink); }
-  .psecb { display: none; padding: 4px 18px 16px; }
-  .psec.open .psecb { display: block; }
+  .psecb { display: block; padding: 4px 18px 16px; }
+  /* psecb always visible */
 
   .pitems { list-style: none; }
   .pitem2 { display: flex; align-items: center; gap: 12px; padding: 11px 2px; border-bottom: 1px solid var(--cream-dk); cursor: pointer; user-select: none; transition: background 0.1s; }
@@ -820,129 +820,217 @@
 
 <!-- PACKING -->
 <div class="tp" id="tab-packing">
-  <div class="ptop">
-    <div class="ppw">
-      <div class="pplabel"><span>Packed</span><span id="packCount">0 of 0 items</span></div>
-      <div class="ptrack"><div class="pfill" id="packFill" style="width:0%"></div></div>
+<style>
+  .pk-wrap { padding: 16px; }
+  .pk-progress { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .pk-bar-wrap { flex:1; }
+  .pk-bar-label { font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:#888; margin-bottom:6px; display:flex; justify-content:space-between; }
+  .pk-bar-track { background:#E8E0CE; border-radius:2px; height:3px; }
+  .pk-bar-fill { background:#1A1A1A; height:3px; width:0%; transition:width .3s; }
+  .pk-reset { font-family:'Jost',sans-serif; font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:#888; background:none; border:1px solid #D5CEC0; border-radius:2px; padding:5px 12px; cursor:pointer; }
+  .pk-people { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; }
+  .pk-person { font-family:'Jost',sans-serif; font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; background:white; border:1px solid #D5CEC0; border-radius:2px; padding:5px 12px; cursor:pointer; color:#888; }
+  .pk-person.on { background:#1A1A1A; color:white; border-color:#1A1A1A; }
+  .pk-section { background:white; margin-bottom:2px; }
+  .pk-section-head { padding:14px 18px; border-bottom:1px solid #EDE7D9; }
+  .pk-section-head h3 { font-family:'Jost',sans-serif; font-size:.85rem; font-weight:600; letter-spacing:.04em; margin:0; }
+  .pk-list { list-style:none; margin:0; padding:0; }
+  .pk-item { display:flex; align-items:center; gap:12px; padding:10px 18px; border-bottom:1px solid #F5F0E8; cursor:pointer; }
+  .pk-item:last-child { border-bottom:none; }
+  .pk-item.gone { display:none; }
+  .pk-item.done .pk-check { background:#1A1A1A; border-color:#1A1A1A; }
+  .pk-item.done .pk-check::after { opacity:1; }
+  .pk-item.done .pk-label { color:#B8B0A0; text-decoration:line-through; }
+  .pk-check { width:20px; height:20px; border:1.5px solid #D5CEC0; border-radius:2px; flex-shrink:0; background:white; position:relative; }
+  .pk-check::after { content:'✓'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:.65rem; color:white; opacity:0; }
+  .pk-label { flex:1; font-size:.84rem; color:#3A3A3A; }
+  .pk-tag { font-size:.55rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; padding:2px 7px; border-radius:2px; flex-shrink:0; }
+  .t-all { background:#F5F0E8; color:#8A8478; }
+  .t-paul { background:#FEF0EE; color:#8B2020; }
+  .t-lorraine { background:#FEF0EE; color:#8B2020; }
+  .t-tom { background:#EAF0F8; color:#1A3A6E; }
+  .t-christie { background:#F0EEF8; color:#3D2E6E; }
+  .t-megan { background:#EBF2EB; color:#2A5A2A; }
+  .t-michael { background:#F5F0E8; color:#8B5A1A; }
+  .t-buy { background:#FBF3DC; color:#7A5C00; }
+  .t-skip { background:#F5F0E8; color:#8A8478; }
+  .pk-add { display:flex; gap:8px; padding:10px 18px 14px; border-top:1px solid #EDE7D9; }
+  .pk-add input { flex:1; border:1px solid #D5CEC0; background:#F5F0E8; border-radius:2px; padding:7px 11px; font-family:'Jost',sans-serif; font-size:.82rem; outline:none; }
+  .pk-add input:focus { border-color:#1A1A1A; background:white; }
+  .pk-add button { background:#1A1A1A; color:white; border:none; border-radius:2px; padding:7px 14px; font-family:'Jost',sans-serif; font-size:.82rem; cursor:pointer; }
+</style>
+
+<div class="pk-wrap">
+  <div class="pk-progress">
+    <div class="pk-bar-wrap">
+      <div class="pk-bar-label"><span>Packed</span><span id="pk-count">0 of 0</span></div>
+      <div class="pk-bar-track"><div class="pk-bar-fill" id="pk-fill"></div></div>
     </div>
-    <button class="preset" onclick="resetPack()">Reset</button>
+    <button class="pk-reset" onclick="pkReset()">Reset</button>
   </div>
-  <div class="ptabs">
-    <button class="ptab active" data-p="all" onclick="fp('all',this)">👥 All</button>
-    <button class="ptab" data-p="paul" onclick="fp('paul',this)">👴 Paul</button>
-    <button class="ptab" data-p="lorraine" onclick="fp('lorraine',this)">👵 Lorraine</button>
-    <button class="ptab" data-p="tom" onclick="fp('tom',this)">🧔 Tom</button>
-    <button class="ptab" data-p="christie" onclick="fp('christie',this)">👩 Christie</button>
-    <button class="ptab" data-p="megan" onclick="fp('megan',this)">🧑 Megan</button>
-    <button class="ptab" data-p="michael" onclick="fp('michael',this)">👦 Michael</button>
+
+  <div class="pk-people">
+    <button class="pk-person on" data-who="all" onclick="pkFilter('all',this)">👥 All</button>
+    <button class="pk-person" data-who="paul" onclick="pkFilter('paul',this)">👴 Paul</button>
+    <button class="pk-person" data-who="lorraine" onclick="pkFilter('lorraine',this)">👵 Lorraine</button>
+    <button class="pk-person" data-who="tom" onclick="pkFilter('tom',this)">🧔 Tom</button>
+    <button class="pk-person" data-who="christie" onclick="pkFilter('christie',this)">👩 Christie</button>
+    <button class="pk-person" data-who="megan" onclick="pkFilter('megan',this)">🧑 Megan</button>
+    <button class="pk-person" data-who="michael" onclick="pkFilter('michael',this)">👦 Michael</button>
   </div>
-  <div class="psecs" id="packSecs">
 
-    <div class="psec open" data-sec="clothes">
-      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">👕</span><h3>Clothes</h3><span class="pscnt" id="cnt-clothes"></span><span class="pchv">▼</span></div>
-      <div class="psecb"><ul class="pitems" id="pl-clothes">
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">5 pairs of socks</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">5 underwear</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">3 shirts</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">1 pants</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">1 shorts</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Pajamas</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Raincoat / windbreaker with hood</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Layerable quarter-zip / long sleeve</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Sweatshirt</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Sunglasses</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Crossbody / purse (water + phone)</span><span class="pwho wchristie">Christie</span></li>
-        <li class="pitem2" data-pack="item" data-who="megan"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Going-out outfit</span><span class="pwho wmegan">Megan</span></li>
-      </ul>
-      <div class="padd"><input class="paddinp" type="text" placeholder="Add clothing item…" onkeydown="api(event,'pl-clothes')"><button class="paddbtn" onclick="apib('pl-clothes')">＋</button></div></div>
-    </div>
-
-    <div class="psec" data-sec="tech">
-      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">🔌</span><h3>Tech & Gear</h3><span class="pscnt" id="cnt-tech"></span><span class="pchv">▼</span></div>
-      <div class="psecb"><ul class="pitems" id="pl-tech">
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Power adapter (European)</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Backup battery — small</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Phone charger with long cord</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Headphones</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Backpack loop / carabiner</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Packing cubes</span><span class="pwho wchristie">Christie</span></li>
-        <li class="pitem2" data-pack="item" data-who="tom"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Mini USB fan</span><span class="pwho wtom">Tom</span></li>
-        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">USB fan</span><span class="pwho wchristie">Christie</span></li>
-        <li class="pitem2" data-pack="item" data-who="michael"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Tablet / device + charger</span><span class="pwho wmichael">Michael</span></li>
-      </ul>
-      <div class="padd"><input class="paddinp" type="text" placeholder="Add tech item…" onkeydown="api(event,'pl-tech')"><button class="paddbtn" onclick="apib('pl-tech')">＋</button></div></div>
-    </div>
-
-    <div class="psec" data-sec="toiletries">
-      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">🪥</span><h3>Toiletries</h3><span class="pscnt" id="cnt-toiletries"></span><span class="pchv">▼</span></div>
-      <div class="psecb"><ul class="pitems" id="pl-toiletries">
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Toothbrush + mini toothpaste</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Deodorant</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Mini pack hand wipes</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Hand sanitizer</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Laundry detergent sheets</span><span class="pwho wchristie">Christie</span></li>
-        <li class="pitem2" data-pack="item" data-who="tom"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Foot powder</span><span class="pwho wtom">Tom</span></li>
-        <li class="pitem2" data-pack="item" data-who="tom"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Nail clippers</span><span class="pwho wtom">Tom</span></li>
-        <li class="pitem2" data-pack="item" data-who="tom"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Saline / contacts</span><span class="pwho wtom">Tom</span></li>
-        <li class="pitem2" data-pack="item" data-who="paul"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Toiletry bag essentials</span><span class="pwho wpaul">Paul</span></li>
-        <li class="pitem2" data-pack="item" data-who="lorraine"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Toiletry bag essentials</span><span class="pwho wlorraine">Lorraine</span></li>
-        <li class="pitem2" data-pack="item" data-who="megan"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Toiletry bag</span><span class="pwho wmegan">Megan</span></li>
-        <li class="pitem2" data-pack="item" data-who="michael"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Toiletry bag</span><span class="pwho wmichael">Michael</span></li>
-      </ul>
-      <div class="padd"><input class="paddinp" type="text" placeholder="Add toiletry…" onkeydown="api(event,'pl-toiletries')"><button class="paddbtn" onclick="apib('pl-toiletries')">＋</button></div></div>
-    </div>
-
-    <div class="psec" data-sec="health">
-      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">💊</span><h3>Health & Meds</h3><span class="pscnt" id="cnt-health"></span><span class="pchv">▼</span></div>
-      <div class="psecb"><ul class="pitems" id="pl-health">
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">OTC medications (ibuprofen, antacids, etc.)</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="paul"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Prescription medications</span><span class="pwho wpaul">Paul</span></li>
-        <li class="pitem2" data-pack="item" data-who="lorraine"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Prescription medications</span><span class="pwho wlorraine">Lorraine</span></li>
-        <li class="pitem2" data-pack="item" data-who="tom"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Prescription medications</span><span class="pwho wtom">Tom</span></li>
-        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Prescription medications</span><span class="pwho wchristie">Christie</span></li>
-      </ul>
-      <div class="padd"><input class="paddinp" type="text" placeholder="Add med / health item…" onkeydown="api(event,'pl-health')"><button class="paddbtn" onclick="apib('pl-health')">＋</button></div></div>
-    </div>
-
-    <div class="psec" data-sec="docs">
-      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">📄</span><h3>Documents</h3><span class="pscnt" id="cnt-docs"></span><span class="pchv">▼</span></div>
-      <div class="psecb"><ul class="pitems" id="pl-docs">
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Passport + copy</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Credit card — call bank to notify travel</span><span class="pwho wall">Everyone</span></li>
-        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">T&amp;C credit card + backup</span><span class="pwho wchristie">Christie</span></li>
-        <li class="pitem2" data-pack="item" data-who="paul"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">TSA Precheck KTN: TT13Q1XQB</span><span class="pwho wpaul">Paul</span></li>
-        <li class="pitem2" data-pack="item" data-who="lorraine"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">TSA Precheck KTN: TT13Q1Y6H</span><span class="pwho wlorraine">Lorraine</span></li>
-        <li class="pitem2" data-pack="item" data-who="christie"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">TSA Precheck KTN: TT1313SXZ</span><span class="pwho wchristie">Christie</span></li>
-      </ul>
-      <div class="padd"><input class="paddinp" type="text" placeholder="Add document…" onkeydown="api(event,'pl-docs')"><button class="paddbtn" onclick="apib('pl-docs')">＋</button></div></div>
-    </div>
-
-    <div class="psec" data-sec="buy">
-      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">🛒</span><h3>Buy in Europe</h3><span class="pscnt" id="cnt-buy">—</span><span class="pchv">▼</span></div>
-      <div class="psecb">
-        <div class="pnote">💡 Don't pack these — grab them over there</div>
-        <ul class="pitems" id="pl-buy">
-          <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Laundry detergent</span><span class="pwho wbuy">Buy there</span></li>
-          <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Cards / games for the chalet</span><span class="pwho wbuy">Buy there</span></li>
-          <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Reusable tote bag</span><span class="pwho wbuy">Buy there</span></li>
-          <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Extra suitcase for souvenirs (maybe)</span><span class="pwho wbuy">Maybe</span></li>
-        </ul>
-        <div class="padd"><input class="paddinp" type="text" placeholder="Add something to buy there…" onkeydown="api(event,'pl-buy')"><button class="paddbtn" onclick="apib('pl-buy')">＋</button></div>
-      </div>
-    </div>
-
-    <div class="psec" data-sec="skip">
-      <div class="psech" onclick="tps(this.parentElement)"><span class="psi">🚫</span><h3>Don't Bother</h3><span class="pscnt" id="cnt-skip">—</span><span class="pchv">▼</span></div>
-      <div class="psecb">
-        <div class="pnote">🙅 Leave these at home</div>
-        <ul class="pitems" id="pl-skip">
-          <li class="pitem2" data-pack="item" data-who="all"><div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">Sunscreen</span><span class="pwho wskip">Skip</span></li>
-        </ul>
-        <div class="padd"><input class="paddinp" type="text" placeholder="Add something to leave behind…" onkeydown="api(event,'pl-skip')"><button class="paddbtn" onclick="apib('pl-skip')">＋</button></div>
-      </div>
-    </div>
-
+  <div class="pk-section">
+    <div class="pk-section-head"><h3>👕 Clothes</h3></div>
+    <ul class="pk-list" id="pkl-clothes">
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">5 pairs of socks</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">5 underwear</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">3 shirts</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">1 pants</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">1 shorts</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Pajamas</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Raincoat / windbreaker with hood</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Layerable quarter-zip / long sleeve</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Sweatshirt</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Sunglasses</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="christie" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Crossbody / purse</span><span class="pk-tag t-christie">Christie</span></li>
+      <li class="pk-item" data-who="megan" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Going-out outfit</span><span class="pk-tag t-megan">Megan</span></li>
+    </ul>
+    <div class="pk-add"><input type="text" placeholder="Add clothing…" onkeydown="if(event.key==='Enter')pkAdd('pkl-clothes',this)"><button onclick="pkAdd('pkl-clothes',this.previousElementSibling)">＋</button></div>
   </div>
+
+  <div class="pk-section">
+    <div class="pk-section-head"><h3>🔌 Tech & Gear</h3></div>
+    <ul class="pk-list" id="pkl-tech">
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Power adapter (European)</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Backup battery — small</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Phone charger with long cord</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Headphones</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Backpack loop / carabiner</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="christie" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Packing cubes</span><span class="pk-tag t-christie">Christie</span></li>
+      <li class="pk-item" data-who="tom" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Mini USB fan</span><span class="pk-tag t-tom">Tom</span></li>
+      <li class="pk-item" data-who="christie" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">USB fan</span><span class="pk-tag t-christie">Christie</span></li>
+      <li class="pk-item" data-who="michael" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Tablet / device + charger</span><span class="pk-tag t-michael">Michael</span></li>
+    </ul>
+    <div class="pk-add"><input type="text" placeholder="Add tech item…" onkeydown="if(event.key==='Enter')pkAdd('pkl-tech',this)"><button onclick="pkAdd('pkl-tech',this.previousElementSibling)">＋</button></div>
+  </div>
+
+  <div class="pk-section">
+    <div class="pk-section-head"><h3>🪥 Toiletries</h3></div>
+    <ul class="pk-list" id="pkl-toiletries">
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Toothbrush + mini toothpaste</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Deodorant</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Mini pack hand wipes</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Hand sanitizer</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="christie" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Laundry detergent sheets</span><span class="pk-tag t-christie">Christie</span></li>
+      <li class="pk-item" data-who="tom" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Foot powder</span><span class="pk-tag t-tom">Tom</span></li>
+      <li class="pk-item" data-who="tom" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Nail clippers</span><span class="pk-tag t-tom">Tom</span></li>
+      <li class="pk-item" data-who="tom" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Saline / contacts</span><span class="pk-tag t-tom">Tom</span></li>
+      <li class="pk-item" data-who="paul" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Toiletry bag essentials</span><span class="pk-tag t-paul">Paul</span></li>
+      <li class="pk-item" data-who="lorraine" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Toiletry bag essentials</span><span class="pk-tag t-lorraine">Lorraine</span></li>
+      <li class="pk-item" data-who="megan" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Toiletry bag</span><span class="pk-tag t-megan">Megan</span></li>
+      <li class="pk-item" data-who="michael" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Toiletry bag</span><span class="pk-tag t-michael">Michael</span></li>
+    </ul>
+    <div class="pk-add"><input type="text" placeholder="Add toiletry…" onkeydown="if(event.key==='Enter')pkAdd('pkl-toiletries',this)"><button onclick="pkAdd('pkl-toiletries',this.previousElementSibling)">＋</button></div>
+  </div>
+
+  <div class="pk-section">
+    <div class="pk-section-head"><h3>💊 Health & Meds</h3></div>
+    <ul class="pk-list" id="pkl-health">
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">OTC medications (ibuprofen, antacids, etc.)</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="paul" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Prescription medications</span><span class="pk-tag t-paul">Paul</span></li>
+      <li class="pk-item" data-who="lorraine" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Prescription medications</span><span class="pk-tag t-lorraine">Lorraine</span></li>
+      <li class="pk-item" data-who="tom" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Prescription medications</span><span class="pk-tag t-tom">Tom</span></li>
+      <li class="pk-item" data-who="christie" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Prescription medications</span><span class="pk-tag t-christie">Christie</span></li>
+    </ul>
+    <div class="pk-add"><input type="text" placeholder="Add med…" onkeydown="if(event.key==='Enter')pkAdd('pkl-health',this)"><button onclick="pkAdd('pkl-health',this.previousElementSibling)">＋</button></div>
+  </div>
+
+  <div class="pk-section">
+    <div class="pk-section-head"><h3>📄 Documents</h3></div>
+    <ul class="pk-list" id="pkl-docs">
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Passport + copy</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Credit card — call bank to notify travel</span><span class="pk-tag t-all">Everyone</span></li>
+      <li class="pk-item" data-who="christie" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">T&amp;C credit card + backup</span><span class="pk-tag t-christie">Christie</span></li>
+      <li class="pk-item" data-who="paul" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">TSA Precheck KTN: TT13Q1XQB</span><span class="pk-tag t-paul">Paul</span></li>
+      <li class="pk-item" data-who="lorraine" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">TSA Precheck KTN: TT13Q1Y6H</span><span class="pk-tag t-lorraine">Lorraine</span></li>
+      <li class="pk-item" data-who="christie" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">TSA Precheck KTN: TT1313SXZ</span><span class="pk-tag t-christie">Christie</span></li>
+    </ul>
+    <div class="pk-add"><input type="text" placeholder="Add document…" onkeydown="if(event.key==='Enter')pkAdd('pkl-docs',this)"><button onclick="pkAdd('pkl-docs',this.previousElementSibling)">＋</button></div>
+  </div>
+
+  <div class="pk-section">
+    <div class="pk-section-head"><h3>🛒 Buy in Europe</h3></div>
+    <ul class="pk-list" id="pkl-buy">
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Laundry detergent</span><span class="pk-tag t-buy">Buy there</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Cards / games for the chalet</span><span class="pk-tag t-buy">Buy there</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Reusable tote bag</span><span class="pk-tag t-buy">Buy there</span></li>
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Extra suitcase for souvenirs (maybe)</span><span class="pk-tag t-buy">Maybe</span></li>
+    </ul>
+    <div class="pk-add"><input type="text" placeholder="Add something to buy there…" onkeydown="if(event.key==='Enter')pkAdd('pkl-buy',this)"><button onclick="pkAdd('pkl-buy',this.previousElementSibling)">＋</button></div>
+  </div>
+
+  <div class="pk-section">
+    <div class="pk-section-head"><h3>🚫 Don't Bother</h3></div>
+    <ul class="pk-list" id="pkl-skip">
+      <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Sunscreen</span><span class="pk-tag t-skip">Skip</span></li>
+    </ul>
+    <div class="pk-add"><input type="text" placeholder="Add something to leave behind…" onkeydown="if(event.key==='Enter')pkAdd('pkl-skip',this)"><button onclick="pkAdd('pkl-skip',this.previousElementSibling)">＋</button></div>
+  </div>
+
+</div>
+
+<script>
+var pkWho = 'all';
+
+function pkCheck(item) {
+  item.classList.toggle('done');
+  pkProgress();
+}
+
+function pkFilter(who, btn) {
+  pkWho = who;
+  document.querySelectorAll('.pk-person').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  document.querySelectorAll('.pk-item').forEach(function(item){
+    var w = item.dataset.who || 'all';
+    if (who === 'all' || w === who || w === 'all') {
+      item.classList.remove('gone');
+    } else {
+      item.classList.add('gone');
+    }
+  });
+  pkProgress();
+}
+
+function pkProgress() {
+  var items = Array.from(document.querySelectorAll('.pk-item')).filter(function(i){ return !i.classList.contains('gone'); });
+  var done = items.filter(function(i){ return i.classList.contains('done'); });
+  var pct = items.length ? Math.round(done.length / items.length * 100) : 0;
+  document.getElementById('pk-fill').style.width = pct + '%';
+  document.getElementById('pk-count').textContent = done.length + ' of ' + items.length;
+}
+
+function pkAdd(listId, input) {
+  var txt = input.value.trim();
+  if (!txt) return;
+  var li = document.createElement('li');
+  li.className = 'pk-item';
+  li.dataset.who = pkWho === 'all' ? 'all' : pkWho;
+  li.onclick = function(){ pkCheck(li); };
+  li.innerHTML = '<div class="pk-check"></div><span class="pk-label">' + txt + '</span>';
+  document.getElementById(listId).appendChild(li);
+  input.value = '';
+  pkProgress();
+}
+
+function pkReset() {
+  if (!confirm('Reset all checkboxes?')) return;
+  document.querySelectorAll('.pk-item').forEach(function(i){ i.classList.remove('done'); });
+  pkProgress();
+}
+
+pkProgress();
+</script>
 </div><!-- /packing -->
 
 </div><!-- /scroll-area -->
@@ -950,6 +1038,7 @@
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{})}
 
+// ── TAB SWITCHING ──
 function sw(name,btn){
   document.querySelectorAll('.tp').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));
@@ -957,11 +1046,14 @@ function sw(name,btn){
   btn.classList.add('active');
   document.querySelector('.sa').scrollTop=0;
 }
+
+// ── DAY / REF / COST TOGGLES ──
 function td2(c){c.classList.toggle('open')}
 function tr2(c){c.classList.toggle('open')}
 function tc(c){c.classList.toggle('open')}
 function tps(s){s.classList.toggle('open')}
 
+// ── PERSON FILTER ──
 let curP='all';
 function fp(p,btn){
   curP=p;
@@ -974,8 +1066,13 @@ function fp(p,btn){
   upp();
 }
 
+// ── PACKING PROGRESS ──
 const NOCOUNT=['skip','buy'];
-function ti(item){item.classList.toggle('checked');upp();sps()}
+
+function ti(item){
+  item.classList.toggle('checked');
+  upp();
+}
 
 function upp(){
   let tot=0,chk=0;
@@ -985,87 +1082,77 @@ function upp(){
     const cv=vis.filter(i=>i.classList.contains('checked'));
     const cel=sec.querySelector('.pscnt');
     if(NOCOUNT.includes(id)){if(cel)cel.textContent='—';return}
-    if(cel){cel.textContent=`${cv.length}/${vis.length}`;cel.classList.toggle('done',cv.length===vis.length&&vis.length>0)}
+    if(cel){
+      cel.textContent=vis.length>0?cv.length+'/'+vis.length:'';
+      cel.classList.toggle('done',cv.length===vis.length&&vis.length>0);
+    }
     tot+=vis.length;chk+=cv.length;
   });
   const pct=tot?Math.round(chk/tot*100):0;
   document.getElementById('packFill').style.width=pct+'%';
-  document.getElementById('packCount').textContent=`${chk} of ${tot} items`;
-}
-
-function sps(){
-  const st={};
-  document.querySelectorAll('.psec').forEach(sec=>{
-    const id=sec.dataset.sec;
-    const oc=parseInt(sec.dataset.oc||0);
-    const items=Array.from(sec.querySelectorAll('.pitem2'));
-    st[id]={checked:items.map(i=>i.classList.contains('checked')),added:items.slice(oc).map(i=>({html:i.querySelector('.pitxt').innerHTML,who:i.dataset.who||'all'}))};
-  });
-  try{localStorage.setItem('ps5',JSON.stringify(st))}catch(e){}
-}
-
-function lps(){
-  document.querySelectorAll('.psec').forEach(s=>{s.dataset.oc=s.querySelectorAll('.pitem2').length});
-  let st;try{st=JSON.parse(localStorage.getItem('ps5'))}catch(e){}
-  if(st){
-    document.querySelectorAll('.psec').forEach(sec=>{
-      const id=sec.dataset.sec;if(!st[id])return;
-      const list=sec.querySelector('.pitems');
-      const items=Array.from(list.querySelectorAll('.pitem2'));
-      // Only restore checked state on existing HTML items
-      const origCount = parseInt(sec.dataset.oc || 0);
-      (st[id].checked||[]).slice(0, origCount).forEach((c,i)=>{if(items[i])items[i].classList.toggle('checked',c)});
-      // Append any user-added items beyond original HTML count
-      (st[id].added||[]).forEach(a=>{list.appendChild(mpi(a.html,false,a.who))});
-    });
-  }
-  upp();
-}
-
-function mpi(html,checked=false,who='all'){
-  const li=document.createElement('li');
-  li.className='pitem2'+(checked?' checked':'');
-  li.dataset.who=who;
-  li.onclick=()=>ti(li);
-  li.innerHTML=`<div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">${html}</span>`;
-  return li;
-}
-
-function api(e,lid){if(e.key==='Enter')apib(lid)}
-function apib(lid){
-  const inp=document.querySelector('#'+lid).closest('.psecb').querySelector('.paddinp');
-  const txt=inp.value.trim();if(!txt)return;
-  document.getElementById(lid).appendChild(mpi(txt,false,curP==='all'?'all':curP));
-  inp.value='';upp();sps();
+  document.getElementById('packCount').textContent=chk+' of '+tot+' items';
 }
 
 function resetPack(){
   if(!confirm('Reset all checkboxes?'))return;
   document.querySelectorAll('.pitem2').forEach(i=>i.classList.remove('checked'));
-  upp();sps();
+  upp();
 }
 
+// ── ADD PACK ITEM ──
+function mpi(text,who){
+  const li=document.createElement('li');
+  li.className='pitem2';
+  li.dataset.who=who||'all';
+  li.innerHTML='<div class="pchk"><span class="pchkm">✓</span></div><span class="pitxt">'+text+'</span>';
+  li.addEventListener('click',function(){ti(li)});
+  return li;
+}
+
+function api(e,lid){if(e.key==='Enter')apib(lid);}
+function apib(lid){
+  const inp=document.querySelector('#'+lid).closest('.psecb').querySelector('.paddinp');
+  const txt=inp.value.trim();if(!txt)return;
+  const item=mpi(txt,curP==='all'?'all':curP);
+  document.getElementById(lid).appendChild(item);
+  inp.value='';
+  upp();
+}
+
+// ── ADD REFERENCE ROW ──
 function addRow(tid,cols){
   const tbody=document.getElementById(tid);
   const tr=document.createElement('tr');
   cols.forEach((col,i)=>{
     const td=document.createElement('td');
     if(i===0)td.className='lbl';
-    if(i===2){const sp=document.createElement('span');sp.className='conf ph';sp.contentEditable=true;sp.textContent=col;td.appendChild(sp)}
-    else{td.contentEditable=true;td.textContent=col}
+    if(i===2){
+      const sp=document.createElement('span');
+      sp.className='conf ph';sp.contentEditable=true;sp.textContent=col;
+      td.appendChild(sp);
+    } else {
+      td.contentEditable=true;td.textContent=col;
+    }
     tr.appendChild(td);
   });
   tbody.appendChild(tr);
   tr.querySelector('[contenteditable]').focus();
 }
 
-document.querySelectorAll('[contenteditable]').forEach(el=>el.addEventListener('click',e=>e.stopPropagation()));
-// Event delegation for packing items (sandbox-safe)
-  document.getElementById('tab-packing').addEventListener('click', function(e) {
-    const item = e.target.closest('[data-pack="item"]');
-    if (item) ti(item);
+// ── INIT ──
+// Wire up all existing packing items via event delegation (sandbox-safe)
+document.addEventListener('DOMContentLoaded', function(){
+  // Wire pack items
+  document.querySelectorAll('.pitem2').forEach(function(item){
+    item.addEventListener('click', function(){ ti(item); });
   });
-  lps();
+  // Stop contenteditable from bubbling
+  document.querySelectorAll('[contenteditable]').forEach(function(el){
+    el.addEventListener('click', function(e){ e.stopPropagation(); });
+  });
+  // Initial progress count
+  upp();
+});
 </script>
 </body>
 </html>

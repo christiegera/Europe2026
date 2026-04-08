@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Europe 2026">
+<meta name="apple-mobile-web-app-title" content="The Geras Go to Europe">
 <meta name="theme-color" content="#0B1F3A">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>Europe 2026</title>
+<title>The Geras Go to Europe</title>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
@@ -429,50 +429,114 @@
   <div class="hi">
     <div class="aicon">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width:100%;height:100%;display:block">
-  <!-- Clean dark background -->
-  <rect width="512" height="512" rx="110" fill="#0D0D0D"/>
-  <!-- Subtle texture rings -->
-  <circle cx="256" cy="256" r="200" fill="none" stroke="rgba(168,137,58,0.12)" stroke-width="1"/>
-  <circle cx="256" cy="256" r="160" fill="none" stroke="rgba(168,137,58,0.08)" stroke-width="1"/>
-  <!-- Alps silhouette background -->
-  <polygon points="0,380 100,240 200,340 300,200 400,310 512,220 512,512 0,512" fill="rgba(255,255,255,0.04)"/>
-  <polygon points="0,380 100,240 200,340 300,200 400,310 512,220 512,400 380,360 300,390 200,370 100,395 0,400" fill="rgba(255,255,255,0.03)"/>
-  <!-- Big Ben minimal silhouette -->
-  <!-- Main tower -->
-  <rect x="212" y="155" width="88" height="270" rx="2" fill="rgba(168,137,58,0.9)"/>
-  <!-- Clock section -->
-  <rect x="200" y="155" width="112" height="95" rx="3" fill="#A8893A"/>
-  <!-- Clock face -->
-  <circle cx="256" cy="200" r="35" fill="#F5F0E8" opacity="0.95"/>
-  <circle cx="256" cy="200" r="29" fill="none" stroke="#A8893A" stroke-width="2"/>
+  <!-- Sky gradient background -->
+  <defs>
+    <linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="70%" stop-color="#B8E4F5"/>
+      <stop offset="100%" stop-color="#D4EED6"/>
+    </linearGradient>
+    <linearGradient id="alpg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#E8EEF0"/>
+      <stop offset="100%" stop-color="#7BAE7F"/>
+    </linearGradient>
+    <linearGradient id="alp2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="25%" stop-color="#D8E8EA"/>
+      <stop offset="100%" stop-color="#5A9E6E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded rect clip -->
+  <rect width="512" height="512" rx="100" fill="url(#skyg)"/>
+
+  <!-- Sun -->
+  <circle cx="400" cy="80" r="50" fill="#FFD94A" opacity="0.95"/>
+  <circle cx="400" cy="80" r="42" fill="#FFE566" opacity="0.6"/>
+
+  <!-- Far Alps (lighter, behind) -->
+  <polygon points="0,340 80,210 160,300 240,180 320,270 400,190 512,280 512,400 0,400" fill="#A8C8B0" opacity="0.7"/>
+  <!-- Snow caps far -->
+  <polygon points="80,210 65,245 95,245" fill="white" opacity="0.9"/>
+  <polygon points="240,180 225,218 255,218" fill="white" opacity="0.9"/>
+  <polygon points="400,190 386,225 414,225" fill="white" opacity="0.9"/>
+
+  <!-- Near Alps (darker, in front) -->
+  <polygon points="-10,390 90,240 190,340 290,200 390,310 512,230 512,420 -10,420" fill="#5A9E6E"/>
+  <!-- Snow caps near -->
+  <polygon points="90,240 74,278 106,278" fill="white" opacity="0.95"/>
+  <polygon points="290,200 274,240 306,240" fill="white" opacity="0.95"/>
+
+  <!-- Ground / Thames -->
+  <rect x="0" y="400" width="512" height="112" fill="#2A7A3E"/>
+  <rect x="0" y="395" width="512" height="22" fill="#1A5EA0" opacity="0.55"/>
+
+  <!-- Westminster Bridge -->
+  <rect x="60" y="388" width="392" height="14" rx="3" fill="#8B7355"/>
+  <ellipse cx="150" cy="402" rx="42" ry="13" fill="#1A5EA0" opacity="0.5"/>
+  <ellipse cx="256" cy="402" rx="42" ry="13" fill="#1A5EA0" opacity="0.5"/>
+  <ellipse cx="362" cy="402" rx="42" ry="13" fill="#1A5EA0" opacity="0.5"/>
+
+  <!-- BIG BEN - main tower body -->
+  <rect x="204" y="145" width="104" height="270" rx="4" fill="#F5C842"/>
+  <!-- Tower shading right side -->
+  <rect x="278" y="145" width="30" height="270" rx="0" fill="rgba(0,0,0,0.1)"/>
+
+  <!-- Horizontal detail bands -->
+  <rect x="204" y="175" width="104" height="6" fill="rgba(0,0,0,0.12)"/>
+  <rect x="204" y="220" width="104" height="5" fill="rgba(0,0,0,0.10)"/>
+  <rect x="204" y="270" width="104" height="5" fill="rgba(0,0,0,0.10)"/>
+  <rect x="204" y="320" width="104" height="5" fill="rgba(0,0,0,0.08)"/>
+
+  <!-- Windows on tower -->
+  <rect x="228" y="240" width="18" height="28" rx="3" fill="rgba(0,0,0,0.2)"/>
+  <rect x="266" y="240" width="18" height="28" rx="3" fill="rgba(0,0,0,0.2)"/>
+  <rect x="228" y="290" width="18" height="28" rx="3" fill="rgba(0,0,0,0.15)"/>
+  <rect x="266" y="290" width="18" height="28" rx="3" fill="rgba(0,0,0,0.15)"/>
+  <rect x="228" y="340" width="18" height="28" rx="3" fill="rgba(0,0,0,0.12)"/>
+  <rect x="266" y="340" width="18" height="28" rx="3" fill="rgba(0,0,0,0.12)"/>
+
+  <!-- Clock face section -->
+  <rect x="192" y="118" width="128" height="100" rx="5" fill="#E8B830"/>
+  <!-- Clock face circle -->
+  <circle cx="256" cy="165" r="40" fill="#FFFFF5" stroke="#C9960A" stroke-width="4"/>
+  <circle cx="256" cy="165" r="34" fill="none" stroke="#C9960A" stroke-width="1.5" opacity="0.4"/>
+  <!-- Clock tick marks -->
+  <line x1="256" y1="128" x2="256" y2="136" stroke="#333" stroke-width="3"/>
+  <line x1="256" y1="194" x2="256" y2="202" stroke="#333" stroke-width="3"/>
+  <line x1="219" y1="165" x2="227" y2="165" stroke="#333" stroke-width="3"/>
+  <line x1="285" y1="165" x2="293" y2="165" stroke="#333" stroke-width="3"/>
   <!-- Clock hands -->
-  <line x1="256" y1="200" x2="256" y2="178" stroke="#0D0D0D" stroke-width="4" stroke-linecap="round"/>
-  <line x1="256" y1="200" x2="273" y2="208" stroke="#0D0D0D" stroke-width="3" stroke-linecap="round"/>
-  <!-- Belfry ledge -->
-  <rect x="196" y="138" width="120" height="20" rx="2" fill="#C9A84C"/>
+  <line x1="256" y1="165" x2="256" y2="140" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round"/>
+  <line x1="256" y1="165" x2="278" y2="172" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="256" cy="165" r="4" fill="#333"/>
+
+  <!-- Belfry top section -->
+  <rect x="196" y="96" width="120" height="26" rx="3" fill="#E8B830"/>
+  <rect x="210" y="98" width="24" height="22" rx="2" fill="rgba(0,0,0,0.15)"/>
+  <rect x="246" y="98" width="24" height="22" rx="2" fill="rgba(0,0,0,0.15)"/>
+  <rect x="278" y="98" width="24" height="22" rx="2" fill="rgba(0,0,0,0.15)"/>
+
   <!-- Spire -->
-  <polygon points="256,45 232,142 280,142" fill="#C9A84C"/>
-  <polygon points="256,45 244,95 268,95" fill="#E8D060"/>
-  <!-- Decorative tower details -->
-  <rect x="217" y="175" width="78" height="2" fill="rgba(0,0,0,0.2)"/>
-  <rect x="217" y="210" width="78" height="2" fill="rgba(0,0,0,0.2)"/>
-  <rect x="217" y="270" width="78" height="2" fill="rgba(0,0,0,0.15)"/>
-  <rect x="217" y="310" width="78" height="2" fill="rgba(0,0,0,0.15)"/>
-  <!-- Tower base -->
-  <rect x="200" y="422" width="112" height="18" rx="2" fill="#8B6E24"/>
-  <!-- Thames water hint -->
-  <rect x="0" y="440" width="512" height="72" rx="0" fill="rgba(26,58,110,0.35)"/>
-  <!-- Bridge arches -->
-  <ellipse cx="140" cy="452" rx="55" ry="16" fill="rgba(0,0,0,0.25)"/>
-  <ellipse cx="256" cy="452" rx="55" ry="16" fill="rgba(0,0,0,0.25)"/>
-  <ellipse cx="372" cy="452" rx="55" ry="16" fill="rgba(0,0,0,0.25)"/>
-  <!-- Gold "E26" monogram bottom -->
-  <text x="256" y="490" font-family="Georgia,serif" font-size="36" font-weight="700" fill="rgba(168,137,58,0.7)" text-anchor="middle" letter-spacing="8">E 2 6</text>
+  <polygon points="256,22 236,98 276,98" fill="#E8B830"/>
+  <polygon points="256,22 248,60 264,60" fill="#FFD94A"/>
+  <!-- Spire tip flag -->
+  <rect x="255" y="18" width="2" height="16" fill="#C9960A"/>
+  <polygon points="257,18 272,22 257,27" fill="#C0392B"/>
+
+  <!-- Tower base plinth -->
+  <rect x="194" y="412" width="124" height="16" rx="3" fill="#C9960A"/>
+
+  <!-- "GERA" text at bottom -->
+  <rect x="0" y="455" width="512" height="57" rx="0" fill="rgba(0,0,0,0.35)"/>
+  <text x="256" y="494" font-family="Georgia,serif" font-size="38" font-weight="700"
+    fill="white" text-anchor="middle" letter-spacing="10">GERA</text>
 </svg>
     </div>
     <div>
-      <div class="eye">Summer 2026 · 15 Days · 6 Travellers</div>
-      <h1>Europe <em>2026</em></h1>
+      <div class="eye">Summer 2026 · 15 Days</div>
+      <h1>The Geras Go<br><em>to Europe</em></h1>
     </div>
   </div>
   <div class="pills">

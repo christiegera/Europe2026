@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- VERSION 5 — built April 2026 -->
+<!-- VERSION 12 — built April 2026 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#0B1F3A">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>The Geras Go to Europe — v5</title>
+<title>The Geras Go to Europe — v13</title>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
@@ -110,9 +110,9 @@
   .tbtn:hover:not(.active) { color: rgba(255,255,255,0.6); }
 
   /* ── SCROLL ── */
-  .sa { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding-bottom: calc(24px + var(--sb)); }
-  .tp { display: none; padding: 24px 16px 0; }
-  .tp.active { display: block; }
+  .sa { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding-bottom: calc(24px + var(--sb)); display: block; width: 100%; }
+  .tp { display: none; padding: 24px 16px 0; width: 100%; }
+  .tp.active { display: block; width: 100%; min-height: 100%; box-sizing: border-box; }
 
   /* ── LOCATION DIVIDERS ── */
   .ldiv { display: flex; align-items: center; gap: 12px; margin: 28px 0 12px; }
@@ -340,8 +340,8 @@
   .pscnt.done { color: var(--ink); }
   .pchv { color: var(--muted); font-size: 0.55rem; transition: transform 0.2s; }
   .psec.open .pchv { transform: rotate(180deg); color: var(--ink); }
-  .psecb { display: block; padding: 4px 18px 16px; }
-  /* psecb always visible */
+  .psecb { display: none; padding: 4px 18px 16px; }
+  .psec.open .psecb { display: block; }
 
   .pitems { list-style: none; }
   .pitem2 { display: flex; align-items: center; gap: 12px; padding: 11px 2px; border-bottom: 1px solid var(--cream-dk); cursor: pointer; user-select: none; transition: background 0.1s; }
@@ -421,6 +421,45 @@
   .vlink-map    { background: var(--cream-dk); color: var(--ink2); border: 1px solid var(--rule); }
   .vlink-web    { background: var(--cream-dk); color: var(--ink2); border: 1px solid var(--rule); }
   .vlink-menu   { background: var(--cream-dk); color: var(--ink2); border: 1px solid var(--rule); }
+
+
+  .pk-wrap { padding: 16px; }
+  .pk-progress { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .pk-bar-wrap { flex:1; }
+  .pk-bar-label { font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:#888; margin-bottom:6px; display:flex; justify-content:space-between; }
+  .pk-bar-track { background:#E8E0CE; border-radius:2px; height:3px; }
+  .pk-bar-fill { background:#1A1A1A; height:3px; width:0%; transition:width .3s; }
+  .pk-reset { font-family:'Jost',sans-serif; font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:#888; background:none; border:1px solid #D5CEC0; border-radius:2px; padding:5px 12px; cursor:pointer; }
+  .pk-people { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; }
+  .pk-person { font-family:'Jost',sans-serif; font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; background:white; border:1px solid #D5CEC0; border-radius:2px; padding:5px 12px; cursor:pointer; color:#888; }
+  .pk-person.on { background:#1A1A1A; color:white; border-color:#1A1A1A; }
+  .pk-section { background:white; margin-bottom:2px; }
+  .pk-section-head { padding:14px 18px; border-bottom:1px solid #EDE7D9; }
+  .pk-section-head h3 { font-family:'Jost',sans-serif; font-size:.85rem; font-weight:600; letter-spacing:.04em; margin:0; }
+  .pk-list { list-style:none; margin:0; padding:0; }
+  .pk-item { display:flex; align-items:center; gap:12px; padding:10px 18px; border-bottom:1px solid #F5F0E8; cursor:pointer; }
+  .pk-item:last-child { border-bottom:none; }
+  .pk-item.gone { display:none; }
+  .pk-item.done .pk-check { background:#1A1A1A; border-color:#1A1A1A; }
+  .pk-item.done .pk-check::after { opacity:1; }
+  .pk-item.done .pk-label { color:#B8B0A0; text-decoration:line-through; }
+  .pk-check { width:20px; height:20px; border:1.5px solid #D5CEC0; border-radius:2px; flex-shrink:0; background:white; position:relative; }
+  .pk-check::after { content:'✓'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:.65rem; color:white; opacity:0; }
+  .pk-label { flex:1; font-size:.84rem; color:#3A3A3A; }
+  .pk-tag { font-size:.55rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; padding:2px 7px; border-radius:2px; flex-shrink:0; }
+  .t-all { background:#F5F0E8; color:#8A8478; }
+  .t-paul { background:#FEF0EE; color:#8B2020; }
+  .t-lorraine { background:#FEF0EE; color:#8B2020; }
+  .t-tom { background:#EAF0F8; color:#1A3A6E; }
+  .t-christie { background:#F0EEF8; color:#3D2E6E; }
+  .t-megan { background:#EBF2EB; color:#2A5A2A; }
+  .t-michael { background:#F5F0E8; color:#8B5A1A; }
+  .t-buy { background:#FBF3DC; color:#7A5C00; }
+  .t-skip { background:#F5F0E8; color:#8A8478; }
+  .pk-add { display:flex; gap:8px; padding:10px 18px 14px; border-top:1px solid #EDE7D9; }
+  .pk-add input { flex:1; border:1px solid #D5CEC0; background:#F5F0E8; border-radius:2px; padding:7px 11px; font-family:'Jost',sans-serif; font-size:.82rem; outline:none; }
+  .pk-add input:focus { border-color:#1A1A1A; background:white; }
+  .pk-add button { background:#1A1A1A; color:white; border:none; border-radius:2px; padding:7px 14px; font-family:'Jost',sans-serif; font-size:.82rem; cursor:pointer; }
 
 </style>
 </head>
@@ -817,50 +856,11 @@
       </tbody></table>
       <button class="arb" onclick="addRow('tTr',['Type','Date','Ref #','Notes'])">＋ Add transport</button></div>
     </div>
+  </div>
 </div><!-- /reference -->
 
 <!-- PACKING -->
 <div class="tp" id="tab-packing">
-<style>
-  .pk-wrap { padding: 16px; }
-  .pk-progress { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
-  .pk-bar-wrap { flex:1; }
-  .pk-bar-label { font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:#888; margin-bottom:6px; display:flex; justify-content:space-between; }
-  .pk-bar-track { background:#E8E0CE; border-radius:2px; height:3px; }
-  .pk-bar-fill { background:#1A1A1A; height:3px; width:0%; transition:width .3s; }
-  .pk-reset { font-family:'Jost',sans-serif; font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:#888; background:none; border:1px solid #D5CEC0; border-radius:2px; padding:5px 12px; cursor:pointer; }
-  .pk-people { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; }
-  .pk-person { font-family:'Jost',sans-serif; font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; background:white; border:1px solid #D5CEC0; border-radius:2px; padding:5px 12px; cursor:pointer; color:#888; }
-  .pk-person.on { background:#1A1A1A; color:white; border-color:#1A1A1A; }
-  .pk-section { background:white; margin-bottom:2px; }
-  .pk-section-head { padding:14px 18px; border-bottom:1px solid #EDE7D9; }
-  .pk-section-head h3 { font-family:'Jost',sans-serif; font-size:.85rem; font-weight:600; letter-spacing:.04em; margin:0; }
-  .pk-list { list-style:none; margin:0; padding:0; }
-  .pk-item { display:flex; align-items:center; gap:12px; padding:10px 18px; border-bottom:1px solid #F5F0E8; cursor:pointer; }
-  .pk-item:last-child { border-bottom:none; }
-  .pk-item.gone { display:none; }
-  .pk-item.done .pk-check { background:#1A1A1A; border-color:#1A1A1A; }
-  .pk-item.done .pk-check::after { opacity:1; }
-  .pk-item.done .pk-label { color:#B8B0A0; text-decoration:line-through; }
-  .pk-check { width:20px; height:20px; border:1.5px solid #D5CEC0; border-radius:2px; flex-shrink:0; background:white; position:relative; }
-  .pk-check::after { content:'✓'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:.65rem; color:white; opacity:0; }
-  .pk-label { flex:1; font-size:.84rem; color:#3A3A3A; }
-  .pk-tag { font-size:.55rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; padding:2px 7px; border-radius:2px; flex-shrink:0; }
-  .t-all { background:#F5F0E8; color:#8A8478; }
-  .t-paul { background:#FEF0EE; color:#8B2020; }
-  .t-lorraine { background:#FEF0EE; color:#8B2020; }
-  .t-tom { background:#EAF0F8; color:#1A3A6E; }
-  .t-christie { background:#F0EEF8; color:#3D2E6E; }
-  .t-megan { background:#EBF2EB; color:#2A5A2A; }
-  .t-michael { background:#F5F0E8; color:#8B5A1A; }
-  .t-buy { background:#FBF3DC; color:#7A5C00; }
-  .t-skip { background:#F5F0E8; color:#8A8478; }
-  .pk-add { display:flex; gap:8px; padding:10px 18px 14px; border-top:1px solid #EDE7D9; }
-  .pk-add input { flex:1; border:1px solid #D5CEC0; background:#F5F0E8; border-radius:2px; padding:7px 11px; font-family:'Jost',sans-serif; font-size:.82rem; outline:none; }
-  .pk-add input:focus { border-color:#1A1A1A; background:white; }
-  .pk-add button { background:#1A1A1A; color:white; border:none; border-radius:2px; padding:7px 14px; font-family:'Jost',sans-serif; font-size:.82rem; cursor:pointer; }
-</style>
-
 <div class="pk-wrap">
   <div class="pk-progress">
     <div class="pk-bar-wrap">
@@ -980,65 +980,10 @@
 
 </div>
 
-<script>
-var pkWho = 'all';
-
-function pkCheck(item) {
-  item.classList.toggle('done');
-  pkProgress();
-}
-
-function pkFilter(who, btn) {
-  pkWho = who;
-  document.querySelectorAll('.pk-person').forEach(function(b){ b.classList.remove('on'); });
-  btn.classList.add('on');
-  document.querySelectorAll('.pk-item').forEach(function(item){
-    var w = item.dataset.who || 'all';
-    if (who === 'all' || w === who || w === 'all') {
-      item.classList.remove('gone');
-    } else {
-      item.classList.add('gone');
-    }
-  });
-  pkProgress();
-}
-
-function pkProgress() {
-  var items = Array.from(document.querySelectorAll('.pk-item')).filter(function(i){ return !i.classList.contains('gone'); });
-  var done = items.filter(function(i){ return i.classList.contains('done'); });
-  var pct = items.length ? Math.round(done.length / items.length * 100) : 0;
-  document.getElementById('pk-fill').style.width = pct + '%';
-  document.getElementById('pk-count').textContent = done.length + ' of ' + items.length;
-}
-
-function pkAdd(listId, input) {
-  var txt = input.value.trim();
-  if (!txt) return;
-  var li = document.createElement('li');
-  li.className = 'pk-item';
-  li.dataset.who = pkWho === 'all' ? 'all' : pkWho;
-  li.onclick = function(){ pkCheck(li); };
-  li.innerHTML = '<div class="pk-check"></div><span class="pk-label">' + txt + '</span>';
-  document.getElementById(listId).appendChild(li);
-  input.value = '';
-  pkProgress();
-}
-
-function pkReset() {
-  if (!confirm('Reset all checkboxes?')) return;
-  document.querySelectorAll('.pk-item').forEach(function(i){ i.classList.remove('done'); });
-  pkProgress();
-}
-
-pkProgress();
-</script>
 </div><!-- /packing -->
 
 </div><!-- /scroll-area -->
-
 <script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{})}
-
 // ── TAB SWITCHING ──
 function sw(name,btn){
   document.querySelectorAll('.tp').forEach(p=>p.classList.remove('active'));
@@ -1046,6 +991,7 @@ function sw(name,btn){
   document.getElementById('tab-'+name).classList.add('active');
   btn.classList.add('active');
   document.querySelector('.sa').scrollTop=0;
+  if(name==='packing') pkProgress();
 }
 
 // ── DAY / REF / COST TOGGLES ──
@@ -1054,33 +1000,73 @@ function tr2(c){c.classList.toggle('open')}
 function tc(c){c.classList.toggle('open')}
 function tps(s){s.classList.toggle('open')}
 
-// ── ADD REFERENCE ROW ──
+// ── PACKING ──
+var pkWho='all';
+
+function pkCheck(item){item.classList.toggle('done');pkProgress();}
+
+function pkFilter(who,btn){
+  pkWho=who;
+  document.querySelectorAll('.pk-person').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  document.querySelectorAll('.pk-item').forEach(function(item){
+    var w=item.dataset.who||'all';
+    item.classList.toggle('gone',!(who==='all'||w===who||w==='all'));
+  });
+  pkProgress();
+}
+
+function pkProgress(){
+  var items=Array.from(document.querySelectorAll('.pk-item')).filter(function(i){return !i.classList.contains('gone');});
+  var done=items.filter(function(i){return i.classList.contains('done');});
+  var pct=items.length?Math.round(done.length/items.length*100):0;
+  document.getElementById('pk-fill').style.width=pct+'%';
+  document.getElementById('pk-count').textContent=done.length+' of '+items.length;
+}
+
+function pkAdd(listId,input){
+  var txt=input.value.trim();if(!txt)return;
+  var li=document.createElement('li');
+  li.className='pk-item';
+  li.dataset.who=pkWho==='all'?'all':pkWho;
+  li.onclick=function(){pkCheck(li);};
+  li.innerHTML='<div class="pk-check"></div><span class="pk-label">'+txt+'</span>';
+  document.getElementById(listId).appendChild(li);
+  input.value='';pkProgress();
+}
+
+function pkReset(){
+  if(!confirm('Reset all checkboxes?'))return;
+  document.querySelectorAll('.pk-item').forEach(function(i){i.classList.remove('done');});
+  pkProgress();
+}
+
+// ── REFERENCE ROWS ──
 function addRow(tid,cols){
-  const tbody=document.getElementById(tid);
-  const tr=document.createElement('tr');
-  cols.forEach((col,i)=>{
-    const td=document.createElement('td');
+  var tbody=document.getElementById(tid);
+  var tr=document.createElement('tr');
+  cols.forEach(function(col,i){
+    var td=document.createElement('td');
     if(i===0)td.className='lbl';
-    if(i===2){
-      const sp=document.createElement('span');
-      sp.className='conf ph';sp.contentEditable=true;sp.textContent=col;
-      td.appendChild(sp);
-    } else {
-      td.contentEditable=true;td.textContent=col;
-    }
+    if(i===2){var sp=document.createElement('span');sp.className='conf ph';sp.contentEditable=true;sp.textContent=col;td.appendChild(sp);}
+    else{td.contentEditable=true;td.textContent=col;}
     tr.appendChild(td);
   });
   tbody.appendChild(tr);
   tr.querySelector('[contenteditable]').focus();
 }
 
+// ── SERVICE WORKER ──
+if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(function(){});}
+
 // ── INIT ──
-document.addEventListener('DOMContentLoaded', function(){
-  // Stop contenteditable from bubbling
+window.onload = function(){
+  pkProgress();
   document.querySelectorAll('[contenteditable]').forEach(function(el){
-    el.addEventListener('click', function(e){ e.stopPropagation(); });
+    el.addEventListener('click',function(e){e.stopPropagation();});
   });
-});
+};
 </script>
+
 </body>
 </html>

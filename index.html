@@ -1001,18 +1001,21 @@ function sps(){
     const items=Array.from(sec.querySelectorAll('.pitem2'));
     st[id]={checked:items.map(i=>i.classList.contains('checked')),added:items.slice(oc).map(i=>({html:i.querySelector('.pitxt').innerHTML,who:i.dataset.who||'all'}))};
   });
-  try{localStorage.setItem('ps4',JSON.stringify(st))}catch(e){}
+  try{localStorage.setItem('ps5',JSON.stringify(st))}catch(e){}
 }
 
 function lps(){
   document.querySelectorAll('.psec').forEach(s=>{s.dataset.oc=s.querySelectorAll('.pitem2').length});
-  let st;try{st=JSON.parse(localStorage.getItem('ps4'))}catch(e){}
+  let st;try{st=JSON.parse(localStorage.getItem('ps5'))}catch(e){}
   if(st){
     document.querySelectorAll('.psec').forEach(sec=>{
       const id=sec.dataset.sec;if(!st[id])return;
       const list=sec.querySelector('.pitems');
       const items=Array.from(list.querySelectorAll('.pitem2'));
-      (st[id].checked||[]).forEach((c,i)=>{if(items[i])items[i].classList.toggle('checked',c)});
+      // Only restore checked state on existing HTML items
+      const origCount = parseInt(sec.dataset.oc || 0);
+      (st[id].checked||[]).slice(0, origCount).forEach((c,i)=>{if(items[i])items[i].classList.toggle('checked',c)});
+      // Append any user-added items beyond original HTML count
       (st[id].added||[]).forEach(a=>{list.appendChild(mpi(a.html,false,a.who))});
     });
   }

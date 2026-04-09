@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#0B1F3A">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>The Geras Go to Europe — v13</title>
+<title>The Geras Go to Europe — v14</title>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
@@ -461,6 +461,70 @@
   .pk-add input:focus { border-color:#1A1A1A; background:white; }
   .pk-add button { background:#1A1A1A; color:white; border:none; border-radius:2px; padding:7px 14px; font-family:'Jost',sans-serif; font-size:.82rem; cursor:pointer; }
 
+
+  /* ── LARGE TEXT MODE ── */
+  body.large {
+    --text-scale: 1.25;
+  }
+  body.large .dt { font-size: 1.15rem; }
+  body.large .ds { font-size: 0.88rem; }
+  body.large .dv { font-size: 1rem; }
+  body.large .dlbl { font-size: 0.65rem; }
+  body.large .chip { font-size: 0.88rem; padding: 7px 14px; }
+  body.large .hbadge { font-size: 0.85rem; }
+  body.large .vhours-text { font-size: 0.92rem; }
+  body.large .vlink { font-size: 0.82rem; padding: 7px 14px; }
+  body.large .pk-label { font-size: 1rem; }
+  body.large .pk-tag { font-size: 0.7rem; }
+  body.large .pk-person { font-size: 0.8rem; padding: 7px 16px; }
+  body.large .pk-section-head h3 { font-size: 1.05rem; }
+  body.large .pk-bar-label { font-size: 0.82rem; }
+  body.large .cct h3 { font-size: 1.05rem; }
+  body.large .cct p { font-size: 0.85rem; }
+  body.large .cctot .amt { font-size: 1.15rem; }
+  body.large .ctbl { font-size: 0.95rem; }
+  body.large .plr { font-size: 1rem; }
+  body.large .rch h3 { font-size: 1.05rem; }
+  body.large table.rt { font-size: 0.92rem; }
+  body.large .conf { font-size: 0.9rem; }
+  body.large .db2 .n { font-size: 1.7rem; }
+  body.large .db2 .dw { font-size: 0.65rem; }
+  body.large .dw2 { font-size: 0.68rem; }
+
+  /* Toggle button */
+  .font-toggle {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 4px;
+    padding: 3px 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+  .font-toggle .ft-sm {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    padding: 2px 5px;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .font-toggle .ft-lg {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    padding: 2px 5px;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  body:not(.large) .font-toggle .ft-sm { background: rgba(255,255,255,0.15); color: white; }
+  body.large .font-toggle .ft-lg { background: rgba(255,255,255,0.15); color: white; }
+
 </style>
 </head>
 <body>
@@ -579,10 +643,14 @@
       <h1>The Geras Go<br><em>to Europe</em></h1>
     </div>
   </div>
-  <div class="pills">
+  <div class="pills" style="display:flex;align-items:center;">
     <div class="pill plon">🇬🇧 London</div>
     <div class="pill pzur">🇨🇭 Zurich</div>
     <div class="pill pmur">🏔️ Mürren</div>
+    <button class="font-toggle" onclick="toggleFont()" aria-label="Toggle text size">
+      <span class="ft-sm">A</span>
+      <span class="ft-lg">A</span>
+    </button>
   </div>
 </header>
 
@@ -1056,11 +1124,18 @@ function addRow(tid,cols){
   tr.querySelector('[contenteditable]').focus();
 }
 
+// ── FONT SIZE TOGGLE ──
+function toggleFont(){
+  var isLarge = document.body.classList.toggle('large');
+  try { localStorage.setItem('geraFont', isLarge ? 'large' : 'normal'); } catch(e){}
+}
+
 // ── SERVICE WORKER ──
 if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(function(){});}
 
 // ── INIT ──
 window.onload = function(){
+  try { if(localStorage.getItem('geraFont')==='large') document.body.classList.add('large'); } catch(e){}
   pkProgress();
   document.querySelectorAll('[contenteditable]').forEach(function(el){
     el.addEventListener('click',function(e){e.stopPropagation();});

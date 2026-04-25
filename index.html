@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#0B1F3A">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>The Geras Go to Europe — v14</title>
+<title>The Geras Go to Europe — v18</title>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
@@ -659,6 +659,7 @@
   <button class="tbtn" onclick="sw('costs',this)"><span class="ti">💰</span>Costs</button>
   <button class="tbtn" onclick="sw('reference',this)"><span class="ti">🔐</span>Reference</button>
   <button class="tbtn" onclick="sw('packing',this)"><span class="ti">🧳</span>Packing</button>
+  <button class="tbtn" onclick="sw('words',this)"><span class="ti">🇨🇭</span>Words</button>
 </div>
 
 <div class="sa">
@@ -736,7 +737,7 @@
       <div class="dr"><div class="dri">✈️</div><div><div class="dlbl">Flight</div><div class="dv">Swiss Air LX 319 · LHR→ZRH · 12:10pm–2:50pm</div></div></div>
       <div class="dr"><div class="dri">🏨</div><div><div class="dlbl">Stay</div><div class="dv">Hotel Adler Zürich · 2 double + 2 single</div></div></div>
       <div class="ah">Plan</div>
-      <div class="chips"><span class="chip ctravel">🚶 Walk to Hotel Adler</span><span class="chip cfood">🍽️ Dinner out</span></div>
+      <div class="chips"><span class="chip ctravel">🚶 Walk to Hotel Adler</span><span class="chip cfood">🍺 Dinner: Rheinfelder Bierhalle</span></div>
     </div>
   </div>
 
@@ -756,22 +757,22 @@
     <div class="dh"><div class="db2 btrv"><span class="n">8</span><span class="dw">Thu</span><span class="dd">Jun 18</span></div>
     <div class="di"><div class="dw2 ctrv">Travel Day</div><div class="dt">Zurich → Mürren</div><div class="ds">Trains 12–3:30pm · Possible Lucerne stop</div></div><div class="dch">▼</div></div>
     <div class="dbody">
-      <div class="dr"><div class="dri">🚆</div><div><div class="dlbl">Journey</div><div class="dv">Train · Zurich→Mürren · 12:00–15:30</div><div class="dv addr">Consider a stop in Lucerne!</div></div></div>
+      <div class="dr"><div class="dri">🚆</div><div><div class="dlbl">Journey</div><div class="dv">Train · Zurich→Mürren · 12:00–15:30</div><div class="dv addr">Lucerne stop confirmed! · Coop in Mürren closes 6:30pm</div></div></div>
       <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet Apartment "Schnell"</div><div class="dv addr">Hehmatten 1068E, Mürren</div></div></div>
       <div class="ah">Plan</div>
-      <div class="chips"><span class="chip ctravel">🚆 Train through the Alps</span><span class="chip cdef">🥨 Snacks en route</span><span class="chip cfood">🛒 Groceries on arrival</span></div>
+      <div class="chips"><span class="chip ctravel">🚆 Zurich→Luzern 9:35–10:25</span><span class="chip csight">🏙️ Lunch in Luzern</span><span class="chip ctravel">🎫 Buy Bernese Oberland pass</span><span class="chip ctravel">🚆 Luzern→Mürren 2:06–5:18</span><span class="chip cfood">🛒 Coop groceries (closes 6:30)</span></div>
     </div>
   </div>
 
-  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">9</span><span class="dw">Fri</span><span class="dd">Jun 19</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Free day — add your plans!</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef" contenteditable onclick="event.stopPropagation()">✏️ Add activity</span></div></div></div>
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">9</span><span class="dw">Fri</span><span class="dd">Jun 19</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Lazy day · Allmendhubel</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef" contenteditable onclick="event.stopPropagation()">✏️ Add activity</span></div></div></div>
 
-  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">10</span><span class="dw">Sat</span><span class="dd">Jun 20</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Free day in the Alps</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef" contenteditable onclick="event.stopPropagation()">✏️ Add activity</span></div></div></div>
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">10</span><span class="dw">Sat</span><span class="dd">Jun 20</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Wengen · Männlichen · Grindelwald</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip csight">🚡 Wengen</span><span class="chip csight">🏔️ Männlichen ridge walk</span><span class="chip csight">🏘️ Grindelwald</span></div></div></div>
 
-  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">11</span><span class="dw">Sun</span><span class="dd">Jun 21</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Maybe a helicopter ride? 🚁</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip csight">🚁 Helicopter ride (if P&amp;L are up for it!)</span></div></div></div>
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">11</span><span class="dw">Sun</span><span class="dd">Jun 21</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Schilthorn · Piz Gloria · Gimmelwald</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip csight">🚡 Schilthorn / Piz Gloria</span><span class="chip csight">🏘️ Gimmelwald village</span></div></div></div>
 
-  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">12</span><span class="dw">Mon</span><span class="dd">Jun 22</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Free day in the Alps</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef" contenteditable onclick="event.stopPropagation()">✏️ Add activity</span></div></div></div>
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">12</span><span class="dw">Mon</span><span class="dd">Jun 22</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Brienz · Rothorn · Interlaken</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip ctravel">🚂 Train to Brienz</span><span class="chip csight">🚠 Brienz Rothorn</span><span class="chip csight">🚢 Boat to Interlaken</span><span class="chip ctravel">🚆 Train home</span></div></div></div>
 
-  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">13</span><span class="dw">Tue</span><span class="dd">Jun 23</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Free day in the Alps</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef" contenteditable onclick="event.stopPropagation()">✏️ Add activity</span></div></div></div>
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">13</span><span class="dw">Tue</span><span class="dd">Jun 23</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Schynige Platte · Alphorn 11AM</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip csight">🎵 Schynige Platte · Alphorn concert 11AM–2PM</span></div></div></div>
 
   <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">14</span><span class="dw">Wed</span><span class="dd">Jun 24</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Last night in the Alps 🌄</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef">🌄 Last Alpine sunset</span><span class="chip cdef">🧳 Pack for tomorrow</span></div></div></div>
 
@@ -782,7 +783,7 @@
       <div class="dr"><div class="dri">🚆</div><div><div class="dlbl">To Airport</div><div class="dv">Train · Mürren → Zurich ZRH</div></div></div>
       <div class="dr"><div class="dri">✈️</div><div><div class="dlbl">Flight Home</div><div class="dv">United UA 9748 · ZRH→EWR · 5:20pm–8:10pm</div></div></div>
       <div class="ah">Plan</div>
-      <div class="chips"><span class="chip cfood">☕ Final Swiss breakfast</span><span class="chip ctravel">🚆 Train to airport</span><span class="chip ctravel">✈️ Fly home</span></div>
+      <div class="chips"><span class="chip cdef">🧳 10am checkout</span><span class="chip ctravel">🚠 10:21 Schilthornbahn down</span><span class="chip ctravel">🚆 Train to Zurich</span><span class="chip ctravel">✈️ UA 9748 · 5:20PM → Newark 8:10PM</span></div>
     </div>
   </div>
 </div>
@@ -854,20 +855,6 @@
       </tbody></table>
       <button class="arb" onclick="addRow('tF',['Route','Date','Flight','Times','Conf #'])">＋ Add flight</button></div>
     </div>
-
-    <div class="rc mileage open">
-      <div class="rch" onclick="tr2(this.parentElement)"><span class="ri">🏅</span><h3>MileagePlus & TSA Precheck</h3><span class="rtog">▼</span></div>
-      <div class="rcb"><table class="rt"><thead><tr><th>Person</th><th>MileagePlus #</th><th>TSA KTN</th></tr></thead><tbody>
-        <tr><td class="lbl">Christie</td><td><span class="conf">CP712321</span></td><td><span class="conf">TT1313SXZ</span></td></tr>
-        <tr><td class="lbl">Tom</td><td><span class="conf">ND837316</span></td><td><span class="conf ph" contenteditable>Add KTN</span></td></tr>
-        <tr><td class="lbl">Megan</td><td><span class="conf">CHM93920</span></td><td><span class="conf ph" contenteditable>Add KTN</span></td></tr>
-        <tr><td class="lbl">Michael</td><td><span class="conf">WGN11733</span></td><td><span class="conf ph" contenteditable>Add KTN</span></td></tr>
-        <tr><td class="lbl">Paul</td><td><span class="conf ph" contenteditable>Add #</span></td><td><span class="conf">TT13Q1XQB</span></td></tr>
-        <tr><td class="lbl">Lorraine</td><td><span class="conf ph" contenteditable>Add #</span></td><td><span class="conf">TT13Q1Y6H</span></td></tr>
-      </tbody></table>
-      <p style="font-size:.7rem;color:var(--muted);margin-top:8px">⚠️ Tom: check if upgrade fees on refundable tickets are also refundable · Megan: link reservations</p></div>
-    </div>
-
     <div class="rc hotels">
       <div class="rch" onclick="tr2(this.parentElement)"><span class="ri">🏨</span><h3>Accommodations</h3><span class="rtog">▼</span></div>
       <div class="rcb"><table class="rt"><thead><tr><th>Property</th><th>Dates</th><th>Conf #</th></tr></thead><tbody id="tH">
@@ -1020,9 +1007,6 @@
       <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Passport + copy</span><span class="pk-tag t-all">Everyone</span></li>
       <li class="pk-item" data-who="all" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">Credit card — call bank to notify travel</span><span class="pk-tag t-all">Everyone</span></li>
       <li class="pk-item" data-who="christie" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">T&amp;C credit card + backup</span><span class="pk-tag t-christie">Christie</span></li>
-      <li class="pk-item" data-who="paul" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">TSA Precheck KTN: TT13Q1XQB</span><span class="pk-tag t-paul">Paul</span></li>
-      <li class="pk-item" data-who="lorraine" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">TSA Precheck KTN: TT13Q1Y6H</span><span class="pk-tag t-lorraine">Lorraine</span></li>
-      <li class="pk-item" data-who="christie" onclick="pkCheck(this)"><div class="pk-check"></div><span class="pk-label">TSA Precheck KTN: TT1313SXZ</span><span class="pk-tag t-christie">Christie</span></li>
     </ul>
     <div class="pk-add"><input type="text" placeholder="Add document…" onkeydown="if(event.key==='Enter')pkAdd('pkl-docs',this)"><button onclick="pkAdd('pkl-docs',this.previousElementSibling)">＋</button></div>
   </div>
@@ -1049,6 +1033,46 @@
 </div>
 
 </div><!-- /packing -->
+
+
+<!-- WORDS -->
+<div class="tp" id="tab-words">
+<div style="padding:24px 16px 0;">
+
+  <div style="margin-bottom:20px;">
+    <div style="font-size:0.58rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Spoken</div>
+    <div style="background:white;border-radius:4px;overflow:hidden;">
+      <table class="rt" style="margin-top:0;"><thead><tr><th>Swiss German</th><th>Sounds Like</th><th>English</th></tr></thead><tbody>
+        <tr><td class="lbl">Grüezi</td><td style="color:var(--muted);font-style:italic">grootsy</td><td>Hello</td></tr>
+        <tr><td class="lbl">Merci vielmal</td><td style="color:var(--muted);font-style:italic">mersee feelmal</td><td>Thank you very much</td></tr>
+        <tr><td class="lbl">Bitte</td><td style="color:var(--muted);font-style:italic">bitteh</td><td>Please / You're welcome</td></tr>
+        <tr><td class="lbl">Entschuldigung</td><td style="color:var(--muted);font-style:italic">enschuldagung</td><td>Excuse me</td></tr>
+        <tr><td class="lbl">Es tut mir leid</td><td style="color:var(--muted);font-style:italic">estootmerlied</td><td>I'm sorry</td></tr>
+        <tr><td class="lbl">Ja / Nein</td><td style="color:var(--muted);font-style:italic">ya / nine</td><td>Yes / No</td></tr>
+        <tr><td class="lbl">Wo ist...?</td><td style="color:var(--muted);font-style:italic">vo ist</td><td>Where is...?</td></tr>
+        <tr><td class="lbl">Rechnung, bitte</td><td style="color:var(--muted);font-style:italic">rechnoong bitteh</td><td>Bill, please</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <div>
+    <div style="font-size:0.58rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Written / Signs</div>
+    <div style="background:white;border-radius:4px;overflow:hidden;">
+      <table class="rt" style="margin-top:0;"><thead><tr><th>Word</th><th>English</th></tr></thead><tbody>
+        <tr><td class="lbl">Bahnhof</td><td>Train station</td></tr>
+        <tr><td class="lbl">Hauptbahnhof / HB</td><td>Main train station</td></tr>
+        <tr><td class="lbl">Gleis</td><td>Platform</td></tr>
+        <tr><td class="lbl">Ausfahrt</td><td>Exit (roads)</td></tr>
+        <tr><td class="lbl">Kasse</td><td>Checkout / till</td></tr>
+        <tr><td class="lbl">Eingang / Ausgang</td><td>Entrance / Exit</td></tr>
+        <tr><td class="lbl">Offen / Geschlossen</td><td>Open / Closed</td></tr>
+        <tr><td class="lbl">WC / Toilette</td><td>Toilet</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+</div>
+</div><!-- /words -->
 
 </div><!-- /scroll-area -->
 <script>

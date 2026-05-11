@@ -10,10 +10,10 @@
 <meta name="theme-color" content="#0B1F3A">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>The Geras Go to Europe — v18</title>
+<title>The Geras Go to Europe — v39</title>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
 
   :root {
     --cream: #F5F0E8;
@@ -37,7 +37,7 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   html, body { height: 100%; overflow: hidden; }
-  body { font-family: 'Jost', sans-serif; color: var(--ink); background: var(--cream); display: flex; flex-direction: column; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--ink); background: var(--cream); display: flex; flex-direction: column; }
 
   /* ── HEADER ── */
   header {
@@ -59,7 +59,7 @@
     color: var(--gold-lt); margin-bottom: 5px; display: block;
   }
   h1 {
-    font-family: 'Jost', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 1.6rem; font-weight: 300;
     color: white; line-height: 1;
     letter-spacing: 0.08em; text-transform: uppercase;
@@ -96,7 +96,7 @@
   .tbtn {
     flex: 1; background: none; border: none;
     color: rgba(255,255,255,0.3);
-    font-family: 'Jost', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.6rem; font-weight: 500;
     padding: 11px 4px 12px;
     cursor: pointer;
@@ -119,7 +119,7 @@
   .ldiv:first-child { margin-top: 0; }
   .ldot { display: none; }
   .ldiv h2 {
-    font-family: 'Jost', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.58rem; font-weight: 600;
     color: var(--muted); white-space: nowrap;
     letter-spacing: 0.22em; text-transform: uppercase;
@@ -173,14 +173,14 @@
   .blon, .bzur, .bmur, .btrv { }
 
   .di { flex: 1; padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
-  .dw2 { font-size: 0.55rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 3px; }
+  .dw2 { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 4px; }
   .clon { color: var(--red); }
   .czur { color: var(--blue); }
   .cmur { color: var(--purple); }
   .ctrv { color: var(--gold); }
 
   .dt {
-    font-family: 'Jost', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.95rem; font-weight: 500;
     color: var(--ink); line-height: 1.25;
     letter-spacing: 0.01em;
@@ -199,13 +199,13 @@
   .dv { font-size: 0.84rem; color: var(--ink2); font-weight: 400; line-height: 1.5; }
   .dv.addr { font-size: 0.75rem; color: var(--muted); margin-top: 1px; }
 
-  .ah { font-size: 0.52rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); margin: 16px 0 8px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip { font-size: 0.7rem; font-weight: 400; padding: 5px 12px; border-radius: 2px; letter-spacing: 0.04em; }
-  .cdef    { background: var(--cream-dk); color: var(--ink2); }
-  .ctravel { background: #F9EEEE; color: var(--red); }
-  .cfood   { background: #EEF4EE; color: #1A4A1A; }
-  .csight  { background: #EEF0F9; color: var(--blue); }
+  .ah { display: none; }
+  .chips { display: flex; flex-direction: column; gap: 0; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--cream-dk); }
+  .chip { font-size: 0.78rem; font-weight: 400; padding: 4px 0; letter-spacing: 0.01em; background: none !important; border-radius: 0; color: var(--ink2); }
+  .cdef    { color: var(--ink2); }
+  .ctravel { color: var(--red); }
+  .cfood   { color: #1A6A1A; }
+  .csight  { color: var(--blue); }
 
   .hbadge {
     display: inline-flex; align-items: center; gap: 7px;
@@ -228,7 +228,7 @@
     margin-bottom: 8px;
   }
   .cbig {
-    font-family: 'Jost', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 2.6rem; font-weight: 300;
     color: white; line-height: 1;
     letter-spacing: -0.02em;
@@ -251,7 +251,7 @@
   .ccard.open .cch { border-bottom-color: var(--rule); }
   .cch .ci { font-size: 1.1rem; opacity: 0.7; }
   .cct { flex: 1; }
-  .cct h3 { font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em; }
+  .cct h3 { font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em; }
   .cct p { font-size: 0.68rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.02em; }
   .cctot { text-align: right; }
   .cctot .amt { font-size: 0.95rem; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
@@ -270,7 +270,7 @@
   .bo { background: #F5EDDA; color: #6B4A10; font-size: 0.6rem; font-weight: 600; padding: 3px 8px; border-radius: 2px; display: inline-block; letter-spacing: 0.06em; }
 
   .plsec { background: white; border-radius: 4px; padding: 20px; margin-top: 8px; }
-  .plsec h3 { font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 500; margin-bottom: 14px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .plsec h3 { font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; margin-bottom: 14px; letter-spacing: 0.06em; text-transform: uppercase; }
   .plr { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--cream-dk); font-size: 0.82rem; }
   .plr:last-child { border-bottom: none; }
   .plr .pll { color: var(--muted); font-weight: 400; }
@@ -290,7 +290,7 @@
   .rch { display: flex; align-items: center; gap: 10px; padding: 14px 18px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--cream-dk); }
   .rc.open .rch { border-bottom-color: var(--rule); }
   .rch .ri { font-size: 1rem; opacity: 0.7; }
-  .rch h3 { font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 500; flex: 1; letter-spacing: 0.04em; }
+  .rch h3 { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; flex: 1; letter-spacing: 0.04em; }
   .rtog { color: var(--muted); font-size: 0.55rem; transition: transform 0.2s; }
   .rc.open .rtog { transform: rotate(180deg); }
   .rcb { display: none; padding: 12px 18px 18px; }
@@ -301,11 +301,11 @@
   table.rt td { padding: 8px 6px; border-bottom: 1px solid var(--cream-dk); vertical-align: top; color: var(--ink2); }
   table.rt tr:last-child td { border-bottom: none; }
   table.rt td.lbl { font-weight: 500; color: var(--ink); white-space: nowrap; }
-  .conf { font-family: 'Jost', monospace; font-size: 0.73rem; background: var(--cream-dk); color: var(--ink); padding: 3px 8px; border-radius: 2px; display: inline-block; font-weight: 500; letter-spacing: 0.06em; }
+  .conf { font-family: 'DM Sans', monospace; font-size: 0.73rem; background: var(--cream-dk); color: var(--ink); padding: 3px 8px; border-radius: 2px; display: inline-block; font-weight: 500; letter-spacing: 0.06em; }
   .ph { color: var(--muted); font-style: italic; font-weight: 300; }
   [contenteditable] { outline: none; }
   [contenteditable]:focus { background: var(--cream); outline: none; box-shadow: inset 0 -2px 0 var(--gold); }
-  .arb { display: inline-flex; align-items: center; gap: 5px; margin-top: 12px; padding: 6px 14px; background: none; border: 1px solid var(--rule); border-radius: 2px; font-family: 'Jost', sans-serif; font-size: 0.7rem; color: var(--muted); cursor: pointer; transition: all 0.2s; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+  .arb { display: inline-flex; align-items: center; gap: 5px; margin-top: 12px; padding: 6px 14px; background: none; border: 1px solid var(--rule); border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 0.7rem; color: var(--muted); cursor: pointer; transition: all 0.2s; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
   .arb:hover { border-color: var(--ink); color: var(--ink); }
 
   /* ── PACKING ── */
@@ -314,11 +314,11 @@
   .pplabel { font-size: 0.56rem; font-weight: 600; color: var(--muted); margin-bottom: 7px; display: flex; justify-content: space-between; text-transform: uppercase; letter-spacing: 0.16em; }
   .ptrack { background: var(--rule); border-radius: 1px; height: 2px; }
   .pfill { background: var(--ink); height: 100%; transition: width 0.4s ease; }
-  .preset { background: none; border: 1px solid var(--rule); border-radius: 2px; padding: 6px 14px; font-family: 'Jost', sans-serif; font-size: 0.62rem; color: var(--muted); cursor: pointer; white-space: nowrap; transition: all 0.2s; flex-shrink: 0; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+  .preset { background: none; border: 1px solid var(--rule); border-radius: 2px; padding: 6px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.62rem; color: var(--muted); cursor: pointer; white-space: nowrap; transition: all 0.2s; flex-shrink: 0; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
   .preset:hover { border-color: var(--ink); color: var(--ink); }
 
   .ptabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
-  .ptab { background: white; border: 1px solid var(--rule); border-radius: 2px; padding: 6px 14px; font-family: 'Jost', sans-serif; font-size: 0.62rem; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; letter-spacing: 0.1em; text-transform: uppercase; }
+  .ptab { background: white; border: 1px solid var(--rule); border-radius: 2px; padding: 6px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.62rem; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; letter-spacing: 0.1em; text-transform: uppercase; }
   .ptab:hover { border-color: var(--ink); color: var(--ink); }
   .ptab.active { background: var(--ink); color: white; border-color: var(--ink); }
   .ptab[data-p="paul"].active   { background: var(--red); border-color: var(--red); }
@@ -335,7 +335,7 @@
   .psech { display: flex; align-items: center; gap: 10px; padding: 14px 18px; cursor: pointer; user-select: none; border-bottom: 1px solid var(--cream-dk); }
   .psec.open .psech { border-bottom-color: var(--rule); }
   .psech .psi { font-size: 1rem; opacity: 0.6; }
-  .psech h3 { font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 500; flex: 1; letter-spacing: 0.04em; }
+  .psech h3 { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; flex: 1; letter-spacing: 0.04em; }
   .pscnt { font-size: 0.62rem; font-weight: 500; color: var(--muted); margin-right: 5px; font-variant-numeric: tabular-nums; letter-spacing: 0.06em; }
   .pscnt.done { color: var(--ink); }
   .pchv { color: var(--muted); font-size: 0.55rem; transition: transform 0.2s; }
@@ -369,13 +369,21 @@
 
   .pnote { font-size: 0.7rem; color: var(--muted); padding: 10px 2px 4px; letter-spacing: 0.02em; font-style: italic; }
   .padd { display: flex; gap: 8px; align-items: center; padding: 12px 2px 2px; margin-top: 4px; border-top: 1px solid var(--cream-dk); }
-  .paddinp { flex: 1; border: 1px solid var(--rule); background: var(--cream); border-radius: 2px; padding: 8px 12px; font-family: 'Jost', sans-serif; font-size: 0.82rem; color: var(--ink); outline: none; transition: border-color 0.2s; letter-spacing: 0.02em; }
+  .paddinp { flex: 1; border: 1px solid var(--rule); background: var(--cream); border-radius: 2px; padding: 8px 12px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; color: var(--ink); outline: none; transition: border-color 0.2s; letter-spacing: 0.02em; }
   .paddinp:focus { border-color: var(--ink); background: white; }
   .paddinp::placeholder { color: var(--muted); }
-  .paddbtn { background: var(--ink); color: white; border: none; border-radius: 2px; padding: 8px 18px; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s; flex-shrink: 0; letter-spacing: 0.08em; text-transform: uppercase; }
+  .paddbtn { background: var(--ink); color: white; border: none; border-radius: 2px; padding: 8px 18px; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s; flex-shrink: 0; letter-spacing: 0.08em; text-transform: uppercase; }
   .paddbtn:hover { background: var(--ink2); }
 
   /* ── VENUE CARDS ── */
+  .vname {
+    font-size: 0.62rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
   .vcard {
     margin-top: 12px;
     padding: 12px 14px;
@@ -429,13 +437,13 @@
   .pk-bar-label { font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:#888; margin-bottom:6px; display:flex; justify-content:space-between; }
   .pk-bar-track { background:#E8E0CE; border-radius:2px; height:3px; }
   .pk-bar-fill { background:#1A1A1A; height:3px; width:0%; transition:width .3s; }
-  .pk-reset { font-family:'Jost',sans-serif; font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:#888; background:none; border:1px solid #D5CEC0; border-radius:2px; padding:5px 12px; cursor:pointer; }
+  .pk-reset { font-family:'DM Sans',sans-serif; font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:#888; background:none; border:1px solid #D5CEC0; border-radius:2px; padding:5px 12px; cursor:pointer; }
   .pk-people { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; }
-  .pk-person { font-family:'Jost',sans-serif; font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; background:white; border:1px solid #D5CEC0; border-radius:2px; padding:5px 12px; cursor:pointer; color:#888; }
+  .pk-person { font-family:'DM Sans',sans-serif; font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; background:white; border:1px solid #D5CEC0; border-radius:2px; padding:5px 12px; cursor:pointer; color:#888; }
   .pk-person.on { background:#1A1A1A; color:white; border-color:#1A1A1A; }
   .pk-section { background:white; margin-bottom:2px; }
   .pk-section-head { padding:14px 18px; border-bottom:1px solid #EDE7D9; }
-  .pk-section-head h3 { font-family:'Jost',sans-serif; font-size:.85rem; font-weight:600; letter-spacing:.04em; margin:0; }
+  .pk-section-head h3 { font-family:'DM Sans',sans-serif; font-size:.85rem; font-weight:600; letter-spacing:.04em; margin:0; }
   .pk-list { list-style:none; margin:0; padding:0; }
   .pk-item { display:flex; align-items:center; gap:12px; padding:10px 18px; border-bottom:1px solid #F5F0E8; cursor:pointer; }
   .pk-item:last-child { border-bottom:none; }
@@ -457,9 +465,9 @@
   .t-buy { background:#FBF3DC; color:#7A5C00; }
   .t-skip { background:#F5F0E8; color:#8A8478; }
   .pk-add { display:flex; gap:8px; padding:10px 18px 14px; border-top:1px solid #EDE7D9; }
-  .pk-add input { flex:1; border:1px solid #D5CEC0; background:#F5F0E8; border-radius:2px; padding:7px 11px; font-family:'Jost',sans-serif; font-size:.82rem; outline:none; }
+  .pk-add input { flex:1; border:1px solid #D5CEC0; background:#F5F0E8; border-radius:2px; padding:7px 11px; font-family:'DM Sans',sans-serif; font-size:.82rem; outline:none; }
   .pk-add input:focus { border-color:#1A1A1A; background:white; }
-  .pk-add button { background:#1A1A1A; color:white; border:none; border-radius:2px; padding:7px 14px; font-family:'Jost',sans-serif; font-size:.82rem; cursor:pointer; }
+  .pk-add button { background:#1A1A1A; color:white; border:none; border-radius:2px; padding:7px 14px; font-family:'DM Sans',sans-serif; font-size:.82rem; cursor:pointer; }
 
 
   /* ── LARGE TEXT MODE ── */
@@ -505,7 +513,7 @@
     margin-left: auto;
   }
   .font-toggle .ft-sm {
-    font-family: 'Jost', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.65rem;
     font-weight: 600;
     color: rgba(255,255,255,0.5);
@@ -514,7 +522,7 @@
     transition: all 0.2s;
   }
   .font-toggle .ft-lg {
-    font-family: 'Jost', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.85rem;
     font-weight: 600;
     color: rgba(255,255,255,0.5);
@@ -639,7 +647,7 @@
 </svg>
     </div>
     <div>
-      <div class="eye">Summer 2026 · 15 Days</div>
+      <div class="eye" id="hdr-eye">✈️ Loading...</div>
       <h1>The Geras Go<br><em>to Europe</em></h1>
     </div>
   </div>
@@ -666,6 +674,48 @@
 
 <!-- ITINERARY -->
 <div class="tp active" id="tab-itinerary">
+
+<!-- TODAY + WIDGETS ROW -->
+<div id="today-view" style="padding:0 0 4px;">
+
+  <!-- COUNTDOWN / TODAY LABEL -->
+  <div id="today-label" style="font-size:0.58rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;padding:0 2px;"></div>
+
+  <!-- TODAY CARD SLOT -->
+  <div id="today-card-slot" style="margin-bottom:16px;"></div>
+
+  <!-- WEATHER + CURRENCY -->
+  <div style="display:flex;gap:8px;margin-bottom:20px;">
+    <div id="weather-widget" style="flex:1;background:var(--black);border-radius:4px;padding:14px 16px;color:white;min-width:0;">
+      <div style="font-size:0.52rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px;">Weather</div>
+      <div id="wx-content" style="font-size:0.84rem;color:rgba(255,255,255,0.5);">Loading...</div>
+    </div>
+    <div style="flex:1;background:white;border-radius:4px;padding:14px 16px;border:1px solid var(--rule);min-width:0;">
+      <div style="font-size:0.52rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;" id="cur-label">CHF → USD</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+        <input id="chf-input" type="number" value="10" min="0" step="1"
+          style="width:56px;border:1px solid var(--rule);border-radius:2px;padding:5px 7px;font-family:"DM Sans",sans-serif;font-size:0.9rem;font-weight:500;color:var(--ink);background:var(--cream);"
+          oninput="convertCur()">
+        <span id="cur-sym" style="color:var(--muted);font-size:0.8rem;">CHF =</span>
+        <span id="usd-result" style="font-size:0.9rem;font-weight:600;color:var(--ink);">...</span>
+      </div>
+      <div id="rate-note" style="font-size:0.58rem;color:var(--muted);margin-top:5px;">Fetching rate...</div>
+    </div>
+  </div>
+
+  <!-- SEE ALL DAYS BUTTON -->
+  <button onclick="toggleAllDays()" id="all-days-btn"
+    style="width:100%;padding:10px;background:white;border:1px solid var(--rule);border-radius:4px;font-family:"DM Sans",sans-serif;font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;margin-bottom:16px;">
+    📅 Full Itinerary ›
+  </button>
+
+</div>
+
+<!-- ALL DAYS (hidden by default) -->
+<div id="all-days-view" style="display:none;">
+  <button onclick="toggleAllDays()" style="width:100%;padding:10px;background:white;border:1px solid var(--rule);border-radius:4px;font-family:"DM Sans",sans-serif;font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;margin-bottom:16px;">
+    ‹ Back to Today
+  </button>
 <div class="dgrid">
   <div class="ldiv ll-lon"><div class="ldot"></div><h2>London, England</h2><div class="lline"></div></div>
 
@@ -674,56 +724,57 @@
     <div class="di"><div class="dw2 ctrv">Travel Day</div><div class="dt">EWR → LHR (UA 934)</div><div class="ds">Depart 8:30am · Arrive 8:40pm</div></div><div class="dch">▼</div></div>
     <div class="dbody">
       <div class="dr"><div class="dri">✈️</div><div><div class="dlbl">Flight</div><div class="dv">United UA 934 · EWR→LHR · 8:30am–8:40pm</div></div></div>
-      <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Marlin Apartments – Empire Square, London Bridge</div><div class="dv addr">34 Long Ln, London SE1 4NA</div></div></div>
+      <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv"><a href="https://www.google.com/maps/search/?api=1&query=Marlin+Apartments+Empire+Square+London+Bridge" target="_blank" style="color:var(--blue);text-decoration:none;">Marlin Apartments – Empire Square, London Bridge 📍</a></div><div class="dv addr"><a href="https://www.google.com/maps/search/?api=1&query=34+Long+Ln+London+SE1+4NA" target="_blank" style="color:var(--blue);text-decoration:none;">34 Long Ln, London SE1 4NA 📍</a></div><div class="dv addr">Check-in: 3pm (arriving ~9:45pm) · 5 nights</div></div></div>
       <div class="ah">Plan</div>
-      <div class="chips"><span class="chip ctravel">✈️ Heathrow arrival</span><span class="chip ctravel">🚕 Black cab to Airbnb</span><span class="chip cdef">🛌 Check in</span></div>
+      <div class="chips" onclick="event.stopPropagation()"><span class="chip ctravel">✈️ Heathrow arrival</span><span class="chip ctravel">🚕 Black cab to apartment</span><span class="chip cdef">🛌 Check in</span></div>
     </div>
   </div>
 
   <div class="dc" onclick="td2(this)">
     <div class="dh"><div class="db2 blon"><span class="n">2</span><span class="dw">Fri</span><span class="dd">Jun 12</span></div>
-    <div class="di"><div class="dw2 clon">London</div><div class="dt">Marlin Apartments</div><div class="ds">Borough Market · Bangers & Mash</div></div><div class="dch">▼</div></div>
+    <div class="di"><div class="dw2 clon">London</div><div class="dt">Borough Market · Bangers &amp; Mash</div></div><div class="dch">▼</div></div>
     <div class="dbody">
       <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Marlin Apartments, London Bridge</div></div></div>
       <div class="ah">Plan</div>
-      <div class="chips"><span class="chip csight">🛒 Borough Market</span><span class="chip cdef">🛍️ Shop & explore</span><span class="chip cfood">🍽️ Dinner: Bangers & Mash</span></div>
-      <div class="hbadge">🕐 Borough Market: M–F 10–5, Sat 9–5, Sun closed</div>
+      <div class="chips" onclick="event.stopPropagation()"><span class="chip csight">🛒 Borough Market</span><span class="chip cdef">🛍️ Shop & explore</span><span class="chip cfood">🍽️ Dinner: Bangers & Mash</span></div>
+      <div class="hbadge" onclick="event.stopPropagation()">🕐 Borough Market: M–F 10–5, Sat 9–5, Sun closed</div>
     </div>
   </div>
 
   <div class="dc" onclick="td2(this)">
     <div class="dh"><div class="db2 blon"><span class="n">3</span><span class="dw">Sat</span><span class="dd">Jun 13</span></div>
-    <div class="di"><div class="dw2 clon">London</div><div class="dt">Marlin Apartments</div><div class="ds">E Pellicci · Fortnum & Mason · Harry Potter 4pm</div></div><div class="dch">▼</div></div>
+    <div class="di"><div class="dw2 clon">London</div><div class="dt">E Pellicci · Fortnum &amp; Mason · Harry Potter</div></div><div class="dch">▼</div></div>
     <div class="dbody">
       <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Marlin Apartments, London Bridge</div></div></div>
       <div class="ah">Plan</div>
-      <div class="chips"><span class="chip cfood">🍳 E Pellicci English Breakfast</span><span class="chip csight">🏪 Fortnum & Mason</span><span class="chip csight">⚡ Harry Potter Studio Tour @ 4PM</span></div>
-<div class="vcard"><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Mon–Sat 8am–3pm · Sun closed</span></div><div class="vlinks"><a href="https://epellicci.co.uk/menu/" target="_blank" class="vlink vlink-menu">🍽 Menu</a> <a href="https://maps.app.goo.gl/pUtZ6TQyEwLZEEwP9" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
-      <div class="vcard"><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">9am–10pm <span class="vdur">· 3–3.5 hrs</span></span></div><div class="vlinks"><a href="https://drive.google.com/file/d/1kSRyXRlFXeFmJDjg_nfx9JX9OkUzdt56/view?usp=sharing" target="_blank" class="vlink vlink-ticket">🎟 Ticket</a> <a href="https://www.wbstudiotour.co.uk" target="_blank" class="vlink vlink-web">↗ Website</a> <a href="https://maps.app.goo.gl/htQWtQcd8kf6XBRE7" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
+      <div class="chips" onclick="event.stopPropagation()"><span class="chip cfood">🍳 E Pellicci English Breakfast</span><span class="chip csight">🏪 Fortnum & Mason</span><span class="chip csight">⚡ Harry Potter Studio Tour @ 4PM</span></div>
+<div class="vcard" onclick="event.stopPropagation()"><div class="vname">E Pellicci</div><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Mon–Sat 8am–3pm · Sun closed</span></div><div class="vlinks"><a href="https://epellicci.co.uk/menu/" target="_blank" class="vlink vlink-menu">🍽 Menu</a> <a href="https://maps.app.goo.gl/pUtZ6TQyEwLZEEwP9" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
+      <div class="vcard" onclick="event.stopPropagation()"><div class="vname">Harry Potter Studio Tour</div><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">9am–10pm <span class="vdur">· 3–3.5 hrs</span></span></div><div class="vlinks"><a href="https://drive.google.com/file/d/1kSRyXRlFXeFmJDjg_nfx9JX9OkUzdt56/view?usp=sharing" target="_blank" class="vlink vlink-ticket">🎟 Ticket</a> <a href="https://www.wbstudiotour.co.uk" target="_blank" class="vlink vlink-web">↗ Website</a> <a href="https://maps.app.goo.gl/htQWtQcd8kf6XBRE7" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
     </div>
   </div>
 
   <div class="dc" onclick="td2(this)">
     <div class="dh"><div class="db2 blon"><span class="n">4</span><span class="dw">Sun</span><span class="dd">Jun 14</span></div>
-    <div class="di"><div class="dw2 clon">London</div><div class="dt">Marlin Apartments</div><div class="ds">Black Cab 9am–3pm · Fish & Chips</div></div><div class="dch">▼</div></div>
+    <div class="di"><div class="dw2 clon">London</div><div class="dt">Black Cab · Fish &amp; Chips</div></div><div class="dch">▼</div></div>
     <div class="dbody">
       <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Marlin Apartments, London Bridge</div></div></div>
       <div class="ah">Plan</div>
-      <div class="chips"><span class="chip csight">🚕 Black Cab city tour · 9am–3pm</span><span class="chip cfood">🐟 Late lunch: Fish & Chips</span><span class="chip cfood">🫖 Swan Afternoon Tea</span></div>
-      <div class="hbadge">🍵 Swan Afternoon Tea: daily 12–5pm</div>
+      <div class="chips" onclick="event.stopPropagation()"><span class="chip csight">🚕 Black Cab city tour · 9am–3pm</span><span class="chip cfood">🐟 Late lunch: Fish & Chips</span></div>
+      
     </div>
   </div>
 
   <div class="dc" onclick="td2(this)">
     <div class="dh"><div class="db2 blon"><span class="n">5</span><span class="dw">Mon</span><span class="dd">Jun 15</span></div>
-    <div class="di"><div class="dw2 clon">London</div><div class="dt">Marlin Apartments</div><div class="ds">Uber Boat · Churchill War Rooms · Westminster</div></div><div class="dch">▼</div></div>
+    <div class="di"><div class="dw2 clon">London</div><div class="dt">Uber Boat · Churchill · Westminster · Swan</div></div><div class="dch">▼</div></div>
     <div class="dbody">
       <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Marlin Apartments, London Bridge</div></div></div>
       <div class="ah">Plan</div>
-      <div class="chips"><span class="chip csight">🛥️ Uber Boat on Thames</span><span class="chip csight">🪖 Churchill War Rooms</span><span class="chip csight">⛪ Westminster Abbey</span></div>
-<div class="vcard"><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Daily 6am–midnight (varies by route)</span></div><div class="vlinks"><a href="https://www.uber.com/gb/en/ride/uber-boat/" target="_blank" class="vlink vlink-web">↗ Website</a></div></div>
-      <div class="vcard"><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Daily 9am–6pm (last entry 5pm) <span class="vdur">· 2.5–3 hrs</span></span></div><div class="vlinks"><a href="https://www.iwm.org.uk/visits/churchill-war-rooms" target="_blank" class="vlink vlink-web">↗ Website</a> <a href="https://maps.app.goo.gl/Fj2mPqCacEayGp577" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
-      <div class="vcard"><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Mon–Sat 9:30am–1pm last entry <span class="vdur">· 1.5–2 hrs</span></span></div><div class="vlinks"><a href="https://www.westminster-abbey.org" target="_blank" class="vlink vlink-web">↗ Website</a> <a href="https://maps.app.goo.gl/WgepaoxGMuY5arAUA" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
+      <div class="chips" onclick="event.stopPropagation()"><span class="chip csight">🛥️ Uber Boat on Thames</span><span class="chip csight">🪖 Churchill War Rooms</span><span class="chip csight">⛪ Westminster Abbey</span><span class="chip cfood">🫖 Afternoon Tea · Swan</span></div>
+<div class="vcard" onclick="event.stopPropagation()"><div class="vname">Uber Boat by Thames Clippers</div><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Daily 6am–midnight (varies by route)</span></div><div class="vlinks"><a href="https://www.uber.com/gb/en/ride/uber-boat/" target="_blank" class="vlink vlink-web">↗ Website</a></div></div>
+      <div class="vcard" onclick="event.stopPropagation()"><div class="vname">Churchill War Rooms</div><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Daily 9am–5pm (last entry 4pm) <span class="vdur">· 2.5–3 hrs</span></span></div><div class="vlinks"><a href="https://www.iwm.org.uk/visits/churchill-war-rooms" target="_blank" class="vlink vlink-web">↗ Website</a> <a href="https://maps.app.goo.gl/Fj2mPqCacEayGp577" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
+      <div class="vcard" onclick="event.stopPropagation()"><div class="vname">Westminster Abbey</div><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Mon–Sat 9:30am–1pm last entry <span class="vdur">· 1.5–2 hrs</span></span></div><div class="vlinks"><a href="https://www.westminster-abbey.org" target="_blank" class="vlink vlink-web">↗ Website</a> <a href="https://maps.app.goo.gl/WgepaoxGMuY5arAUA" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
+      <div class="vcard" onclick="event.stopPropagation()"><div class="vname">Swan at Shakespeare's Globe</div><div class="vhours"><span class="vhours-icon">🕐</span><span class="vhours-text">Afternoon Tea daily 12–5pm</span></div><div class="vlinks"><a href="https://swanlondon.co.uk/afternoon-tea/" target="_blank" class="vlink vlink-web">↗ Website</a> <a href="https://maps.app.goo.gl/jLCGGedDaGVEuBcE7" target="_blank" class="vlink vlink-map">📍 Maps</a></div></div>
     </div>
   </div>
 
@@ -733,21 +784,21 @@
     <div class="dh"><div class="db2 btrv"><span class="n">6</span><span class="dw">Tue</span><span class="dd">Jun 16</span></div>
     <div class="di"><div class="dw2 ctrv">Travel Day</div><div class="dt">LHR → ZRH (LX 319)</div><div class="ds">8am Tube · Fly 12:10–2:50pm · Hotel Adler</div></div><div class="dch">▼</div></div>
     <div class="dbody">
-      <div class="dr"><div class="dri">🚇</div><div><div class="dlbl">Morning</div><div class="dv">8am Tube to Heathrow</div></div></div>
+      <div class="dr"><div class="dri">🚇</div><div><div class="dlbl">Morning</div><div class="dv">Check out Marlin by 10:30am · 8am Tube to Heathrow</div></div></div>
       <div class="dr"><div class="dri">✈️</div><div><div class="dlbl">Flight</div><div class="dv">Swiss Air LX 319 · LHR→ZRH · 12:10pm–2:50pm</div></div></div>
-      <div class="dr"><div class="dri">🏨</div><div><div class="dlbl">Stay</div><div class="dv">Hotel Adler Zürich · 2 double + 2 single</div></div></div>
+      <div class="dr"><div class="dri">🏨</div><div><div class="dlbl">Stay</div><div class="dv"><a href="https://www.google.com/maps/search/?api=1&query=Hotel+Adler+Zurich" target="_blank" style="color:var(--blue);text-decoration:none;">Hotel Adler Zürich 📍</a> · 2 double + 2 single</div><div class="dv addr">Check-in: 3pm · 2 nights</div></div></div>
       <div class="ah">Plan</div>
-      <div class="chips"><span class="chip ctravel">🚶 Walk to Hotel Adler</span><span class="chip cfood">🍺 Dinner: Rheinfelder Bierhalle</span></div>
+      <div class="chips" onclick="event.stopPropagation()"><span class="chip ctravel">🚶 Walk to Hotel Adler</span><span class="chip cfood">🍺 Dinner: Rheinfelder Bierhalle</span></div>
     </div>
   </div>
 
   <div class="dc" onclick="td2(this)">
     <div class="dh"><div class="db2 bzur"><span class="n">7</span><span class="dw">Wed</span><span class="dd">Jun 17</span></div>
-    <div class="di"><div class="dw2 czur">Zurich</div><div class="dt">Hotel Adler Zürich</div><div class="ds">City · Fries & Sausage · Ducks on the lake!</div></div><div class="dch">▼</div></div>
+    <div class="di"><div class="dw2 czur">Zürich</div><div class="dt">Sternen Grill · Lake Zurich</div></div><div class="dch">▼</div></div>
     <div class="dbody">
-      <div class="dr"><div class="dri">🏨</div><div><div class="dlbl">Stay</div><div class="dv">Hotel Adler Zürich</div></div></div>
+      <div class="dr"><div class="dri">🏨</div><div><div class="dlbl">Checkout</div><div class="dv">Hotel Adler Zürich · by 12pm</div></div></div>
       <div class="ah">Plan</div>
-      <div class="chips"><span class="chip csight">🏙️ Explore Zurich</span><span class="chip cdef">🛍️ Shop</span><span class="chip cfood">🍟 Fries & Sausage</span><span class="chip csight">🦆 Feed ducks · Lake Zurich</span></div>
+      <div class="chips" onclick="event.stopPropagation()"><span class="chip csight">🏙️ Zurich</span><span class="chip cdef">🛍️ Shop</span><span class="chip cfood">🍟 Fries & Sausage</span><span class="chip csight">🦆 Lake Zurich</span></div>
     </div>
   </div>
 
@@ -757,24 +808,24 @@
     <div class="dh"><div class="db2 btrv"><span class="n">8</span><span class="dw">Thu</span><span class="dd">Jun 18</span></div>
     <div class="di"><div class="dw2 ctrv">Travel Day</div><div class="dt">Zurich → Mürren</div><div class="ds">Trains 12–3:30pm · Possible Lucerne stop</div></div><div class="dch">▼</div></div>
     <div class="dbody">
-      <div class="dr"><div class="dri">🚆</div><div><div class="dlbl">Journey</div><div class="dv">Train · Zurich→Mürren · 12:00–15:30</div><div class="dv addr">Lucerne stop confirmed! · Coop in Mürren closes 6:30pm</div></div></div>
-      <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet Apartment "Schnell"</div><div class="dv addr">Hehmatten 1068E, Mürren</div></div></div>
+      <div class="dr"><div class="dri">🚆</div><div><div class="dlbl">Journey</div><div class="dv">Zurich→Luzern 9:35–10:25 · IR75 Platform 5</div><div class="dv addr">Luzern→Mürren 2:06–5:18 · PE2928 Platform 13</div><div class="dv addr">🛒 Coop in Mürren: 8am–6:30pm</div></div></div>
+      <div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet Apartment "Schnell"</div><div class="dv addr"><a href="https://www.google.com/maps/search/?api=1&query=Hehmatten+1068E+Mürren+Switzerland" target="_blank" style="color:var(--blue);text-decoration:none;">Hehmatten 1068E, Mürren 📍</a></div><div class="dv addr">Zürich checkout: 12pm · Chalet check-in: 3pm · 7 nights</div></div></div>
       <div class="ah">Plan</div>
-      <div class="chips"><span class="chip ctravel">🚆 Zurich→Luzern 9:35–10:25</span><span class="chip csight">🏙️ Lunch in Luzern</span><span class="chip ctravel">🎫 Buy Bernese Oberland pass</span><span class="chip ctravel">🚆 Luzern→Mürren 2:06–5:18</span><span class="chip cfood">🛒 Coop groceries (closes 6:30)</span></div>
+      <div class="chips" onclick="event.stopPropagation()"><span class="chip cdef">🚶 Leave hotel 8:30am</span><span class="chip ctravel">🚆 Zurich→Luzern 9:35–10:25</span><span class="chip csight">🍽️ Lunch in Luzern</span><span class="chip ctravel">🎫 Buy Bernese Oberland pass</span><span class="chip ctravel">🚆 Luzern→Mürren 2:06–5:18</span><span class="chip cfood">🛒 Coop groceries</span></div>
     </div>
   </div>
 
-  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">9</span><span class="dw">Fri</span><span class="dd">Jun 19</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Lazy day · Allmendhubel</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef" contenteditable onclick="event.stopPropagation()">✏️ Add activity</span></div></div></div>
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">9</span><span class="dw">Fri</span><span class="dd">Jun 19</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Lazy day · Allmendhubel</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips" onclick="event.stopPropagation()"><span class="chip cdef" contenteditable onclick="event.stopPropagation()">✏️ Add activity</span></div></div></div>
 
-  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">10</span><span class="dw">Sat</span><span class="dd">Jun 20</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Wengen · Männlichen · Grindelwald</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip csight">🚡 Wengen</span><span class="chip csight">🏔️ Männlichen ridge walk</span><span class="chip csight">🏘️ Grindelwald</span></div></div></div>
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">10</span><span class="dw">Sat</span><span class="dd">Jun 20</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Wengen · Männlichen · Grindelwald</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips" onclick="event.stopPropagation()"><span class="chip csight">🚡 Wengen</span><span class="chip csight">🏔️ Männlichen ridge walk</span><span class="chip csight">🏘️ Grindelwald</span></div></div></div>
 
-  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">11</span><span class="dw">Sun</span><span class="dd">Jun 21</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Schilthorn · Piz Gloria · Gimmelwald</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip csight">🚡 Schilthorn / Piz Gloria</span><span class="chip csight">🏘️ Gimmelwald village</span></div></div></div>
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">11</span><span class="dw">Sun</span><span class="dd">Jun 21</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Schilthorn · Gimmelwald</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips" onclick="event.stopPropagation()"><span class="chip csight">🚡 Schilthorn / Piz Gloria</span><span class="chip csight">🏘️ Gimmelwald village</span></div></div></div>
 
-  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">12</span><span class="dw">Mon</span><span class="dd">Jun 22</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Brienz · Rothorn · Interlaken</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip ctravel">🚂 Train to Brienz</span><span class="chip csight">🚠 Brienz Rothorn</span><span class="chip csight">🚢 Boat to Interlaken</span><span class="chip ctravel">🚆 Train home</span></div></div></div>
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">12</span><span class="dw">Mon</span><span class="dd">Jun 22</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Brienz · Rothorn · Interlaken</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips" onclick="event.stopPropagation()"><span class="chip ctravel">🚂 Train to Brienz</span><span class="chip csight">🚠 Brienz Rothorn</span><span class="chip csight">🚢 Boat to Interlaken</span><span class="chip ctravel">🚆 Train home</span></div></div></div>
 
-  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">13</span><span class="dw">Tue</span><span class="dd">Jun 23</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Schynige Platte · Alphorn 11AM</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip csight">🎵 Schynige Platte · Alphorn concert 11AM–2PM</span></div></div></div>
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">13</span><span class="dw">Tue</span><span class="dd">Jun 23</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Schynige Platte · Alphorn</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips" onclick="event.stopPropagation()"><span class="chip csight">🎵 Schynige Platte · Alphorn concert</span></div></div></div>
 
-  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">14</span><span class="dw">Wed</span><span class="dd">Jun 24</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Chalet "Schnell"</div><div class="ds">Last night in the Alps 🌄</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips"><span class="chip cdef">🌄 Last Alpine sunset</span><span class="chip cdef">🧳 Pack for tomorrow</span></div></div></div>
+  <div class="dc" onclick="td2(this)"><div class="dh"><div class="db2 bmur"><span class="n">14</span><span class="dw">Wed</span><span class="dd">Jun 24</span></div><div class="di"><div class="dw2 cmur">Mürren</div><div class="dt">Last night in the Alps</div></div><div class="dch">▼</div></div><div class="dbody"><div class="dr"><div class="dri">🏠</div><div><div class="dlbl">Stay</div><div class="dv">Chalet "Schnell" · Hehmatten 1068E</div></div></div><div class="ah">Plan</div><div class="chips" onclick="event.stopPropagation()"><span class="chip cdef">🌄 Last night in Mürren</span><span class="chip cfood">🍽️ Dinner</span><span class="chip cdef">🧳 Pack for tomorrow</span></div></div></div>
 
   <div class="dc" onclick="td2(this)">
     <div class="dh"><div class="db2 btrv"><span class="n">15</span><span class="dw">Thu</span><span class="dd">Jun 25</span></div>
@@ -783,10 +834,11 @@
       <div class="dr"><div class="dri">🚆</div><div><div class="dlbl">To Airport</div><div class="dv">Train · Mürren → Zurich ZRH</div></div></div>
       <div class="dr"><div class="dri">✈️</div><div><div class="dlbl">Flight Home</div><div class="dv">United UA 9748 · ZRH→EWR · 5:20pm–8:10pm</div></div></div>
       <div class="ah">Plan</div>
-      <div class="chips"><span class="chip cdef">🧳 10am checkout</span><span class="chip ctravel">🚠 10:21 Schilthornbahn down</span><span class="chip ctravel">🚆 Train to Zurich</span><span class="chip ctravel">✈️ UA 9748 · 5:20PM → Newark 8:10PM</span></div>
+      <div class="chips" onclick="event.stopPropagation()"><span class="chip cdef">🧳 Chalet checkout: 10am</span><span class="chip ctravel">🚠 10:21 Schilthornbahn down</span><span class="chip ctravel">🚆 Train to Zurich</span><span class="chip ctravel">✈️ UA 9748 · 5:20PM → Newark 8:10PM</span></div>
     </div>
   </div>
 </div>
+</div><!-- /all-days-view -->
 </div><!-- /itinerary -->
 
 <!-- COSTS -->
@@ -822,7 +874,7 @@
       <div class="cch" onclick="tc(this.parentElement)"><span class="ci">🎟️</span><div class="cct"><h3>Activities</h3><p>Black Cab · Harry Potter</p></div><div class="cctot"><div class="amt">$1,318</div><span class="chv">▼</span></div></div>
       <div class="ccb"><table class="ctbl"><thead><tr><th>Activity</th><th>Total</th><th>Paid</th><th>T&amp;C</th><th>P&amp;L</th></tr></thead><tbody>
         <tr><td class="in">Black Cab Tour</td><td>$850</td><td><span class="bo">$0</span></td><td>$561</td><td>$280.50</td></tr>
-        <tr><td class="in">Harry Potter Studio</td><td>$468</td><td><span class="bo">$0</span></td><td>$308.88</td><td>$154.44</td></tr>
+        <tr><td class="in">Harry Potter Studio</td><td>$450</td><td><span class="bo">$0</span></td><td>$297</td><td>$148.50</td></tr>
       </tbody></table></div>
     </div>
   </div>
@@ -848,12 +900,15 @@
 
     <div class="rc flights open">
       <div class="rch" onclick="tr2(this.parentElement)"><span class="ri">✈️</span><h3>Flights</h3><span class="rtog">▼</span></div>
-      <div class="rcb"><table class="rt"><thead><tr><th>Route</th><th>Date</th><th>Flight</th><th>Times</th><th>Conf #</th></tr></thead><tbody id="tF">
-        <tr><td class="lbl">EWR→LHR</td><td>Jun 11</td><td>UA 934</td><td>8:30am–8:40pm</td><td><span class="conf ph" contenteditable>Add conf #</span></td></tr>
-        <tr><td class="lbl">LHR→ZRH</td><td>Jun 16</td><td>LX 319</td><td>12:10–2:50pm</td><td><span class="conf ph" contenteditable>Add conf #</span></td></tr>
-        <tr><td class="lbl">ZRH→EWR</td><td>Jun 25</td><td>UA 9748</td><td>5:20–8:10pm</td><td><span class="conf ph" contenteditable>Add conf #</span></td></tr>
+      <div class="rcb">
+        <p style="font-size:.7rem;color:var(--muted);margin-bottom:10px;">Two separate bookings — different confirmation numbers.</p>
+        <table class="rt"><thead><tr><th>Route</th><th>Date</th><th>Flight</th><th>Times</th><th>T&amp;C Conf</th><th>P&amp;L Conf</th></tr></thead><tbody id="tF">
+          <tr><td class="lbl">EWR→LHR</td><td>Jun 11</td><td>UA 934</td><td>8:30am–8:40pm</td><td><span class="conf">H24GD9</span></td><td><span class="conf">H2V0GJ</span></td></tr>
+          <tr><td class="lbl">LHR→ZRH</td><td>Jun 16</td><td>LX 319</td><td>12:10–2:50pm</td><td><span class="conf">AAGH66</span></td><td><span class="conf">AAFF5Q</span></td></tr>
+          <tr><td class="lbl">ZRH→EWR</td><td>Jun 25</td><td>UA 9748</td><td>5:20–8:10pm</td><td><span class="conf">H24GD9</span></td><td><span class="conf">H2V0GJ</span></td></tr>
       </tbody></table>
-      <button class="arb" onclick="addRow('tF',['Route','Date','Flight','Times','Conf #'])">＋ Add flight</button></div>
+
+              </div>
     </div>
     <div class="rc hotels">
       <div class="rch" onclick="tr2(this.parentElement)"><span class="ri">🏨</span><h3>Accommodations</h3><span class="rtog">▼</span></div>
@@ -1039,34 +1094,57 @@
 <div class="tp" id="tab-words">
 <div style="padding:24px 16px 0;">
 
-  <div style="margin-bottom:20px;">
-    <div style="font-size:0.58rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Spoken</div>
+  <!-- LONDON SECTION -->
+  <div style="margin-bottom:8px;">
+    <div style="font-size:0.58rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">🇬🇧 London — Good to Know</div>
     <div style="background:white;border-radius:4px;overflow:hidden;">
-      <table class="rt" style="margin-top:0;"><thead><tr><th>Swiss German</th><th>Sounds Like</th><th>English</th></tr></thead><tbody>
-        <tr><td class="lbl">Grüezi</td><td style="color:var(--muted);font-style:italic">grootsy</td><td>Hello</td></tr>
-        <tr><td class="lbl">Merci vielmal</td><td style="color:var(--muted);font-style:italic">mersee feelmal</td><td>Thank you very much</td></tr>
-        <tr><td class="lbl">Bitte</td><td style="color:var(--muted);font-style:italic">bitteh</td><td>Please / You're welcome</td></tr>
-        <tr><td class="lbl">Entschuldigung</td><td style="color:var(--muted);font-style:italic">enschuldagung</td><td>Excuse me</td></tr>
-        <tr><td class="lbl">Es tut mir leid</td><td style="color:var(--muted);font-style:italic">estootmerlied</td><td>I'm sorry</td></tr>
-        <tr><td class="lbl">Ja / Nein</td><td style="color:var(--muted);font-style:italic">ya / nine</td><td>Yes / No</td></tr>
-        <tr><td class="lbl">Wo ist...?</td><td style="color:var(--muted);font-style:italic">vo ist</td><td>Where is...?</td></tr>
-        <tr><td class="lbl">Rechnung, bitte</td><td style="color:var(--muted);font-style:italic">rechnoong bitteh</td><td>Bill, please</td></tr>
+      <table class="rt" style="margin-top:0;"><thead><tr><th>They Say</th><th>They Mean</th></tr></thead><tbody>
+        <tr><td class="lbl">Quid</td><td>Pounds (£)</td></tr>
+        <tr><td class="lbl">Chips / Crisps</td><td>Fries / Potato chips</td></tr>
+        <tr><td class="lbl">Loo</td><td>Toilet</td></tr>
+        <tr><td class="lbl">Lift</td><td>Elevator</td></tr>
+        <tr><td class="lbl">Queue</td><td>Line</td></tr>
       </tbody></table>
     </div>
   </div>
 
-  <div>
-    <div style="font-size:0.58rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Written / Signs</div>
+  <!-- SWISS GERMAN SPOKEN -->
+  <div style="margin-bottom:8px;margin-top:20px;">
+    <div style="font-size:0.58rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">🇨🇭 German — Spoken</div>
+    <div style="background:white;border-radius:4px;overflow:hidden;">
+      <table class="rt" style="margin-top:0;"><thead><tr><th>German</th><th>Sounds Like</th><th>English</th></tr></thead><tbody>
+        <tr><td class="lbl">Grüezi</td><td style="color:var(--muted);font-style:italic">grootsy</td><td>Hello (Swiss greeting)</td></tr>
+        <tr><td class="lbl">Bitte</td><td style="color:var(--muted);font-style:italic">bitteh</td><td>Please / You're welcome</td></tr>
+        <tr><td class="lbl">Danke / Vielen Dank</td><td style="color:var(--muted);font-style:italic">dahnkeh / feelen dahnk</td><td>Thanks / Thank you very much</td></tr>
+        <tr><td class="lbl">Entschuldigung</td><td style="color:var(--muted);font-style:italic">ent-shool-dee-goong</td><td>Excuse me</td></tr>
+        <tr><td class="lbl">Ja / Nein</td><td style="color:var(--muted);font-style:italic">ya / nine</td><td>Yes / No</td></tr>
+        <tr><td class="lbl">Sprechen Sie Englisch?</td><td style="color:var(--muted);font-style:italic">shpreshen zee english</td><td>Do you speak English?</td></tr>
+        <tr><td class="lbl">Prost!</td><td style="color:var(--muted);font-style:italic">prost</td><td>Cheers!</td></tr>
+        <tr><td class="lbl">Rechnung, bitte</td><td style="color:var(--muted);font-style:italic">reshnoong bitteh</td><td>Bill, please</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <!-- SIGNS & WRITTEN -->
+  <div style="margin-top:20px;padding-bottom:24px;">
+    <div style="font-size:0.58rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">🇨🇭 Swiss German — Signs &amp; Written</div>
     <div style="background:white;border-radius:4px;overflow:hidden;">
       <table class="rt" style="margin-top:0;"><thead><tr><th>Word</th><th>English</th></tr></thead><tbody>
         <tr><td class="lbl">Bahnhof</td><td>Train station</td></tr>
         <tr><td class="lbl">Hauptbahnhof / HB</td><td>Main train station</td></tr>
         <tr><td class="lbl">Gleis</td><td>Platform</td></tr>
-        <tr><td class="lbl">Ausfahrt</td><td>Exit (roads)</td></tr>
-        <tr><td class="lbl">Kasse</td><td>Checkout / till</td></tr>
+        <tr><td class="lbl">Abfahrt / Ankunft</td><td>Departure / Arrival</td></tr>
+        <tr><td class="lbl">Ausfahrt</td><td>Exit (roads/highways)</td></tr>
+        <tr><td class="lbl">Kasse</td><td>Checkout / cash register</td></tr>
         <tr><td class="lbl">Eingang / Ausgang</td><td>Entrance / Exit</td></tr>
         <tr><td class="lbl">Offen / Geschlossen</td><td>Open / Closed</td></tr>
         <tr><td class="lbl">WC / Toilette</td><td>Toilet</td></tr>
+        <tr><td class="lbl">Notausgang</td><td>Emergency exit</td></tr>
+        <tr><td class="lbl">Drücken / Ziehen</td><td>Push / Pull (on doors)</td></tr>
+        <tr><td class="lbl">Stockwerk / EG</td><td>Floor / Ground floor</td></tr>
+        <tr><td class="lbl">Apotheke</td><td>Pharmacy</td></tr>
+        <tr><td class="lbl">Krankenhaus</td><td>Hospital</td></tr>
+        <tr><td class="lbl">Polizei</td><td>Police</td></tr>
       </tbody></table>
     </div>
   </div>
@@ -1076,6 +1154,151 @@
 
 </div><!-- /scroll-area -->
 <script>
+// ── TRIP DATES & HELPERS ──
+var TRIP_START = new Date(2026, 5, 11); // Jun 11
+var TRIP_END   = new Date(2026, 5, 25); // Jun 25
+
+function todayDayNum() {
+  var now = new Date(); now.setHours(0,0,0,0);
+  var t = new Date(TRIP_START); t.setHours(0,0,0,0);
+  var diff = Math.round((now - t) / 86400000);
+  return (diff >= 0 && diff <= 14) ? diff + 1 : null;
+}
+
+function cityForDate(d) {
+  var now = new Date(); now.setHours(0,0,0,0);
+  var start = new Date(TRIP_START); start.setHours(0,0,0,0);
+  // Before the trip always show London (first destination)
+  if (now < start) return {name:'London', lat:51.5074, lon:-0.1278, currency:'GBP', symbol:'£'};
+  var m = d.getMonth(), day = d.getDate();
+  if (m === 5 && day <= 15) return {name:'London', lat:51.5074, lon:-0.1278, currency:'GBP', symbol:'£'};
+  if (m === 5 && day <= 17) return {name:'Zürich', lat:47.3769, lon:8.5417, currency:'CHF', symbol:'CHF'};
+  return {name:'Mürren', lat:46.5588, lon:7.8935, currency:'CHF', symbol:'CHF'};
+}
+
+// ── EYEBROW COUNTDOWN ──
+function updateEyebrow() {
+  var el = document.getElementById('hdr-eye');
+  var lbl = document.getElementById('today-label');
+  if (!el) return;
+  var now = new Date(); now.setHours(0,0,0,0);
+  var start = new Date(TRIP_START); start.setHours(0,0,0,0);
+  var end = new Date(TRIP_END); end.setHours(0,0,0,0);
+  var daysTo = Math.round((start - now) / 86400000);
+  var dn = todayDayNum();
+  var city = cityForDate(now);
+  if (dn) {
+    el.textContent = 'Day ' + dn + ' of 15 · ' + city.name;
+    if (lbl) lbl.textContent = 'Today — Day ' + dn;
+  } else if (daysTo > 0) {
+    el.textContent = daysTo + ' days to Europe 🎉';
+    if (lbl) lbl.textContent = 'Coming up — Day 1 Preview';
+  } else {
+    el.textContent = 'The Geras went to Europe ✈️';
+    if (lbl) lbl.textContent = 'Day 1 — The Adventure Began';
+  }
+}
+
+// ── TODAY VIEW ──
+function setupTodayView() {
+  var dn = todayDayNum() || 1;
+  var slot = document.getElementById('today-card-slot');
+  if (!slot) return;
+  var allCards = Array.from(document.querySelectorAll('#all-days-view .dc'));
+  if (allCards.length >= dn) {
+    var card = allCards[dn - 1].cloneNode(true);
+    card.classList.add('open');
+    card.onclick = function() { this.classList.toggle('open'); };
+    slot.innerHTML = '';
+    slot.appendChild(card);
+  }
+}
+
+function toggleAllDays() {
+  var tv = document.getElementById('today-view');
+  var av = document.getElementById('all-days-view');
+  var showing = av.style.display !== 'none';
+  tv.style.display = showing ? 'block' : 'none';
+  av.style.display = showing ? 'none' : 'block';
+}
+
+// ── WEATHER ──
+// Historical June averages (high/low °F) for each city
+var AVG_TEMPS = {
+  'London':  {hi: 68, lo: 52, desc: 'Mild, chance of rain', icon: '🌤️'},
+  'Zürich':  {hi: 72, lo: 55, desc: 'Warm, some clouds',    icon: '⛅'},
+  'Mürren':  {hi: 58, lo: 42, desc: 'Cool mountain air',    icon: '🏔️'}
+};
+
+function loadWeather() {
+  var el = document.getElementById('wx-content');
+  if (!el) return;
+  var city = cityForDate(new Date());
+  var now = new Date(); now.setHours(0,0,0,0);
+  var tripStart = new Date(TRIP_START); tripStart.setHours(0,0,0,0);
+  var onTrip = now >= tripStart;
+
+  if (!onTrip) {
+    // Show historical averages before trip
+    var avg = AVG_TEMPS[city.name] || AVG_TEMPS['London'];
+    el.innerHTML = '<span style="font-size:1.4rem">'+avg.icon+'</span>'
+      +'<span style="font-size:1.1rem;font-weight:300;margin-left:6px;">'+avg.hi+'° / '+avg.lo+'°F</span>'
+      +'<div style="font-size:0.62rem;color:rgba(255,255,255,0.45);margin-top:4px;">'+city.name+' June avg · '+avg.desc+'</div>';
+    return;
+  }
+
+  // Live weather during trip
+  var url = 'https://api.open-meteo.com/v1/forecast?latitude='+city.lat+'&longitude='+city.lon
+    +'&current=temperature_2m,weathercode,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=auto';
+  fetch(url)
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var t = Math.round(d.current.temperature_2m);
+      var code = d.current.weathercode;
+      var wind = Math.round(d.current.windspeed_10m);
+      var icons = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',
+        61:'🌧️',63:'🌧️',65:'🌧️',71:'🌨️',73:'🌨️',75:'❄️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️'};
+      var icon = icons[code] || '🌡️';
+      el.innerHTML = '<span style="font-size:1.5rem">'+icon+'</span>'
+        +'<span style="font-size:1.3rem;font-weight:300;margin-left:6px;">'+t+'°F</span>'
+        +'<div style="font-size:0.62rem;color:rgba(255,255,255,0.45);margin-top:4px;">'+city.name+' · '+wind+' mph</div>';
+    })
+    .catch(function(){
+      var avg = AVG_TEMPS[city.name] || AVG_TEMPS['London'];
+      el.innerHTML = '<span style="font-size:1.4rem">'+avg.icon+'</span>'
+        +'<span style="font-size:1.1rem;font-weight:300;margin-left:6px;">'+avg.hi+'° / '+avg.lo+'°F</span>'
+        +'<div style="font-size:0.62rem;color:rgba(255,255,255,0.45);margin-top:4px;">'+city.name+' (offline)</div>';
+    });
+}
+
+// ── CURRENCY ──
+var usdRate = 1.12;
+var curCity = cityForDate(new Date());
+function loadRate() {
+  var from = curCity.currency || 'CHF';
+  var lbl = document.getElementById('cur-label');
+  if (lbl) lbl.textContent = from + ' → USD';
+  var fallback = from === 'GBP' ? 1.27 : 1.12;
+  var fallbackNote = from === 'GBP' ? '~$1.27 per £ (offline)' : '~$1.12 per CHF (offline)';
+  fetch('https://api.frankfurter.app/latest?from='+from+'&to=USD')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      usdRate = d.rates.USD;
+      document.getElementById('rate-note').textContent = '1 '+from+' ≈ $'+usdRate.toFixed(3)+' · live rate';
+      convertCur();
+    })
+    .catch(function(){
+      usdRate = fallback;
+      document.getElementById('rate-note').textContent = fallbackNote;
+      convertCur();
+    });
+}
+function convertCur() {
+  var amount = parseFloat(document.getElementById('chf-input').value)||0;
+  var sym = curCity.symbol || 'CHF';
+  document.getElementById('usd-result').textContent = '$'+(amount*usdRate).toFixed(2);
+}
+
 // ── TAB SWITCHING ──
 function sw(name,btn){
   document.querySelectorAll('.tp').forEach(p=>p.classList.remove('active'));
@@ -1160,6 +1383,13 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').cat
 // ── INIT ──
 window.onload = function(){
   try { if(localStorage.getItem('geraFont')==='large') document.body.classList.add('large'); } catch(e){}
+  updateEyebrow();
+  setupTodayView();
+  loadWeather();
+  curCity = cityForDate(new Date());
+  var symEl = document.getElementById('cur-sym');
+  if (symEl) symEl.textContent = (curCity.symbol||'CHF') + ' =';
+  loadRate();
   pkProgress();
   document.querySelectorAll('[contenteditable]').forEach(function(el){
     el.addEventListener('click',function(e){e.stopPropagation();});
